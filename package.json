@@ -1,0 +1,23 @@
+{
+  "name": "react-layout",
+  "version": "0.0.1",
+  "description": "",
+  "main": "dist/react-layout.js",
+  "scripts": {
+    "build": "mkdir -p dist && babel -o dist/react-layout.js index.jsx",
+    "lint": "jsxhint --babel -c .jshintrc *.jsx"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@git.curio.im:wizawu/react-layout.git"
+  },
+  "keywords": [
+    "react",
+    "component"
+  ],
+  "author": "wizawu",
+  "license": "MIT",
+  "dependencies": {
+    "react": "^0.13.3"
+  }
+}
