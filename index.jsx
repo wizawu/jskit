@@ -94,7 +94,7 @@ let Item = React.createClass({
             style.display = "none";
         }
         
-        Object.assign(style, props.style);
+        for (let k in props.style) style[k] = props.style[k];
         return <div {...props} style={style}>{props.children}</div>;
     }
 });

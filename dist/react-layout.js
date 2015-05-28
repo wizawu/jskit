@@ -103,8 +103,9 @@ var Item = _react2["default"].createClass({
             style.display = "none";
         }
 
-        Object.assign(style, props.style);
-        return _react2["default"].createElement(
+        for (var k in props.style) {
+            style[k] = props.style[k];
+        }return _react2["default"].createElement(
             "div",
             _extends({}, props, { style: style }),
             props.children
