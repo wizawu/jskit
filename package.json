@@ -1,10 +1,10 @@
 {
-  "name": "react-layout",
+  "name": "react-polymer-layout",
   "version": "0.0.1",
   "description": "",
-  "main": "dist/react-layout.js",
+  "main": "dist/react-polymer-layout.js",
   "scripts": {
-    "build": "mkdir -p dist && babel -o dist/react-layout.js index.jsx",
+    "build": "mkdir -p dist && babel -o dist/react-polymer-layout.js index.jsx",
     "lint": "jsxhint --babel -c .jshintrc *.jsx"
   },
   "keywords": [
