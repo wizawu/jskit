@@ -1,9 +1,9 @@
-react-layout
+react-polymer-layout
 ===
 
 ### Usage
 
-(TODO)
+[Layout attributes](https://www.polymer-project.org/0.5/docs/polymer/layout-attrs.html)
 
 ### Develop
 
