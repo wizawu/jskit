@@ -27,9 +27,10 @@ function _xhr(method, url, json, done, fail) {
         }
         if (matched) {
             var _ret = (function () {
-                var response = _requests[method][matched].handler(json);
+                var handler = _requests[method][matched].handler;
+                var response = handler ? handler(json) : undefined;
                 setTimeout(function () {
-                    done(response);
+                    if (done) done(response);
                 }, 50);
                 return {
                     v: true
@@ -45,6 +46,7 @@ function _xhr(method, url, json, done, fail) {
         if (xhr.readyState === 4) {
             var _status = xhr.status;
             if (_status >= 200 && _status < 300 || _status === 304) {
+                if (!done) return;
                 var responseText = xhr.responseText;
                 try {
                     var response = JSON.parse(responseText);
@@ -54,19 +56,19 @@ function _xhr(method, url, json, done, fail) {
                     done(responseText);
                 }
             } else {
-                fail(xhr);
+                if (fail) fail(xhr);
             }
         }
     };
 
     xhr.open(method, url, true);
     xhr.setRequestHeader("Content-Type", "application/json; charset=utf-8");
-    xhr.send(JSON.stringify(json));
+    xhr.send(json ? JSON.stringify(json) : "");
     return false;
 }
 
 METHODS.map(function (method) {
-    module[method] = function (url, json, done, fail) {
+    mockxhr[method.toLowerCase()] = function (url, json, done, fail) {
         _xhr(method, url, json, done, fail);
     };
 });

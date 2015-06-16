@@ -19,9 +19,10 @@ function _xhr(method, url, json, done, fail) {
             }
         }
         if (matched) {
-            let response = _requests[method][matched].handler(json);
+            let handler = _requests[method][matched].handler;
+            let response = handler ? handler(json) : undefined;
             setTimeout(() => {
-                done(response);
+                if (done) done(response);
             }, 50);
             return true;
         }
@@ -32,6 +33,7 @@ function _xhr(method, url, json, done, fail) {
         if (xhr.readyState === 4) {
             let status = xhr.status;
             if (status >= 200 && status < 300 || status === 304) {
+                if (!done) return;
                 let responseText = xhr.responseText;
                 try {
                     let response = JSON.parse(responseText);
@@ -41,19 +43,19 @@ function _xhr(method, url, json, done, fail) {
                     done(responseText);
                 }
             } else {
-                fail(xhr);
+                if (fail) fail(xhr);
             }
         }
     };
 
     xhr.open(method, url, true);
     xhr.setRequestHeader("Content-Type", "application/json; charset=utf-8");
-    xhr.send(JSON.stringify(json));
+    xhr.send(json ? JSON.stringify(json) : "");
     return false;
 }
 
 METHODS.map(method => {
-    module[method] = (url, json, done, fail) => {
+    mockxhr[method.toLowerCase()] = (url, json, done, fail) => {
         _xhr(method, url, json, done, fail);
     };
 });

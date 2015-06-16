@@ -1,6 +1,6 @@
 {
   "name": "mockxhr",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Flyweight ajax and mockjax built on Vanilla JS",
   "main": "dist/mockxhr.js",
   "scripts": {
@@ -13,7 +13,8 @@
   },
   "keywords": [
     "ajax",
-    "mockjax"
+    "mock",
+    "xhr"
   ],
   "author": "wizawu",
   "license": "MIT",
