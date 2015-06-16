@@ -1,0 +1,24 @@
+{
+  "name": "mockxhr",
+  "version": "0.0.1",
+  "description": "Flyweight ajax and mockjax built on Vanilla JS",
+  "main": "dist/mockxhr.js",
+  "scripts": {
+    "build": "mkdir -p dist && node_modules/.bin/babel -o dist/mockxhr.js index.js",
+    "lint": "node_modules/.bin/jsxhint ~/.jshintrc *.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wizawu/mockxhr.git"
+  },
+  "keywords": [
+    "ajax",
+    "mockjax"
+  ],
+  "author": "wizawu",
+  "license": "MIT",
+  "devDependencies": {
+    "babel": "^5.5.8",
+    "jsxhint": "^0.12.0"
+  }
+}

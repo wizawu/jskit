@@ -1,1 +1,4 @@
-# mockxhr
+mockxhr
+===
+
+TODO: usage
