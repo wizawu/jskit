@@ -41,6 +41,7 @@ function _xhr(method, url, json, done, fail) {
         }
     }
 
+    // Normal request
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
@@ -77,7 +78,7 @@ mockxhr.setMock = function (flag) {
     return _mock = flag;
 };
 
-mockxhr.mockxhr = function (method, url, handler) {
+mockxhr.mock = function (method, url, handler) {
     _requests[method][url] = { handler: handler };
 };
 

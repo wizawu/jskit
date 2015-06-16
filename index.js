@@ -28,6 +28,7 @@ function _xhr(method, url, json, done, fail) {
         }
     }
 
+    // Normal request
     let xhr = new XMLHttpRequest();
     xhr.onreadystatechange = () => {
         if (xhr.readyState === 4) {
@@ -62,7 +63,7 @@ METHODS.map(method => {
 
 mockxhr.setMock = (flag => _mock = flag);
 
-mockxhr.mockxhr = (method, url, handler) => {
+mockxhr.mock = (method, url, handler) => {
     _requests[method][url] = { handler: handler };
 };
 
