@@ -33,11 +33,18 @@ function _xhr(method, url, json, done, fail) {
         }
         if (matched) {
             var _ret = (function () {
-                var handler = _requests[method][matched].handler;
-                var response = handler ? handler(_clone(json)) : undefined;
+                var _requests$method$matched = _requests[method][matched];
+                var status = _requests$method$matched.status;
+                var handler = _requests$method$matched.handler;
+
+                var response = handler(_clone(json));
                 setTimeout(function () {
-                    if (done) done(response);
-                }, 50);
+                    if (status >= 200 && status < 300 || status === 304) {
+                        if (done) done(response);
+                    } else {
+                        if (fail) fail({ status: status });
+                    }
+                }, 100);
                 return {
                     v: true
                 };
@@ -84,8 +91,13 @@ mockxhr.setMock = function (flag) {
     return _mock = flag;
 };
 
-mockxhr.mock = function (method, url, handler) {
-    _requests[method][url] = { handler: handler };
+mockxhr.mock = function (method, url, handler, status) {
+    _requests[method][url] = {
+        handler: handler || function () {
+            return "";
+        },
+        status: status || 200
+    };
 };
 
 exports["default"] = mockxhr;

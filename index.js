@@ -25,11 +25,15 @@ function _xhr(method, url, json, done, fail) {
             }
         }
         if (matched) {
-            let handler = _requests[method][matched].handler;
-            let response = handler ? handler(_clone(json)) : undefined;
+            let {status, handler} = _requests[method][matched];
+            let response = handler(_clone(json));
             setTimeout(() => {
-                if (done) done(response);
-            }, 50);
+                if (status >= 200 && status < 300 || status === 304) {
+                    if (done) done(response);
+                } else {
+                    if (fail) fail({status: status});
+                }
+            }, 100);
             return true;
         }
     }
@@ -69,8 +73,11 @@ METHODS.map(method => {
 
 mockxhr.setMock = (flag => _mock = flag);
 
-mockxhr.mock = (method, url, handler) => {
-    _requests[method][url] = { handler: handler };
+mockxhr.mock = (method, url, handler, status) => {
+    _requests[method][url] = {
+        handler: handler || (() => ""),
+        status: status || 200
+    };
 };
 
 export default mockxhr;
