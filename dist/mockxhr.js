@@ -13,6 +13,11 @@ METHODS.map(function (method) {
     return _requests[method] = {};
 });
 
+function _clone(json) {
+    if (!json) return {};
+    return JSON.parse(JSON.stringify(json));
+}
+
 function _xhr(method, url, json, done, fail) {
     if (_mock) {
         var matched = url;
@@ -29,7 +34,7 @@ function _xhr(method, url, json, done, fail) {
         if (matched) {
             var _ret = (function () {
                 var handler = _requests[method][matched].handler;
-                var response = handler ? handler(json) : undefined;
+                var response = handler ? handler(_clone(json)) : undefined;
                 setTimeout(function () {
                     if (done) done(response);
                 }, 50);

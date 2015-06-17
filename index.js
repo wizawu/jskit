@@ -6,6 +6,11 @@ let _requests = {};
 
 METHODS.map(method => _requests[method] = {});
 
+function _clone(json) {
+    if (!json) return {};
+    return JSON.parse(JSON.stringify(json));
+}
+
 function _xhr(method, url, json, done, fail) {
     if (_mock) {
         let matched = url;
@@ -21,7 +26,7 @@ function _xhr(method, url, json, done, fail) {
         }
         if (matched) {
             let handler = _requests[method][matched].handler;
-            let response = handler ? handler(json) : undefined;
+            let response = handler ? handler(_clone(json)) : undefined;
             setTimeout(() => {
                 if (done) done(response);
             }, 50);
