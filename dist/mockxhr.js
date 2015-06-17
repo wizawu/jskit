@@ -17,7 +17,8 @@ function _xhr(method, url, json, done, fail) {
     if (_mock) {
         var matched = url;
         // Allow regular expression
-        if (!matched) {
+        if (!_requests[method][url]) {
+            matched = null;
             for (var k in _requests[method]) {
                 if (url.search(k) >= 0) {
                     matched = k;
