@@ -62,13 +62,8 @@ function _xhr(method, url, json, done, fail) {
             if (_status >= 200 && _status < 300 || _status === 304) {
                 if (!done) return;
                 var responseText = xhr.responseText;
-                try {
-                    var response = JSON.parse(responseText);
-                    done(response);
-                } catch (e) {
-                    console.error(e);
-                    done(responseText);
-                }
+                var response = JSON.parse(responseText);
+                done(response);
             } else {
                 if (fail) fail(xhr);
             }
