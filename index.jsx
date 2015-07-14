@@ -1,8 +1,10 @@
-"use strict";
-
 import React from "react";
 
-let Item = React.createClass({
+function assign(target, source) {
+    for (let k in source) target[k] = source[k];
+}
+
+const Item = React.createClass({
     // See Polymer layout attributes
     propTypes: {
         flex: React.PropTypes.oneOfType([
@@ -94,18 +96,103 @@ let Item = React.createClass({
             style.display = "none";
         }
         
-        for (let k in props.style) style[k] = props.style[k];
+        assign(style, props.style);
         return <div {...props} style={style}>{props.children}</div>;
     }
 });
 
-let Layout = React.createClass({
+const Layout = React.createClass({
     render() {
         return <Item layout {...this.props}>{this.props.children}</Item>;
     }
 });
 
+const Dialog = React.createClass({
+    propTypes: {
+        style: React.PropTypes.object,
+        maskStyle: React.PropTypes.object
+    },
+
+    getInitialState() {
+        return {
+            display: "none",
+            opacity: 0,
+            marginTop: -100
+        };
+    },
+
+    componentDidMount() {
+        this.refs.mask.getDOMNode().onclick = () => this.hide();
+    },
+
+    componentWillUnmount() {
+        this.refs.mask.getDOMNode().onclick = undefined;
+    },
+
+    show() {
+        let that = this, state = this.state;
+        let timer = setInterval(() => {
+            if (state.opacity < 0.99) {
+                that.setState({
+                    display: "block",
+                    opacity: state.opacity + 0.05,
+                    marginTop: state.marginTop + 5
+                });
+            } else {
+                clearInterval(timer);
+            }
+        }, 20);
+    },
+
+    hide() {
+        let that = this, state = this.state;
+        let timer = setInterval(() => {
+            if (state.opacity < 0.01) {
+                clearInterval(timer);
+            } else {
+                that.setState({
+                    display: "none",
+                    opacity: state.opacity - 0.05,
+                    marginTop: state.marginTop - 5
+                });
+            }
+        }, 20);
+    },
+
+    render() {
+        let maskStyle = {
+            position: "fixed",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            background: "rgba(0, 0, 0, 0.6)",
+            z-index: 9
+        };
+
+        assign(maskStyle, this.state);
+        assign(maskStyle, this.props.maskStyle);
+
+        let dialogStyle = {
+            width: "60%",
+            height: "60%",
+            background: "white"
+        };
+
+        assign(dialogStyle, this.props.style);
+
+        return (
+            <Layout ref="mask" center centerJustified style={maskStyle}>
+                <Item style={dialogStyle}>
+                    {this.props.children}
+                </Item>
+            </Layout>
+        );
+    }
+});
+
 export default {
     Layout: Layout,
-    Item: Item
+    Item: Item,
+    Dialog: Dialog
 };
