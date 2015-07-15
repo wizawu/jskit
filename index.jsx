@@ -174,7 +174,7 @@ const Dialog = React.createClass({
         };
 
         maskStyle.display = this.state.display;
-        maskStyle.opacity = this.state.opacity;
+        maskStyle.opacity = Math.sin(Math.PI * this.state.opacity / 2);
         assign(maskStyle, this.props.maskStyle);
 
         let dialogStyle = {
@@ -184,7 +184,7 @@ const Dialog = React.createClass({
             boxShadow: "0 4px 8px #333"
         };
 
-        dialogStyle.marginTop = this.state.marginTop;
+        dialogStyle.marginTop = Math.sin(Math.PI * this.state.marginTop / 200) * 100;
         assign(dialogStyle, this.props.style);
 
         return (
