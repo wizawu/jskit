@@ -122,7 +122,8 @@ const Dialog = React.createClass({
     },
 
     componentDidMount() {
-        this.refs.mask.getDOMNode().onclick = () => this.hide();
+        this.refs.mask.getDOMNode().onclick = e =>
+            e.target !== this.refs.dialog.getDOMNode() && this.hide();
     },
 
     componentWillUnmount() {
@@ -130,36 +131,34 @@ const Dialog = React.createClass({
     },
 
     show() {
-        let that = this, state = this.state;
+        let that = this;
         let timer = setInterval(() => {
-            if (state.opacity < 0.99) {
-                that.setState({
-                    display: "block",
-                    opacity: state.opacity + 0.05,
-                    marginTop: state.marginTop + 5
-                });
+            if (that.state.opacity < 0.99) {
+                that.state.opacity += 0.10;
+                that.state.marginTop += 10;
+                that.setState({display: "flex"});
             } else {
                 clearInterval(timer);
             }
-        }, 20);
+        }, 10);
     },
 
     hide() {
-        let that = this, state = this.state;
+        let that = this;
         let timer = setInterval(() => {
-            if (state.opacity < 0.01) {
+            if (that.state.opacity < 0.01) {
+                that.setState({display: "none"});
                 clearInterval(timer);
             } else {
-                that.setState({
-                    display: "none",
-                    opacity: state.opacity - 0.05,
-                    marginTop: state.marginTop - 5
-                });
+                that.state.opacity -= 0.10;
+                that.state.marginTop -= 10;
+                that.setState({});
             }
-        }, 20);
+        }, 10);
     },
 
     render() {
+        console.log(this.state.opacity);
         let maskStyle = {
             position: "fixed",
             top: 0,
@@ -167,23 +166,25 @@ const Dialog = React.createClass({
             width: "100%",
             height: "100%",
             background: "rgba(0, 0, 0, 0.6)",
-            z-index: 9
+            zIndex: 9
         };
 
-        assign(maskStyle, this.state);
+        maskStyle.display = this.state.display;
+        maskStyle.opacity = this.state.opacity;
         assign(maskStyle, this.props.maskStyle);
 
         let dialogStyle = {
-            width: "60%",
-            height: "60%",
-            background: "white"
+            width: "50%",
+            background: "white",
+            padding: "1em"
         };
 
+        dialogStyle.marginTop = this.state.marginTop;
         assign(dialogStyle, this.props.style);
 
         return (
             <Layout ref="mask" center centerJustified style={maskStyle}>
-                <Item style={dialogStyle}>
+                <Item ref="dialog" style={dialogStyle}>
                     {this.props.children}
                 </Item>
             </Layout>

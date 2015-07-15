@@ -12,6 +12,12 @@ var _react = require("react");
 
 var _react2 = _interopRequireDefault(_react);
 
+function assign(target, source) {
+    for (var k in source) {
+        target[k] = source[k];
+    }
+}
+
 var Item = _react2["default"].createClass({
     displayName: "Item",
 
@@ -103,9 +109,8 @@ var Item = _react2["default"].createClass({
             style.display = "none";
         }
 
-        for (var k in props.style) {
-            style[k] = props.style[k];
-        }return _react2["default"].createElement(
+        assign(style, props.style);
+        return _react2["default"].createElement(
             "div",
             _extends({}, props, { style: style }),
             props.children
@@ -125,8 +130,101 @@ var Layout = _react2["default"].createClass({
     }
 });
 
+var Dialog = _react2["default"].createClass({
+    displayName: "Dialog",
+
+    propTypes: {
+        style: _react2["default"].PropTypes.object,
+        maskStyle: _react2["default"].PropTypes.object
+    },
+
+    getInitialState: function getInitialState() {
+        return {
+            display: "none",
+            opacity: 0,
+            marginTop: -100
+        };
+    },
+
+    componentDidMount: function componentDidMount() {
+        var _this = this;
+
+        this.refs.mask.getDOMNode().onclick = function (e) {
+            return e.target !== _this.refs.dialog.getDOMNode() && _this.hide();
+        };
+    },
+
+    componentWillUnmount: function componentWillUnmount() {
+        this.refs.mask.getDOMNode().onclick = undefined;
+    },
+
+    show: function show() {
+        var that = this;
+        var timer = setInterval(function () {
+            if (that.state.opacity < 0.99) {
+                that.state.opacity += 0.10;
+                that.state.marginTop += 10;
+                that.setState({ display: "flex" });
+            } else {
+                clearInterval(timer);
+            }
+        }, 10);
+    },
+
+    hide: function hide() {
+        var that = this;
+        var timer = setInterval(function () {
+            if (that.state.opacity < 0.01) {
+                that.setState({ display: "none" });
+                clearInterval(timer);
+            } else {
+                that.state.opacity -= 0.10;
+                that.state.marginTop -= 10;
+                that.setState({});
+            }
+        }, 10);
+    },
+
+    render: function render() {
+        console.log(this.state.opacity);
+        var maskStyle = {
+            position: "fixed",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            background: "rgba(0, 0, 0, 0.6)",
+            zIndex: 9
+        };
+
+        maskStyle.display = this.state.display;
+        maskStyle.opacity = this.state.opacity;
+        assign(maskStyle, this.props.maskStyle);
+
+        var dialogStyle = {
+            width: "50%",
+            background: "white",
+            padding: "1em"
+        };
+
+        dialogStyle.marginTop = this.state.marginTop;
+        assign(dialogStyle, this.props.style);
+
+        return _react2["default"].createElement(
+            Layout,
+            { ref: "mask", center: true, centerJustified: true, style: maskStyle },
+            _react2["default"].createElement(
+                Item,
+                { ref: "dialog", style: dialogStyle },
+                this.props.children
+            )
+        );
+    }
+});
+
 exports["default"] = {
     Layout: Layout,
-    Item: Item
+    Item: Item,
+    Dialog: Dialog
 };
 module.exports = exports["default"];
