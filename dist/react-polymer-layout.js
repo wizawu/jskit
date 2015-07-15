@@ -142,7 +142,8 @@ var Dialog = _react2["default"].createClass({
         return {
             display: "none",
             opacity: 0,
-            marginTop: -100
+            marginTop: -100,
+            timer: null
         };
     },
 
@@ -159,34 +160,37 @@ var Dialog = _react2["default"].createClass({
     },
 
     show: function show() {
+        if (this.state.timer) return;
         var that = this;
-        var timer = setInterval(function () {
+        this.state.timer = setInterval(function () {
             if (that.state.opacity < 0.99) {
                 that.state.opacity += 0.10;
                 that.state.marginTop += 10;
                 that.setState({ display: "flex" });
             } else {
-                clearInterval(timer);
+                clearInterval(that.state.timer);
+                that.state.timer = null;
             }
-        }, 10);
+        }, 20);
     },
 
     hide: function hide() {
+        if (this.state.timer) return;
         var that = this;
-        var timer = setInterval(function () {
+        this.state.timer = setInterval(function () {
             if (that.state.opacity < 0.01) {
                 that.setState({ display: "none" });
-                clearInterval(timer);
+                clearInterval(that.state.timer);
+                that.state.timer = null;
             } else {
                 that.state.opacity -= 0.10;
                 that.state.marginTop -= 10;
                 that.setState({});
             }
-        }, 10);
+        }, 20);
     },
 
     render: function render() {
-        console.log(this.state.opacity);
         var maskStyle = {
             position: "fixed",
             top: 0,
@@ -204,7 +208,8 @@ var Dialog = _react2["default"].createClass({
         var dialogStyle = {
             width: "50%",
             background: "white",
-            padding: "1em"
+            padding: "1em",
+            boxShadow: "0 4px 8px #333"
         };
 
         dialogStyle.marginTop = this.state.marginTop;
