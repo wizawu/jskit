@@ -1,6 +1,6 @@
 {
   "name": "react-polymer-layout",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "description": "React layout component inspired by Polymer layout attributes",
   "main": "dist/react-polymer-layout.js",
   "scripts": {

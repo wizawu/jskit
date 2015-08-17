@@ -151,7 +151,7 @@ var Dialog = _react2["default"].createClass({
         var _this = this;
 
         this.refs.mask.getDOMNode().onclick = function (e) {
-            return e.target !== _this.refs.dialog.getDOMNode() && _this.hide();
+            return e.target === _this.refs.mask.getDOMNode() && _this.hide();
         };
     },
 
