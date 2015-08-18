@@ -199,6 +199,7 @@ const Dialog = React.createClass({
 
 export default {
     Layout: Layout,
+    Box: Layout,
     Item: Item,
     Dialog: Dialog
 };

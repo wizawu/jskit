@@ -229,6 +229,7 @@ var Dialog = _react2["default"].createClass({
 
 exports["default"] = {
     Layout: Layout,
+    Box: Layout,
     Item: Item,
     Dialog: Dialog
 };
