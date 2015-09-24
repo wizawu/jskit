@@ -110,7 +110,8 @@ const Layout = React.createClass({
 const Dialog = React.createClass({
     propTypes: {
         style: React.PropTypes.object,
-        maskStyle: React.PropTypes.object
+        maskStyle: React.PropTypes.object,
+        className: React.PropTypes.string,
     },
 
     getInitialState() {
@@ -189,7 +190,7 @@ const Dialog = React.createClass({
 
         return (
             <Layout ref="mask" center centerJustified style={maskStyle}>
-                <Item ref="dialog" style={dialogStyle}>
+                <Item ref="dialog" style={dialogStyle} className={this.props.className}>
                     {this.props.children}
                 </Item>
             </Layout>

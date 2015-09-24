@@ -135,7 +135,8 @@ var Dialog = _react2["default"].createClass({
 
     propTypes: {
         style: _react2["default"].PropTypes.object,
-        maskStyle: _react2["default"].PropTypes.object
+        maskStyle: _react2["default"].PropTypes.object,
+        className: _react2["default"].PropTypes.string
     },
 
     getInitialState: function getInitialState() {
@@ -220,7 +221,7 @@ var Dialog = _react2["default"].createClass({
             { ref: "mask", center: true, centerJustified: true, style: maskStyle },
             _react2["default"].createElement(
                 Item,
-                { ref: "dialog", style: dialogStyle },
+                { ref: "dialog", style: dialogStyle, className: this.props.className },
                 this.props.children
             )
         );
