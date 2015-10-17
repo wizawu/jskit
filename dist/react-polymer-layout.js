@@ -12,6 +12,8 @@ var _react = require("react");
 
 var _react2 = _interopRequireDefault(_react);
 
+var onFirefox = window.navigator.userAgent.indexOf("Firefox") >= 0;
+
 function assign(target, source) {
     for (var k in source) {
         target[k] = source[k];
@@ -49,40 +51,46 @@ var Item = _react2["default"].createClass({
 
     render: function render() {
         var props = this.props;
-        var style = props.layout ? { display: "flex" } : {};
+        var style = props.layout ? { display: onFirefox ? "flex" : "-webkit-box" } : {};
         // flex
         if (typeof props.flex === "string") {
-            style.flex = props.flex;
+            style.flex = style.WebkitBoxFlex = props.flex;
         } else if (props.flex) {
-            style.flex = "1 1 1e-9px";
+            style.flex = style.WebkitBoxFlex = "1 1 1e-9px";
         }
         // flex-wrap
         if (props.wrap) {
-            style.flexWrap = "wrap";
+            style.flexWrap = style.WebkitFlexWrap = "wrap";
         }
         // flex-direction
         if (props.vertical) {
             style.flexDirection = style.WebkitFlexDirection = props.reverse ? "column-reverse" : "column";
+            style.WebkitBoxOrient = "vertical";
         } else {
             style.flexDirection = style.WebkitFlexDirection = props.reverse ? "row-reverse" : "row";
+            style.WebkitBoxOrient = "horizontal";
         }
         // align-items
         if (props.center) {
-            style.alignItems = "center";
+            style.alignItems = style.WebkitBoxAlign = "center";
         } else if (props.start) {
             style.alignItems = "flex-start";
+            style.WebkitBoxAlign = "start";
         } else if (props.end) {
             style.alignItems = "flex-end";
+            style.WebkitBoxAlign = "end";
         } else if (props.stretch) {
-            style.alignItems = "stretch";
+            style.alignItems = style.WebkitBoxAlign = "stretch";
         }
         // justify-content
         if (props.startJustified) {
             style.justifyContent = "flex-start";
+            style.WebkitBoxPack = "start";
         } else if (props.centerJustified) {
-            style.justifyContent = "center";
+            style.justifyContent = style.WebkitBoxPack = "center";
         } else if (props.endJustified) {
             style.justifyContent = "flex-end";
+            style.WebkitBoxPack = "end";
         } else if (props.justified) {
             style.justifyContent = "space-between";
         } else if (props.aroundJustified) {
@@ -90,13 +98,13 @@ var Item = _react2["default"].createClass({
         }
         // align-self
         if (props.selfStart) {
-            style.alignSelf = "flex-start";
+            style.alignSelf = style.WebkitAlignSelf = "flex-start";
         } else if (props.selfCenter) {
-            style.alignSelf = "center";
+            style.alignSelf = style.WebkitAlignSelf = "center";
         } else if (props.selfEnd) {
-            style.alignSelf = "flex-end";
+            style.alignSelf = style.WebkitAlignSelf = "flex-end";
         } else if (props.selfStretch) {
-            style.alignSelf = "stretch";
+            style.alignSelf = style.WebkitAlignSelf = "stretch";
         }
         // other
         if (props.relative) {
@@ -167,7 +175,9 @@ var Dialog = _react2["default"].createClass({
             if (that.state.opacity < 0.99) {
                 that.state.opacity += 0.10;
                 that.state.marginTop += 10;
-                that.setState({ display: "flex" });
+                that.setState({
+                    display: onFirefox ? "flex" : "-webkit-box"
+                });
             } else {
                 clearInterval(that.state.timer);
                 that.state.timer = null;
