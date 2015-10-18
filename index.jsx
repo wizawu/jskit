@@ -1,6 +1,6 @@
 import React from "react";
 
-const onFirefox = (window.navigator.userAgent.indexOf("Firefox") >= 0);
+const onFirefox = (window.navigator.userAgent.indexOf("Mozilla") >= 0);
 
 function assign(target, source) {
     for (let k in source) target[k] = source[k];
