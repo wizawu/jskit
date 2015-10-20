@@ -12,7 +12,7 @@ var _react = require("react");
 
 var _react2 = _interopRequireDefault(_react);
 
-var onFirefox = window.navigator.userAgent.indexOf("Mobile") < 0;
+var onMobile = window.navigator.userAgent.indexOf("Mobile") >= 0;
 
 function assign(target, source) {
     for (var k in source) {
@@ -51,12 +51,12 @@ var Item = _react2["default"].createClass({
 
     render: function render() {
         var props = this.props;
-        var style = props.layout ? { display: onFirefox ? "flex" : "-webkit-box" } : {};
+        var style = props.layout ? { display: onMobile ? "-webkit-box" : "flex" } : {};
         // flex
         if (typeof props.flex === "string") {
             style.flex = style.WebkitBoxFlex = props.flex;
         } else if (props.flex) {
-            style.flex = style.WebkitBoxFlex = "1 1 1e-9px";
+            style.flex = style.WebkitBoxFlex = 1;
         }
         // flex-wrap
         if (props.wrap) {
@@ -176,7 +176,7 @@ var Dialog = _react2["default"].createClass({
                 that.state.opacity += 0.10;
                 that.state.marginTop += 10;
                 that.setState({
-                    display: onFirefox ? "flex" : "-webkit-box"
+                    display: onMobile ? "-webkit-box" : "flex"
                 });
             } else {
                 clearInterval(that.state.timer);
