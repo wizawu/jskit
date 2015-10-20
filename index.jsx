@@ -1,6 +1,6 @@
 import React from "react";
 
-const onFirefox = (window.navigator.userAgent.indexOf("Mozilla") >= 0);
+const onMobile = (window.navigator.userAgent.indexOf("Mobile") >= 0);
 
 function assign(target, source) {
     for (let k in source) target[k] = source[k];
@@ -38,12 +38,12 @@ const Item = React.createClass({
 
     render() {
         let props = this.props;
-        let style = props.layout ? { display: onFirefox ? "flex" : "-webkit-box" } : {};
+        let style = props.layout ? { display: onMobile ? "-webkit-box" : "flex" } : {};
         // flex
         if (typeof(props.flex) === "string") {
             style.flex = style.WebkitBoxFlex = props.flex;
         } else if (props.flex) {
-            style.flex = style.WebkitBoxFlex = "1 1 1e-9px";
+            style.flex = style.WebkitBoxFlex = 1;
         }
         // flex-wrap
         if (props.wrap) {
@@ -148,7 +148,7 @@ const Dialog = React.createClass({
                 that.state.opacity += 0.10;
                 that.state.marginTop += 10;
                 that.setState({
-                    display: onFirefox ? "flex": "-webkit-box",
+                    display: onMobile ? "-webkit-box" : "flex",
                 });
             } else {
                 clearInterval(that.state.timer);

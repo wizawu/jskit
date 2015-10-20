@@ -12,7 +12,7 @@ var _react = require("react");
 
 var _react2 = _interopRequireDefault(_react);
 
-var onFirefox = window.navigator.userAgent.indexOf("Mozilla") >= 0;
+var onFirefox = window.navigator.userAgent.indexOf("Mobile") < 0;
 
 function assign(target, source) {
     for (var k in source) {
