@@ -151,7 +151,7 @@ var Dialog = _react2["default"].createClass({
         return {
             display: "none",
             opacity: 0,
-            marginTop: -100,
+            marginTop: -50,
             timer: null
         };
     },
@@ -174,7 +174,7 @@ var Dialog = _react2["default"].createClass({
         this.state.timer = setInterval(function () {
             if (that.state.opacity < 0.99) {
                 that.state.opacity += 0.10;
-                that.state.marginTop += 10;
+                that.state.marginTop += 5;
                 that.setState({
                     display: onMobile ? "-webkit-box" : "flex"
                 });
@@ -195,7 +195,7 @@ var Dialog = _react2["default"].createClass({
                 that.state.timer = null;
             } else {
                 that.state.opacity -= 0.10;
-                that.state.marginTop -= 10;
+                that.state.marginTop -= 5;
                 that.setState({});
             }
         }, 20);
@@ -223,7 +223,7 @@ var Dialog = _react2["default"].createClass({
             boxShadow: "0 4px 8px #333"
         };
 
-        dialogStyle.marginTop = Math.sin(Math.PI * this.state.marginTop / 200) * 100;
+        dialogStyle.marginTop = Math.sin(Math.PI * this.state.marginTop / 100) * 50;
         assign(dialogStyle, this.props.style);
 
         return _react2["default"].createElement(
