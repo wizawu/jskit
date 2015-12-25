@@ -157,15 +157,15 @@ var Dialog = _react2["default"].createClass({
     },
 
     componentDidMount: function componentDidMount() {
-        var _this = this;
-
-        this.refs.mask.getDOMNode().onclick = function (e) {
-            return e.target === _this.refs.mask.getDOMNode() && _this.hide();
-        };
+        this.refs.mask.getDOMNode().addEventListener("click", this._autoHide);
     },
 
     componentWillUnmount: function componentWillUnmount() {
-        this.refs.mask.getDOMNode().onclick = undefined;
+        this.refs.mask.getDOMNode().removeEventListener("click", this._autoHide);
+    },
+
+    _autoHide: function _autoHide(e) {
+        if (e.target === this.refs.mask.getDOMNode()) this.hide();
     },
 
     show: function show() {

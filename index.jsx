@@ -132,12 +132,15 @@ const Dialog = React.createClass({
     },
 
     componentDidMount() {
-        this.refs.mask.getDOMNode().onclick = e =>
-            e.target === this.refs.mask.getDOMNode() && this.hide();
+        this.refs.mask.getDOMNode().addEventListener("click", this._autoHide);
     },
 
     componentWillUnmount() {
-        this.refs.mask.getDOMNode().onclick = undefined;
+        this.refs.mask.getDOMNode().removeEventListener("click", this._autoHide);
+    },
+
+    _autoHide(e) {
+        if (e.target === this.refs.mask.getDOMNode()) this.hide();
     },
 
     show() {
