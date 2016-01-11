@@ -1,6 +1,6 @@
 import React from "react";
 
-const isWebkit = ("WebkitAppearance" in document.documentElement.style);
+const useWebkit = ("WebkitAppearance" in document.documentElement.style) && !window.chrome;
 
 function assign(target, source) {
     for (let k in source) target[k] = source[k];
@@ -38,7 +38,7 @@ const Item = React.createClass({
 
     render() {
         let props = this.props;
-        let style = props.layout ? { display: isWebkit ? "-webkit-box" : "flex" } : {};
+        let style = props.layout ? { display: useWebkit ? "-webkit-box" : "flex" } : {};
         // flex
         if (typeof(props.flex) === "string") {
             style.flex = style.WebkitBoxFlex = props.flex;
@@ -151,7 +151,7 @@ const Dialog = React.createClass({
                 that.state.opacity += 0.10;
                 that.state.marginTop += 5;
                 that.setState({
-                    display: isWebkit ? "-webkit-box" : "flex",
+                    display: useWebkit ? "-webkit-box" : "flex",
                 });
             } else {
                 clearInterval(that.state.timer);
