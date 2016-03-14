@@ -1,6 +1,6 @@
 {
   "name": "mockxhr",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Flyweight ajax and mockjax built on Vanilla JS",
   "main": "lib/mockxhr.js",
   "scripts": {
