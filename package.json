@@ -1,10 +1,10 @@
 {
   "name": "react-polymer-layout",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "main": "main.js",
   "repository": "github.com/wizawu/react-polymer-layout",
   "scripts": {
-    "publish": "babel --presets react -o main.js js/main.jsx"
+    "publish": "babel --presets react,es2015 -o main.js js/main.jsx"
   },
   "peerDependencies": {
     "react": ">=0.14.0",
@@ -12,6 +12,7 @@
   },
   "devDependencies": {
     "babel-cli": "^6.16.0",
+    "babel-preset-es2015": "^6.16.0",
     "babel-preset-react": "^6.16.0"
   }
 }
