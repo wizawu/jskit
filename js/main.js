@@ -1,59 +1,55 @@
-"use strict";
+import React from "react";
+import ReactDOM from "react-dom";
 
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
-var _react = require("react");
-
-var _react2 = _interopRequireDefault(_react);
-
-var useWebkit = "WebkitAppearance" in document.documentElement.style && !window.chrome;
+const useWebkit = ("WebkitAppearance" in document.documentElement.style) && !window.chrome;
 
 function assign(target, source) {
-    for (var k in source) {
-        target[k] = source[k];
+    for (let k in source) target[k] = source[k];
+}
+
+function getDOMNode(ref) {
+    if (React.version > "0.13.x") {
+        return ReactDOM.findDOMNode(ref)
+    } else {
+        return ref.getDOMNode()
     }
 }
 
-var Item = _react2["default"].createClass({
-    displayName: "Item",
-
+export const Item = React.createClass({
     // See Polymer layout attributes
     propTypes: {
-        flex: _react2["default"].PropTypes.oneOfType([_react2["default"].PropTypes.bool, _react2["default"].PropTypes.string]),
-        layout: _react2["default"].PropTypes.bool,
-        wrap: _react2["default"].PropTypes.bool,
-        reverse: _react2["default"].PropTypes.bool,
-        horizontal: _react2["default"].PropTypes.bool,
-        vertical: _react2["default"].PropTypes.bool,
-        center: _react2["default"].PropTypes.bool,
-        start: _react2["default"].PropTypes.bool,
-        end: _react2["default"].PropTypes.bool,
-        stretch: _react2["default"].PropTypes.bool,
-        startJustified: _react2["default"].PropTypes.bool,
-        centerJustified: _react2["default"].PropTypes.bool,
-        endJustified: _react2["default"].PropTypes.bool,
-        justified: _react2["default"].PropTypes.bool,
-        aroundJustified: _react2["default"].PropTypes.bool,
-        selfStart: _react2["default"].PropTypes.bool,
-        selfCenter: _react2["default"].PropTypes.bool,
-        selfEnd: _react2["default"].PropTypes.bool,
-        selfStretch: _react2["default"].PropTypes.bool,
-        relative: _react2["default"].PropTypes.bool,
-        fit: _react2["default"].PropTypes.bool,
-        hidden: _react2["default"].PropTypes.bool
+        flex: React.PropTypes.oneOfType([
+            React.PropTypes.bool,
+            React.PropTypes.string
+        ]),
+        layout: React.PropTypes.bool,
+        wrap: React.PropTypes.bool,
+        reverse: React.PropTypes.bool,
+        horizontal: React.PropTypes.bool,
+        vertical: React.PropTypes.bool,
+        center: React.PropTypes.bool,
+        start: React.PropTypes.bool,
+        end: React.PropTypes.bool,
+        stretch: React.PropTypes.bool,
+        startJustified: React.PropTypes.bool,
+        centerJustified: React.PropTypes.bool,
+        endJustified: React.PropTypes.bool,
+        justified: React.PropTypes.bool,
+        aroundJustified: React.PropTypes.bool,
+        selfStart: React.PropTypes.bool,
+        selfCenter: React.PropTypes.bool,
+        selfEnd: React.PropTypes.bool,
+        selfStretch: React.PropTypes.bool,
+        relative: React.PropTypes.bool,
+        fit: React.PropTypes.bool,
+        hidden: React.PropTypes.bool
     },
 
-    render: function render() {
-        var props = this.props;
-        var style = props.layout ? { display: useWebkit ? "-webkit-box" : "flex" } : {};
+    render() {
+        let props = this.props;
+        let style = props.layout ? { display: useWebkit ? "-webkit-box" : "flex" } : {};
         // flex
-        if (typeof props.flex === "string") {
+        if (typeof(props.flex) === "string") {
             style.flex = style.WebkitBoxFlex = props.flex;
         } else if (props.flex) {
             style.flex = style.WebkitBoxFlex = 1;
@@ -116,38 +112,28 @@ var Item = _react2["default"].createClass({
         if (props.hidden) {
             style.display = "none";
         }
-
+        
         assign(style, props.style);
-        return _react2["default"].createElement(
-            "div",
-            _extends({}, props, { style: style }),
-            props.children
-        );
+        return <div {...props} style={style}>{props.children}</div>;
     }
-});
+})
 
-var Layout = _react2["default"].createClass({
-    displayName: "Layout",
-
-    render: function render() {
-        return _react2["default"].createElement(
-            Item,
-            _extends({ layout: true }, this.props),
-            this.props.children
-        );
+export const Layout = React.createClass({
+    render() {
+        return <Item layout {...this.props}>{this.props.children}</Item>;
     }
-});
+})
 
-var Dialog = _react2["default"].createClass({
-    displayName: "Dialog",
+export const Box = Layout
 
+export const Dialog = React.createClass({
     propTypes: {
-        style: _react2["default"].PropTypes.object,
-        maskStyle: _react2["default"].PropTypes.object,
-        className: _react2["default"].PropTypes.string
+        style: React.PropTypes.object,
+        maskStyle: React.PropTypes.object,
+        className: React.PropTypes.string,
     },
 
-    getInitialState: function getInitialState() {
+    getInitialState() {
         return {
             display: "none",
             opacity: 0,
@@ -156,27 +142,27 @@ var Dialog = _react2["default"].createClass({
         };
     },
 
-    componentDidMount: function componentDidMount() {
-        this.refs.mask.getDOMNode().addEventListener("click", this._autoHide);
+    componentDidMount() {
+        getDOMNode(this.refs.mask).addEventListener("click", this._autoHide);
     },
 
-    componentWillUnmount: function componentWillUnmount() {
-        this.refs.mask.getDOMNode().removeEventListener("click", this._autoHide);
+    componentWillUnmount() {
+        getDOMNode(this.refs.mask).removeEventListener("click", this._autoHide);
     },
 
-    _autoHide: function _autoHide(e) {
-        if (e.target === this.refs.mask.getDOMNode()) this.hide();
+    _autoHide(e) {
+        if (e.target === getDOMNode(this.refs.mask)) this.hide();
     },
 
-    show: function show() {
+    show() {
         if (this.state.timer) return;
-        var that = this;
-        this.state.timer = setInterval(function () {
+        let that = this;
+        this.state.timer = setInterval(() => {
             if (that.state.opacity < 0.99) {
                 that.state.opacity += 0.10;
                 that.state.marginTop += 5;
                 that.setState({
-                    display: useWebkit ? "-webkit-box" : "flex"
+                    display: useWebkit ? "-webkit-box" : "flex",
                 });
             } else {
                 clearInterval(that.state.timer);
@@ -185,12 +171,12 @@ var Dialog = _react2["default"].createClass({
         }, 20);
     },
 
-    hide: function hide() {
+    hide() {
         if (this.state.timer) return;
-        var that = this;
-        this.state.timer = setInterval(function () {
+        let that = this;
+        this.state.timer = setInterval(() => {
             if (that.state.opacity < 0.01) {
-                that.setState({ display: "none" });
+                that.setState({display: "none"});
                 clearInterval(that.state.timer);
                 that.state.timer = null;
             } else {
@@ -201,8 +187,8 @@ var Dialog = _react2["default"].createClass({
         }, 20);
     },
 
-    render: function render() {
-        var maskStyle = {
+    render() {
+        let maskStyle = {
             position: "fixed",
             top: 0,
             left: 0,
@@ -216,7 +202,7 @@ var Dialog = _react2["default"].createClass({
         maskStyle.opacity = Math.sin(Math.PI * this.state.opacity / 2);
         assign(maskStyle, this.props.maskStyle);
 
-        var dialogStyle = {
+        let dialogStyle = {
             width: "50%",
             background: "white",
             padding: "1em",
@@ -226,22 +212,19 @@ var Dialog = _react2["default"].createClass({
         dialogStyle.marginTop = Math.sin(Math.PI * this.state.marginTop / 100) * 50;
         assign(dialogStyle, this.props.style);
 
-        return _react2["default"].createElement(
-            Layout,
-            { ref: "mask", center: true, centerJustified: true, style: maskStyle },
-            _react2["default"].createElement(
-                Item,
-                { ref: "dialog", style: dialogStyle, className: this.props.className },
-                this.props.children
-            )
+        return (
+            <Layout ref="mask" center centerJustified style={maskStyle}>
+                <Item ref="dialog" style={dialogStyle} className={this.props.className}>
+                    {this.props.children}
+                </Item>
+            </Layout>
         );
     }
-});
+})
 
-exports["default"] = {
+export default {
+    Item: Item,
     Layout: Layout,
     Box: Layout,
-    Item: Item,
-    Dialog: Dialog
-};
-module.exports = exports["default"];
+    Dialog: Dialog,
+}
