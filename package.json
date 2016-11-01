@@ -1,8 +1,9 @@
 {
   "name": "mockxhr",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "Flyweight ajax and mockjax built on Vanilla JS",
   "main": "lib/mockxhr.js",
+  "types": "lib/mockxhr.d.ts",
   "scripts": {
     "build": "mkdir -p dist && ./node_modules/.bin/browserify index.js | ./node_modules/.bin/uglifyjs -c > dist/mockxhr.min.js",
     "lint": "node_modules/.bin/jshint ~/.jshintrc index.js lib/mockxhr.js"
