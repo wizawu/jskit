@@ -1,38 +1,51 @@
-interface XHRCallBack{
-    (resp?: any) : void
-}
-
-interface _Request{
-    (url: string, json: any, done?: XHRCallBack, fail?:XHRCallBack): void
-}
-
-interface _SuccessHandler{
-    (json:any, done?:XHRCallBack, fail?: XHRCallBack ): void
-}
-
-interface _FailureHandler{
-    (json:any, done?:XHRCallBack, fail?: XHRCallBack ): void
-}
-
-type HTTPMethod = "GET" | "POST" | "DELETE" | "PUT" | "PATCH" | "COPY" | "HEAD" | "OPTIONS"
-
-declare namespace _mockxhr {
-    let GET: _Request;
-    let POST: _Request;
-    let PUT: _Request;
-    let PATCH: _Request;
-    let DELETE: _Request;
-    let COPY: _Request;
-    let HEAD: _Request;
-    let OPTIONS: _Request;
-    let setMock: (flag: boolean) => void;
-    let setHeaders: (header: any) => void;
-    let ajaxSuccess: (handler: _SuccessHandler) => void;
-    let ajaxFailure: (handler: _FailureHandler) => void;
-    let mock: (method: HTTPMethod, url: string, handler:() => null, status: number) => void;
-}
-
 declare module "mockxhr" {
-    export default _mockxhr;
+    type HTTPMethod = "GET" | "POST" | "DELETE" | "PUT" | "PATCH" | "COPY" | "HEAD" | "OPTIONS"
+
+    interface PlainObject {
+        [propName: string]: any
+    }
+
+    interface Respond {
+        status: number;
+        data: PlainObject;
+    }
+
+    interface XHR{
+        (url: string, json: any, done?: DoneCallback, fail?: FailCallback): void
+    }
+
+    interface DoneCallback {
+        (resp?: PlainObject): void
+    }
+
+    interface FailCallback {
+        (xhr?: XMLHttpRequest)
+    }
+
+    interface SuccessHandler{
+        (json?:PlainObject, done?: DoneCallback, fail?: FailCallback): void
+    }
+
+    interface FailureHandler{
+        (xhr?: XMLHttpRequest, fail?: FailCallback, done?: DoneCallback): void
+    }
+
+    namespace mockxhr {
+        let GET: XHR;
+        let POST: XHR;
+        let PUT: XHR;
+        let PATCH: XHR;
+        let DELETE: XHR;
+        let COPY: XHR;
+        let HEAD: XHR;
+        let OPTIONS: XHR;
+        let setMock: (flag: boolean) => void;
+        let setHeaders: (header: any) => void;
+        let ajaxSuccess: (handler: SuccessHandler) => void;
+        let ajaxFailure: (handler: FailureHandler) => void;
+        let mock: (method: HTTPMethod, url: string, handler:(req: PlainObject) => PlainObject, status: number) => void;
+    }
+
+    export default mockxhr;
 }
 
