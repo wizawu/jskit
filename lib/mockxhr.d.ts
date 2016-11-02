@@ -1,17 +1,10 @@
 declare module "mockxhr" {
     type HTTPMethod = "GET" | "POST" | "DELETE" | "PUT" | "PATCH" | "COPY" | "HEAD" | "OPTIONS"
 
-    interface PlainObject {
-        [propName: string]: any
-    }
-
-    interface Respond {
-        status: number;
-        data: PlainObject;
-    }
+    type PlainObject = any;
 
     interface XHR{
-        (url: string, json: any, done?: DoneCallback, fail?: FailCallback): void
+        (url: string, json: any, done?: DoneCallback, fail?: FailCallback): PromiseLike<any>
     }
 
     interface DoneCallback {
@@ -19,7 +12,7 @@ declare module "mockxhr" {
     }
 
     interface FailCallback {
-        (xhr?: XMLHttpRequest)
+        (xhr?: XMLHttpRequest): void
     }
 
     interface SuccessHandler{
@@ -30,22 +23,19 @@ declare module "mockxhr" {
         (xhr?: XMLHttpRequest, fail?: FailCallback, done?: DoneCallback): void
     }
 
-    namespace mockxhr {
-        let GET: XHR;
-        let POST: XHR;
-        let PUT: XHR;
-        let PATCH: XHR;
-        let DELETE: XHR;
-        let COPY: XHR;
-        let HEAD: XHR;
-        let OPTIONS: XHR;
-        let setMock: (flag: boolean) => void;
-        let setHeaders: (header: any) => void;
-        let ajaxSuccess: (handler: SuccessHandler) => void;
-        let ajaxFailure: (handler: FailureHandler) => void;
-        let mock: (method: HTTPMethod, url: string, handler:(req: PlainObject) => PlainObject, status: number) => void;
-    }
 
-    export default mockxhr;
+    export let GET: XHR;
+    export let POST: XHR;
+    export let PUT: XHR;
+    export let PATCH: XHR;
+    export let DELETE: XHR;
+    export let COPY: XHR;
+    export let HEAD: XHR;
+    export let OPTIONS: XHR;
+    export let setMock: (flag: boolean) => void;
+    export let setHeaders: (header: any) => void;
+    export let ajaxSuccess: (handler: SuccessHandler) => void;
+    export let ajaxFailure: (handler: FailureHandler) => void;
+    export let mock: (method: HTTPMethod, url: string, handler:(req: PlainObject) => PlainObject, status?: number) => void;
 }
 
