@@ -1,7 +1,8 @@
 {
   "name": "react-polymer-layout",
-  "version": "0.3.3",
+  "version": "0.4.0",
   "main": "main.js",
+  "types": "main.d.ts",
   "repository": "github.com/wizawu/react-polymer-layout",
   "scripts": {
     "publish": "babel --presets react,es2015 -o main.js js/main.jsx"
