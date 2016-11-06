@@ -4,7 +4,8 @@
   "main": "index.js",
   "types": "index.d.ts",
   "scripts": {
-    "build": "tsc -d -m commonjs --outDir . js/index.ts"
+    "build": "tsc -d -m commonjs --outDir . js/index.ts",
+    "prepublish": "npm run build && react-beaker publish ."
   },
   "repository": "https://github.com/wizawu/mockxhr.git",
   "devDependencies": {
