@@ -1,3 +1,5 @@
+"use strict";
+var es6_promise_1 = require("es6-promise");
 var mockxhr;
 (function (mockxhr) {
     var MockXHR = (function () {
@@ -49,49 +51,49 @@ var mockxhr;
     }
     mockxhr.mock = mock;
     function COPY(url, json, done, fail) {
-        return new Promise(function (resolve, reject) {
+        return new es6_promise_1.Promise(function (resolve, reject) {
             _xhr(resolve, reject, "COPY", url, json, done, fail);
         });
     }
     mockxhr.COPY = COPY;
     function DELETE(url, json, done, fail) {
-        return new Promise(function (resolve, reject) {
+        return new es6_promise_1.Promise(function (resolve, reject) {
             _xhr(resolve, reject, "DELETE", url, json, done, fail);
         });
     }
     mockxhr.DELETE = DELETE;
     function GET(url, json, done, fail) {
-        return new Promise(function (resolve, reject) {
+        return new es6_promise_1.Promise(function (resolve, reject) {
             _xhr(resolve, reject, "GET", url, json, done, fail);
         });
     }
     mockxhr.GET = GET;
     function HEAD(url, json, done, fail) {
-        return new Promise(function (resolve, reject) {
+        return new es6_promise_1.Promise(function (resolve, reject) {
             _xhr(resolve, reject, "HEAD", url, json, done, fail);
         });
     }
     mockxhr.HEAD = HEAD;
     function OPTIONS(url, json, done, fail) {
-        return new Promise(function (resolve, reject) {
+        return new es6_promise_1.Promise(function (resolve, reject) {
             _xhr(resolve, reject, "OPTIONS", url, json, done, fail);
         });
     }
     mockxhr.OPTIONS = OPTIONS;
     function PATCH(url, json, done, fail) {
-        return new Promise(function (resolve, reject) {
+        return new es6_promise_1.Promise(function (resolve, reject) {
             _xhr(resolve, reject, "PATCH", url, json, done, fail);
         });
     }
     mockxhr.PATCH = PATCH;
     function POST(url, json, done, fail) {
-        return new Promise(function (resolve, reject) {
+        return new es6_promise_1.Promise(function (resolve, reject) {
             _xhr(resolve, reject, "POST", url, json, done, fail);
         });
     }
     mockxhr.POST = POST;
     function PUT(url, json, done, fail) {
-        return new Promise(function (resolve, reject) {
+        return new es6_promise_1.Promise(function (resolve, reject) {
             _xhr(resolve, reject, "PUT", url, json, done, fail);
         });
     }
@@ -133,8 +135,8 @@ var mockxhr;
             var xhr_1 = new XMLHttpRequest();
             xhr_1.onreadystatechange = function () {
                 if (xhr_1.readyState === 4) {
-                    var status = xhr_1.status;
-                    if (status >= 200 && status < 300 || status === 304) {
+                    var status_2 = xhr_1.status;
+                    if (status_2 >= 200 && status_2 < 300 || status_2 === 304) {
                         var response = void 0;
                         try {
                             response = JSON.parse(xhr_1.responseText);

@@ -4,10 +4,13 @@
   "main": "index.js",
   "types": "index.d.ts",
   "scripts": {
-    "build": "tsc -d -m es6 --lib 'webworker,es2015' --outDir . js/index.tsx"
+    "build": "tsc -m commonjs --outDir . js/index.tsx"
   },
   "repository": "https://github.com/wizawu/mockxhr.git",
   "devDependencies": {
     "typescript": "2.x.x"
+  },
+  "dependencies": {
+    "es6-promise": "^4.0.5"
   }
 }

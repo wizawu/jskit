@@ -1,3 +1,5 @@
+import {Promise} from "es6-promise"
+
 namespace mockxhr {
     export type HTTPMethod = "COPY" | "DELETE" | "GET" | "HEAD" | "OPTIONS" | "PATCH" | "POST" | "PUT"
 
