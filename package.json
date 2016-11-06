@@ -1,8 +1,9 @@
 {
   "name": "mockxhr",
-  "version": "0.4.1",
+  "version": "0.5.0",
   "description": "Flyweight ajax and mockjax built on Vanilla JS",
   "main": "lib/mockxhr.js",
+  "types": "lib/mockxhr.d.ts",
   "scripts": {
     "build": "mkdir -p dist && ./node_modules/.bin/browserify index.js | ./node_modules/.bin/uglifyjs -c > dist/mockxhr.min.js",
     "lint": "node_modules/.bin/jshint ~/.jshintrc index.js lib/mockxhr.js"
@@ -22,5 +23,8 @@
     "browserify": "^11.1.0",
     "jshint": "^2.8.0",
     "uglifyjs": "^2.4.10"
+  },
+  "dependencies": {
+    "es6-promise": "^4.0.5"
   }
 }
