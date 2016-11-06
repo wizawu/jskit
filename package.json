@@ -1,8 +1,8 @@
 {
   "name": "mockxhr",
-  "version": "0.5.0",
+  "version": "1.0.0",
   "main": "index.js",
-  "types": "js/@types/index.d.ts",
+  "types": "index.d.ts",
   "scripts": {
     "build": "tsc -d -m es6 --lib 'webworker,es2015' --outDir . js/index.tsx"
   },

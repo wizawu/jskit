@@ -1,7 +1,7 @@
 namespace mockxhr {
     export type HTTPMethod = "COPY" | "DELETE" | "GET" | "HEAD" | "OPTIONS" | "PATCH" | "POST" | "PUT"
 
-    export class Map<T> {
+    export interface Map<T> {
         [k: string]: T
     }
 
@@ -29,7 +29,7 @@ namespace mockxhr {
         (xhr?: XMLHttpRequest, fail?: FailCallback, done?: DoneCallback): void
     }
 
-    class MockHandler {
+    class MockXHR {
         handler: RequestHandler
         status: number
 
@@ -52,11 +52,11 @@ namespace mockxhr {
 
     let _headers: Map<string>
     let _mock: boolean = false
-    let _requests: Map<Map<MockHandler>>
+    let _requests: Map<Map<MockXHR>>
     let _success: SuccessHandler
     let _failure: FailureHandler
 
-    METHODS.forEach(method => _requests[method] = new Map<MockHandler>())
+    METHODS.forEach(method => _requests[method] = {})
 
     function cloneJSON(json: any): any {
         if (!json) return null
@@ -80,59 +80,59 @@ namespace mockxhr {
     }
 
     export function mock(method: HTTPMethod, url: string, handler?: RequestHandler, status?: number) {
-        _requests[method][url] = new MockHandler(handler || (() => ""), status || 200)
+        _requests[method][url] = new MockXHR(handler || (() => ""), status || 200)
     }
 
     export function COPY(url: string, json: any, done: DoneCallback, fail: FailCallback): PromiseLike<any> {
-        return new Promise((resolve: any, reject: any) => {
+        return new Promise((resolve: DoneCallback, reject: FailCallback) => {
             _xhr(resolve, reject, "COPY", url, json, done, fail)
         })
     }
 
     export function DELETE(url: string, json: any, done: DoneCallback, fail: FailCallback): PromiseLike<any> {
-        return new Promise((resolve: any, reject: any) => {
+        return new Promise((resolve: DoneCallback, reject: FailCallback) => {
             _xhr(resolve, reject, "DELETE", url, json, done, fail)
         })
     }
 
     export function GET(url: string, json: any, done: DoneCallback, fail: FailCallback): PromiseLike<any> {
-        return new Promise((resolve: any, reject: any) => {
+        return new Promise((resolve: DoneCallback, reject: FailCallback) => {
             _xhr(resolve, reject, "GET", url, json, done, fail)
         })
     }
 
     export function HEAD(url: string, json: any, done: DoneCallback, fail: FailCallback): PromiseLike<any> {
-        return new Promise((resolve: any, reject: any) => {
+        return new Promise((resolve: DoneCallback, reject: FailCallback) => {
             _xhr(resolve, reject, "HEAD", url, json, done, fail)
         })
     }
 
     export function OPTIONS(url: string, json: any, done: DoneCallback, fail: FailCallback): PromiseLike<any> {
-        return new Promise((resolve: any, reject: any) => {
+        return new Promise((resolve: DoneCallback, reject: FailCallback) => {
             _xhr(resolve, reject, "OPTIONS", url, json, done, fail)
         })
     }
 
     export function PATCH(url: string, json: any, done: DoneCallback, fail: FailCallback): PromiseLike<any> {
-        return new Promise((resolve: any, reject: any) => {
+        return new Promise((resolve: DoneCallback, reject: FailCallback) => {
             _xhr(resolve, reject, "PATCH", url, json, done, fail)
         })
     }
 
     export function POST(url: string, json: any, done: DoneCallback, fail: FailCallback): PromiseLike<any> {
-        return new Promise((resolve: any, reject: any) => {
+        return new Promise((resolve: DoneCallback, reject: FailCallback) => {
             _xhr(resolve, reject, "POST", url, json, done, fail)
         })
     }
 
     export function PUT(url: string, json: any, done: DoneCallback, fail: FailCallback): PromiseLike<any> {
-        return new Promise((resolve: any, reject: any) => {
+        return new Promise((resolve: DoneCallback, reject: FailCallback) => {
             _xhr(resolve, reject, "PUT", url, json, done, fail)
         })
     }
 
-    function _xhr(resolve: any, reject: any, method: HTTPMethod, url: string, json: any,
-            done: DoneCallback, fail: FailCallback): boolean {
+    function _xhr(resolve: DoneCallback, reject: FailCallback, method: HTTPMethod, url: string, json: any,
+            done: DoneCallback, fail: FailCallback) {
         if (_mock) {
             let matched = url
             if (!_requests[method][url]) {
@@ -154,15 +154,11 @@ namespace mockxhr {
                         if (done) done(response)
                     } else {
                         reject({status})
-                        if (fail) {
-                            fail({status})
-                        }
+                        if (fail) fail({status})
                     }
                 }, 100)
-                return true
             } else {
                 reject({status: 404, statusText: "Not Found"})
-                return false
             }
         } else {
             let xhr = new XMLHttpRequest()
@@ -196,7 +192,6 @@ namespace mockxhr {
             xhr.setRequestHeader("Content-Type", "application/json; charset=utf-8")
             Object.keys(_headers || {}).forEach(k => xhr.setRequestHeader(k, _headers[k]))
             xhr.send(json ? JSON.stringify(json) : "")
-            return false
         }
     }
 }

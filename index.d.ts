@@ -1,6 +1,6 @@
 declare namespace mockxhr {
     type HTTPMethod = "COPY" | "DELETE" | "GET" | "HEAD" | "OPTIONS" | "PATCH" | "POST" | "PUT";
-    class Map<T> {
+    interface Map<T> {
         [k: string]: T;
     }
     interface SimpleXHR {

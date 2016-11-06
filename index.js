@@ -1,17 +1,11 @@
 var mockxhr;
 (function (mockxhr) {
-    var Map = (function () {
-        function Map() {
-        }
-        return Map;
-    }());
-    mockxhr.Map = Map;
-    var MockHandler = (function () {
-        function MockHandler(handler, status) {
+    var MockXHR = (function () {
+        function MockXHR(handler, status) {
             this.handler = handler;
             this.status = status;
         }
-        return MockHandler;
+        return MockXHR;
     }());
     var METHODS = [
         "COPY",
@@ -28,7 +22,7 @@ var mockxhr;
     var _requests;
     var _success;
     var _failure;
-    METHODS.forEach(function (method) { return _requests[method] = new Map(); });
+    METHODS.forEach(function (method) { return _requests[method] = {}; });
     function cloneJSON(json) {
         if (!json)
             return null;
@@ -51,7 +45,7 @@ var mockxhr;
     }
     mockxhr.ajaxFailure = ajaxFailure;
     function mock(method, url, handler, status) {
-        _requests[method][url] = new MockHandler(handler || (function () { return ""; }), status || 200);
+        _requests[method][url] = new MockXHR(handler || (function () { return ""; }), status || 200);
     }
     mockxhr.mock = mock;
     function COPY(url, json, done, fail) {
@@ -126,16 +120,13 @@ var mockxhr;
                     }
                     else {
                         reject({ status: status_1 });
-                        if (fail) {
+                        if (fail)
                             fail({ status: status_1 });
-                        }
                     }
                 }, 100);
-                return true;
             }
             else {
                 reject({ status: 404, statusText: "Not Found" });
-                return false;
             }
         }
         else {
@@ -174,7 +165,6 @@ var mockxhr;
             xhr_1.setRequestHeader("Content-Type", "application/json; charset=utf-8");
             Object.keys(_headers || {}).forEach(function (k) { return xhr_1.setRequestHeader(k, _headers[k]); });
             xhr_1.send(json ? JSON.stringify(json) : "");
-            return false;
         }
     }
 })(mockxhr || (mockxhr = {}));
