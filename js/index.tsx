@@ -1,3 +1,86 @@
+class Map<T> {
+    [k: string]: T
+}
+
+interface RequestHandler {
+    (req: any): any
+}
+
+interface DoneCallback {
+    (resp?: any): void
+}
+
+interface FailCallback {
+    (xhr?: XMLHttpRequest): void
+}
+
+interface SuccessHandler {
+    (json?: any, done?: DoneCallback, fail?: FailCallback): void
+}
+
+interface FailureHandler {
+    (xhr?: XMLHttpRequest, fail?: FailCallback, done?: DoneCallback): void
+}
+
+class MockHandler {
+    handler: RequestHandler
+    status: number
+
+    constructor(handler: RequestHandler, status: number) {
+        this.handler = handler
+        this.status = status
+    }
+}
+
+type HTTPMethod = "COPY" | "DELETE" | "GET" | "HEAD" | "OPTIONS" | "PATCH" | "POST" | "PUT"
+
+const METHODS: HTTPMethod[] = [
+    "COPY",
+    "DELETE",
+    "GET",
+    "HEAD",
+    "OPTIONS",
+    "PATCH",
+    "POST",
+    "PUT",
+]
+
+let _headers: Map<string>
+let _mock: boolean = false
+let _requests: Map<Map<MockHandler>>
+let _success: SuccessHandler
+let _failure: FailureHandler
+
+METHODS.forEach(method => _requests[method] = new Map<MockHandler>())
+
+function cloneJSON(json: any): any {
+    if (!json) return null
+    return JSON.parse(JSON.stringify(json))
+}
+
+export function setMock(flag: boolean) {
+    _mock = flag
+}
+
+export function setHeaders(headers: Map<string>) {
+    _headers = headers
+}
+
+export function ajaxSuccess(handler: SuccessHandler) {
+    _success = handler
+}
+
+export function ajaxFailure(handler: FailureHandler) {
+    _failure = handler
+}
+
+export function mock(method: HTTPMethod, url: string, handler?: RequestHandler, status?: number) {
+    _requests[method][url] = {
+        handler: handler || (() => ""),
+        status: status || 200
+    }
+}
+
 /*
 
 function _xhr(resolve, reject, method, url, json, done, fail) {

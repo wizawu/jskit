@@ -1,30 +1,13 @@
 {
   "name": "mockxhr",
   "version": "0.5.0",
-  "description": "Flyweight ajax and mockjax built on Vanilla JS",
-  "main": "lib/mockxhr.js",
-  "types": "lib/mockxhr.d.ts",
+  "main": "index.js",
+  "types": "js/@types/index.d.ts",
   "scripts": {
-    "build": "mkdir -p dist && ./node_modules/.bin/browserify index.js | ./node_modules/.bin/uglifyjs -c > dist/mockxhr.min.js",
-    "lint": "node_modules/.bin/jshint ~/.jshintrc index.js lib/mockxhr.js"
+    "build": "tsc -m commonjs --outFile index.js js/index.tsx"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/wizawu/mockxhr.git"
-  },
-  "keywords": [
-    "ajax",
-    "mock",
-    "xhr"
-  ],
-  "author": "wizawu",
-  "license": "MIT",
+  "repository": "https://github.com/wizawu/mockxhr.git",
   "devDependencies": {
-    "browserify": "^11.1.0",
-    "jshint": "^2.8.0",
-    "uglifyjs": "^2.4.10"
-  },
-  "dependencies": {
-    "es6-promise": "^4.0.5"
+    "typescript": "2.x.x"
   }
 }
