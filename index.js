@@ -21,7 +21,7 @@ var mockxhr;
     ];
     var _headers;
     var _mock = false;
-    var _requests;
+    var _requests = {};
     var _success;
     var _failure;
     METHODS.forEach(function (method) { return _requests[method] = {}; });
@@ -170,3 +170,5 @@ var mockxhr;
         }
     }
 })(mockxhr || (mockxhr = {}));
+exports.__esModule = true;
+exports["default"] = mockxhr;

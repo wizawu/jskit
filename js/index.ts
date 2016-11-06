@@ -54,7 +54,7 @@ namespace mockxhr {
 
     let _headers: Map<string>
     let _mock: boolean = false
-    let _requests: Map<Map<MockXHR>>
+    let _requests: Map<Map<MockXHR>> = {}
     let _success: SuccessHandler
     let _failure: FailureHandler
 
@@ -171,7 +171,7 @@ namespace mockxhr {
                         let response: any
                         try {
                             response = JSON.parse(xhr.responseText)
-                        } catch(e) {
+                        } catch (e) {
                             response = xhr.responseText
                         }
                         resolve(response)
@@ -197,3 +197,5 @@ namespace mockxhr {
         }
     }
 }
+
+export default mockxhr

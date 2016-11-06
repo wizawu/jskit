@@ -4,7 +4,7 @@
   "main": "index.js",
   "types": "index.d.ts",
   "scripts": {
-    "build": "tsc -m commonjs --outDir . js/index.tsx"
+    "build": "tsc -d -m commonjs --outDir . js/index.ts"
   },
   "repository": "https://github.com/wizawu/mockxhr.git",
   "devDependencies": {

@@ -1,2 +1,2 @@
-import * as mockxhr from "../index"
+import mockxhr from "../index"
 window.mockxhr = mockxhr
