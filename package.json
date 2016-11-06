@@ -4,7 +4,7 @@
   "main": "index.js",
   "types": "js/@types/index.d.ts",
   "scripts": {
-    "build": "tsc -m commonjs --outFile index.js js/index.tsx"
+    "build": "tsc -d -m es6 --lib 'webworker,es2015' --outDir . js/index.tsx"
   },
   "repository": "https://github.com/wizawu/mockxhr.git",
   "devDependencies": {

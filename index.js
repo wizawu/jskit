@@ -1,92 +1,180 @@
-/*
-
-function _xhr(resolve, reject, method, url, json, done, fail) {
-    if (_mock) {
-        var matched = url;
-        // Allow regular expression; Match longer URL pattern at first;
-        if (!_requests[method][url]) {
-            matched = null;
-            for (var k in _requests[method]){
-                if (url.search(k) === 0) {
-                    matched = k;
-                    break;
-                }
-            }
+var mockxhr;
+(function (mockxhr) {
+    var Map = (function () {
+        function Map() {
         }
-
-        if (matched) {
-            var _requests$method$matched = _requests[method][matched];
-            var status = _requests$method$matched.status;
-            var handler = _requests$method$matched.handler;
-
-            var response = handler(_clone(json));
-            setTimeout(function () {
-                if (status >= 200 && status < 300 || status === 304) {
-                    // resolve Promise if mocked handler return a ok message;
-                    resolve(response)
-                    if (done) done(response);
-                } else {
-                    // otherwise, reject it;
-                    reject({status})
-                    if (fail) fail({ status: status });
-                }
-            }, 100);
-            return true;
+        return Map;
+    }());
+    mockxhr.Map = Map;
+    var MockHandler = (function () {
+        function MockHandler(handler, status) {
+            this.handler = handler;
+            this.status = status;
         }
-        // if no mocked handler matched, reject the Promise as well;
-        reject({status: 404, statusText: "Mock method not found"})
+        return MockHandler;
+    }());
+    var METHODS = [
+        "COPY",
+        "DELETE",
+        "GET",
+        "HEAD",
+        "OPTIONS",
+        "PATCH",
+        "POST",
+        "PUT",
+    ];
+    var _headers;
+    var _mock = false;
+    var _requests;
+    var _success;
+    var _failure;
+    METHODS.forEach(function (method) { return _requests[method] = new Map(); });
+    function cloneJSON(json) {
+        if (!json)
+            return null;
+        return JSON.parse(JSON.stringify(json));
     }
-
-    // Normal request
-    var xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4) {
-            var status = xhr.status;
-            if (status >= 200 && status < 300 || status === 304) {
-                var responseText = xhr.responseText;
-                var response = null;
-                try {
-                    response = JSON.parse(responseText);
-                } catch (_) {
-                    response = responseText;
+    function setMock(flag) {
+        _mock = flag;
+    }
+    mockxhr.setMock = setMock;
+    function setHeaders(headers) {
+        _headers = headers;
+    }
+    mockxhr.setHeaders = setHeaders;
+    function ajaxSuccess(handler) {
+        _success = handler;
+    }
+    mockxhr.ajaxSuccess = ajaxSuccess;
+    function ajaxFailure(handler) {
+        _failure = handler;
+    }
+    mockxhr.ajaxFailure = ajaxFailure;
+    function mock(method, url, handler, status) {
+        _requests[method][url] = new MockHandler(handler || (function () { return ""; }), status || 200);
+    }
+    mockxhr.mock = mock;
+    function COPY(url, json, done, fail) {
+        return new Promise(function (resolve, reject) {
+            _xhr(resolve, reject, "COPY", url, json, done, fail);
+        });
+    }
+    mockxhr.COPY = COPY;
+    function DELETE(url, json, done, fail) {
+        return new Promise(function (resolve, reject) {
+            _xhr(resolve, reject, "DELETE", url, json, done, fail);
+        });
+    }
+    mockxhr.DELETE = DELETE;
+    function GET(url, json, done, fail) {
+        return new Promise(function (resolve, reject) {
+            _xhr(resolve, reject, "GET", url, json, done, fail);
+        });
+    }
+    mockxhr.GET = GET;
+    function HEAD(url, json, done, fail) {
+        return new Promise(function (resolve, reject) {
+            _xhr(resolve, reject, "HEAD", url, json, done, fail);
+        });
+    }
+    mockxhr.HEAD = HEAD;
+    function OPTIONS(url, json, done, fail) {
+        return new Promise(function (resolve, reject) {
+            _xhr(resolve, reject, "OPTIONS", url, json, done, fail);
+        });
+    }
+    mockxhr.OPTIONS = OPTIONS;
+    function PATCH(url, json, done, fail) {
+        return new Promise(function (resolve, reject) {
+            _xhr(resolve, reject, "PATCH", url, json, done, fail);
+        });
+    }
+    mockxhr.PATCH = PATCH;
+    function POST(url, json, done, fail) {
+        return new Promise(function (resolve, reject) {
+            _xhr(resolve, reject, "POST", url, json, done, fail);
+        });
+    }
+    mockxhr.POST = POST;
+    function PUT(url, json, done, fail) {
+        return new Promise(function (resolve, reject) {
+            _xhr(resolve, reject, "PUT", url, json, done, fail);
+        });
+    }
+    mockxhr.PUT = PUT;
+    function _xhr(resolve, reject, method, url, json, done, fail) {
+        if (_mock) {
+            var matched = url;
+            if (!_requests[method][url]) {
+                matched = "";
+                for (var r in _requests[method]) {
+                    if (url.search(r) === 0) {
+                        matched = r;
+                        break;
+                    }
                 }
-
-                // Resolve the promise and use response as value for onFulfilled function;
-                resolve(response)
-                if (_success) {
-                    _success(response, done, fail);
-                } else if (done) {
-                    done(response);
-                }
-            } else {
-                if (_failure) {
-                    _failure(xhr, fail, done);
-                } else if (fail) {
-                    fail(xhr);
-                }
-                // Reject the promise and use xhr as reason for onRejected function;
-                reject(xhr)
+            }
+            if (matched) {
+                var status_1 = _requests[method][matched].status;
+                var handler = _requests[method][matched].handler;
+                var response_1 = handler(cloneJSON(json));
+                setTimeout(function () {
+                    if (status_1 >= 200 && status_1 < 300 || status_1 === 304) {
+                        resolve(response_1);
+                        if (done)
+                            done(response_1);
+                    }
+                    else {
+                        reject({ status: status_1 });
+                        if (fail) {
+                            fail({ status: status_1 });
+                        }
+                    }
+                }, 100);
+                return true;
+            }
+            else {
+                reject({ status: 404, statusText: "Not Found" });
+                return false;
             }
         }
-    };
-
-    xhr.open(method, url, true);
-    xhr.setRequestHeader("Content-Type", "application/json; charset=utf-8");
-    Object.keys(_headers || {}).forEach(function (k) {
-        xhr.setRequestHeader(k, _headers[k]);
-    });
-    xhr.send(json ? JSON.stringify(json) : "");
-    return false;
-}
-
-METHODS.forEach(function (method) {
-    mockxhr[method] = function (url, json, done, fail) {
-        var _promise = new Promise(function(resolve, reject){
-            _xhr(resolve, reject, method, url, json, done, fail);
-        })
-        return _promise;
-    };
-});
-
-
-*/
+        else {
+            var xhr_1 = new XMLHttpRequest();
+            xhr_1.onreadystatechange = function () {
+                if (xhr_1.readyState === 4) {
+                    var status = xhr_1.status;
+                    if (status >= 200 && status < 300 || status === 304) {
+                        var response = void 0;
+                        try {
+                            response = JSON.parse(xhr_1.responseText);
+                        }
+                        catch (e) {
+                            response = xhr_1.responseText;
+                        }
+                        resolve(response);
+                        if (_success) {
+                            _success(response, done, fail);
+                        }
+                        else if (done) {
+                            done(response);
+                        }
+                    }
+                    else {
+                        reject(xhr_1);
+                        if (_failure) {
+                            _failure(xhr_1, fail, done);
+                        }
+                        else if (fail) {
+                            fail(xhr_1);
+                        }
+                    }
+                }
+            };
+            xhr_1.open(method, url, true);
+            xhr_1.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+            Object.keys(_headers || {}).forEach(function (k) { return xhr_1.setRequestHeader(k, _headers[k]); });
+            xhr_1.send(json ? JSON.stringify(json) : "");
+            return false;
+        }
+    }
+})(mockxhr || (mockxhr = {}));
