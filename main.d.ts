@@ -11,6 +11,9 @@ declare module "react-polymer-layout"{
         relative?: boolean;
         fit?: boolean;
         hidden?: boolean;
+
+        style?: React.CSSProperties,
+        className?: string
     }
 
     interface LayoutProps extends ItemProps {
@@ -36,9 +39,7 @@ declare module "react-polymer-layout"{
     }
 
     interface DialogProps {
-        style?: React.CSSProperties,
         maskStyle?: React.CSSProperties,
-        className?: string
     }
 
     export class Item extends React.Component<ItemProps, any>{}
