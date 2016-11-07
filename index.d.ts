@@ -26,13 +26,13 @@ declare namespace mockxhr {
     function ajaxSuccess(handler: SuccessHandler): void;
     function ajaxFailure(handler: FailureHandler): void;
     function mock(method: HTTPMethod, url: string, handler?: RequestHandler, status?: number): void;
-    function COPY(url: string, json: any, done: DoneCallback, fail: FailCallback): PromiseLike<any>;
-    function DELETE(url: string, json: any, done: DoneCallback, fail: FailCallback): PromiseLike<any>;
-    function GET(url: string, json: any, done: DoneCallback, fail: FailCallback): PromiseLike<any>;
-    function HEAD(url: string, json: any, done: DoneCallback, fail: FailCallback): PromiseLike<any>;
-    function OPTIONS(url: string, json: any, done: DoneCallback, fail: FailCallback): PromiseLike<any>;
-    function PATCH(url: string, json: any, done: DoneCallback, fail: FailCallback): PromiseLike<any>;
-    function POST(url: string, json: any, done: DoneCallback, fail: FailCallback): PromiseLike<any>;
-    function PUT(url: string, json: any, done: DoneCallback, fail: FailCallback): PromiseLike<any>;
+    function COPY(url: string, json: any, done: DoneCallback, fail: FailCallback): any;
+    function DELETE(url: string, json: any, done: DoneCallback, fail: FailCallback): any;
+    function GET(url: string, json: any, done: DoneCallback, fail: FailCallback): any;
+    function HEAD(url: string, json: any, done: DoneCallback, fail: FailCallback): any;
+    function OPTIONS(url: string, json: any, done: DoneCallback, fail: FailCallback): any;
+    function PATCH(url: string, json: any, done: DoneCallback, fail: FailCallback): any;
+    function POST(url: string, json: any, done: DoneCallback, fail: FailCallback): any;
+    function PUT(url: string, json: any, done: DoneCallback, fail: FailCallback): any;
 }
 export default mockxhr;
