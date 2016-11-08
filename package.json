@@ -9,6 +9,7 @@
   },
   "repository": "https://github.com/wizawu/mockxhr.git",
   "devDependencies": {
+    "react-beaker": "latest",
     "typescript": "^2.0.0"
   }
 }
