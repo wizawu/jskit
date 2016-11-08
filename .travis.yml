@@ -1,8 +1,8 @@
+sudo: true
 language: node_js
 node_js:
   - stable
-script:
+before_script:
   - npm install react-beaker
+script:
   - npm install
-  - npm run build
-
