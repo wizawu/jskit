@@ -1,8 +1,8 @@
-class __Promise__ {
-    constructor(executor: any){}
+class FakePromise {
+    constructor(executor: any) {}
 }
 
-const _Promise = Promise || __Promise__
+const _Promise = Promise || FakePromise
 
 namespace mockxhr {
     export type HTTPMethod = "COPY" | "DELETE" | "GET" | "HEAD" | "OPTIONS" | "PATCH" | "POST" | "PUT"

@@ -1,10 +1,10 @@
 "use strict";
-var __Promise = (function () {
-    function __Promise(executor) {
+var FakePromise = (function () {
+    function FakePromise(executor) {
     }
-    return __Promise;
+    return FakePromise;
 }());
-var _Promise = Promise || __Promise;
+var _Promise = Promise || FakePromise;
 var mockxhr;
 (function (mockxhr) {
     var MockXHR = (function () {
@@ -104,7 +104,6 @@ var mockxhr;
     }
     mockxhr.PUT = PUT;
     function _xhr(resolve, reject, method, url, json, done, fail) {
-        [1, 2, 3].map(function () { });
         if (_mock) {
             var matched = url;
             if (!_requests[method][url]) {
