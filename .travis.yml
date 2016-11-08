@@ -3,5 +3,6 @@ node_js:
   - stable
 script:
   - npm install
+  - npm install react-beaker
   - npm run build
 
