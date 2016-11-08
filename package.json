@@ -4,14 +4,11 @@
   "main": "index.js",
   "types": "index.d.ts",
   "scripts": {
-    "build": "tsc -d -m commonjs --outDir . js/index.ts",
+    "build": "tsc -d -m commonjs --lib 'dom, es2015, es2015.promise' --outDir . js/index.ts",
     "prepublish": "npm run build && react-beaker publish ."
   },
   "repository": "https://github.com/wizawu/mockxhr.git",
   "devDependencies": {
     "typescript": "2.x.x"
-  },
-  "dependencies": {
-    "es6-promise": "^4.0.5"
   }
 }

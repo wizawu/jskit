@@ -1,4 +1,8 @@
-import {Promise} from "es6-promise"
+class __Promise__ {
+    constructor(executor: any){}
+}
+
+const _Promise = Promise || __Promise__
 
 namespace mockxhr {
     export type HTTPMethod = "COPY" | "DELETE" | "GET" | "HEAD" | "OPTIONS" | "PATCH" | "POST" | "PUT"
@@ -85,50 +89,50 @@ namespace mockxhr {
         _requests[method][url] = new MockXHR(handler || (() => ""), status || 200)
     }
 
-    export function COPY(url: string, json: any, done: DoneCallback, fail: FailCallback): PromiseLike<any> {
-        return new Promise((resolve: DoneCallback, reject: FailCallback) => {
+    export function COPY(url: string, json: any, done: DoneCallback, fail: FailCallback): any {
+        return new _Promise((resolve: DoneCallback, reject: FailCallback) => {
             _xhr(resolve, reject, "COPY", url, json, done, fail)
         })
     }
 
-    export function DELETE(url: string, json: any, done: DoneCallback, fail: FailCallback): PromiseLike<any> {
-        return new Promise((resolve: DoneCallback, reject: FailCallback) => {
+    export function DELETE(url: string, json: any, done: DoneCallback, fail: FailCallback): any {
+        return new _Promise((resolve: DoneCallback, reject: FailCallback) => {
             _xhr(resolve, reject, "DELETE", url, json, done, fail)
         })
     }
 
-    export function GET(url: string, json: any, done: DoneCallback, fail: FailCallback): PromiseLike<any> {
-        return new Promise((resolve: DoneCallback, reject: FailCallback) => {
+    export function GET(url: string, json: any, done: DoneCallback, fail: FailCallback): any {
+        return new _Promise((resolve: DoneCallback, reject: FailCallback) => {
             _xhr(resolve, reject, "GET", url, json, done, fail)
         })
     }
 
-    export function HEAD(url: string, json: any, done: DoneCallback, fail: FailCallback): PromiseLike<any> {
-        return new Promise((resolve: DoneCallback, reject: FailCallback) => {
+    export function HEAD(url: string, json: any, done: DoneCallback, fail: FailCallback): any {
+        return new _Promise((resolve: DoneCallback, reject: FailCallback) => {
             _xhr(resolve, reject, "HEAD", url, json, done, fail)
         })
     }
 
-    export function OPTIONS(url: string, json: any, done: DoneCallback, fail: FailCallback): PromiseLike<any> {
-        return new Promise((resolve: DoneCallback, reject: FailCallback) => {
+    export function OPTIONS(url: string, json: any, done: DoneCallback, fail: FailCallback): any {
+        return new _Promise((resolve: DoneCallback, reject: FailCallback) => {
             _xhr(resolve, reject, "OPTIONS", url, json, done, fail)
         })
     }
 
-    export function PATCH(url: string, json: any, done: DoneCallback, fail: FailCallback): PromiseLike<any> {
-        return new Promise((resolve: DoneCallback, reject: FailCallback) => {
+    export function PATCH(url: string, json: any, done: DoneCallback, fail: FailCallback): any {
+        return new _Promise((resolve: DoneCallback, reject: FailCallback) => {
             _xhr(resolve, reject, "PATCH", url, json, done, fail)
         })
     }
 
-    export function POST(url: string, json: any, done: DoneCallback, fail: FailCallback): PromiseLike<any> {
-        return new Promise((resolve: DoneCallback, reject: FailCallback) => {
+    export function POST(url: string, json: any, done: DoneCallback, fail: FailCallback): any {
+        return new _Promise((resolve: DoneCallback, reject: FailCallback) => {
             _xhr(resolve, reject, "POST", url, json, done, fail)
         })
     }
 
-    export function PUT(url: string, json: any, done: DoneCallback, fail: FailCallback): PromiseLike<any> {
-        return new Promise((resolve: DoneCallback, reject: FailCallback) => {
+    export function PUT(url: string, json: any, done: DoneCallback, fail: FailCallback): any {
+        return new _Promise((resolve: DoneCallback, reject: FailCallback) => {
             _xhr(resolve, reject, "PUT", url, json, done, fail)
         })
     }
