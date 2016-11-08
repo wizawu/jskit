@@ -2,3 +2,24 @@
 <meta charset="utf-8">
 <body></body>
 <script src="./mockxhr.min.js"></script>
+<script>
+    mockxhr.GET("https://api.github.com/users/wizawu", {}, function(resp) {
+        console.log(resp)
+    })
+
+    mockxhr.setMock(true)
+
+    mockxhr.mock("GET", "https://api.github.com/users/wizawu", function(req) {
+        return { login: req.name }
+    })
+    mockxhr.GET("https://api.github.com/users/wizawu", { name: "a" }, function(resp) {
+        console.log(resp)
+    })
+
+    mockxhr.mock("GET", "/users/.*", function(req) {
+        return { login: req.name }
+    })
+    mockxhr.GET("/users/wizawu", { name: "b" }, function(resp) {
+        console.log(resp)
+    })
+</script>
