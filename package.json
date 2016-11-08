@@ -9,6 +9,6 @@
   },
   "repository": "https://github.com/wizawu/mockxhr.git",
   "devDependencies": {
-    "typescript": "2.x.x"
+    "typescript": "^2.0.0"
   }
 }

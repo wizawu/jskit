@@ -1,4 +1,4 @@
-# mockxhr
+# mockxhr ![build status](https://travis-ci.org/wizawu/mockxhr.svg)
 
 ### Installation
 
@@ -18,6 +18,6 @@ npm install --save mockxhr
 
 See [index.d.ts](index.d.ts)
 
-### Example
+### Usage
 
 See [test.html](html/test.html)
