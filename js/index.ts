@@ -95,6 +95,8 @@ namespace mockxhr {
         })
     }
 
+    export const copy = COPY
+
     export function DELETE(url: string, json: any, done: DoneCallback, fail: FailCallback): any {
         return new _Promise((resolve: DoneCallback, reject: FailCallback) => {
             _xhr(resolve, reject, "DELETE", url, json, done, fail)
@@ -107,11 +109,15 @@ namespace mockxhr {
         })
     }
 
+    export const get = GET
+
     export function HEAD(url: string, json: any, done: DoneCallback, fail: FailCallback): any {
         return new _Promise((resolve: DoneCallback, reject: FailCallback) => {
             _xhr(resolve, reject, "HEAD", url, json, done, fail)
         })
     }
+
+    export const head = HEAD
 
     export function OPTIONS(url: string, json: any, done: DoneCallback, fail: FailCallback): any {
         return new _Promise((resolve: DoneCallback, reject: FailCallback) => {
@@ -119,11 +125,15 @@ namespace mockxhr {
         })
     }
 
+    export const options = OPTIONS
+
     export function PATCH(url: string, json: any, done: DoneCallback, fail: FailCallback): any {
         return new _Promise((resolve: DoneCallback, reject: FailCallback) => {
             _xhr(resolve, reject, "PATCH", url, json, done, fail)
         })
     }
+
+    export const patch = PATCH
 
     export function POST(url: string, json: any, done: DoneCallback, fail: FailCallback): any {
         return new _Promise((resolve: DoneCallback, reject: FailCallback) => {
@@ -131,11 +141,15 @@ namespace mockxhr {
         })
     }
 
+    export const post = POST
+
     export function PUT(url: string, json: any, done: DoneCallback, fail: FailCallback): any {
         return new _Promise((resolve: DoneCallback, reject: FailCallback) => {
             _xhr(resolve, reject, "PUT", url, json, done, fail)
         })
     }
+
+    export const put = PUT
 
     function _xhr(resolve: DoneCallback, reject: FailCallback, method: HTTPMethod, url: string, json: any,
             done: DoneCallback, fail: FailCallback) {

@@ -1,10 +1,11 @@
 {
   "name": "mockxhr",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "main": "index.js",
   "types": "index.d.ts",
   "scripts": {
     "build": "tsc -d -m commonjs --lib 'dom,es2015,es2015.promise' --outDir . js/index.ts",
+    "watch": "tsc -d -m commonjs --lib 'dom,es2015,es2015.promise' --outDir . -w js/index.ts",
     "prepublish": "npm run build && react-beaker publish ."
   },
   "repository": "https://github.com/wizawu/mockxhr.git",

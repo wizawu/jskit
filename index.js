@@ -61,6 +61,7 @@ var mockxhr;
         });
     }
     mockxhr.COPY = COPY;
+    mockxhr.copy = COPY;
     function DELETE(url, json, done, fail) {
         return new _Promise(function (resolve, reject) {
             _xhr(resolve, reject, "DELETE", url, json, done, fail);
@@ -73,36 +74,42 @@ var mockxhr;
         });
     }
     mockxhr.GET = GET;
+    mockxhr.get = GET;
     function HEAD(url, json, done, fail) {
         return new _Promise(function (resolve, reject) {
             _xhr(resolve, reject, "HEAD", url, json, done, fail);
         });
     }
     mockxhr.HEAD = HEAD;
+    mockxhr.head = HEAD;
     function OPTIONS(url, json, done, fail) {
         return new _Promise(function (resolve, reject) {
             _xhr(resolve, reject, "OPTIONS", url, json, done, fail);
         });
     }
     mockxhr.OPTIONS = OPTIONS;
+    mockxhr.options = OPTIONS;
     function PATCH(url, json, done, fail) {
         return new _Promise(function (resolve, reject) {
             _xhr(resolve, reject, "PATCH", url, json, done, fail);
         });
     }
     mockxhr.PATCH = PATCH;
+    mockxhr.patch = PATCH;
     function POST(url, json, done, fail) {
         return new _Promise(function (resolve, reject) {
             _xhr(resolve, reject, "POST", url, json, done, fail);
         });
     }
     mockxhr.POST = POST;
+    mockxhr.post = POST;
     function PUT(url, json, done, fail) {
         return new _Promise(function (resolve, reject) {
             _xhr(resolve, reject, "PUT", url, json, done, fail);
         });
     }
     mockxhr.PUT = PUT;
+    mockxhr.put = PUT;
     function _xhr(resolve, reject, method, url, json, done, fail) {
         if (_mock) {
             var matched = url;

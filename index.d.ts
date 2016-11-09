@@ -27,12 +27,19 @@ declare namespace mockxhr {
     function ajaxFailure(handler: FailureHandler): void;
     function mock(method: HTTPMethod, url: string, handler?: RequestHandler, status?: number): void;
     function COPY(url: string, json: any, done: DoneCallback, fail: FailCallback): any;
+    const copy: typeof COPY;
     function DELETE(url: string, json: any, done: DoneCallback, fail: FailCallback): any;
     function GET(url: string, json: any, done: DoneCallback, fail: FailCallback): any;
+    const get: typeof GET;
     function HEAD(url: string, json: any, done: DoneCallback, fail: FailCallback): any;
+    const head: typeof HEAD;
     function OPTIONS(url: string, json: any, done: DoneCallback, fail: FailCallback): any;
+    const options: typeof OPTIONS;
     function PATCH(url: string, json: any, done: DoneCallback, fail: FailCallback): any;
+    const patch: typeof PATCH;
     function POST(url: string, json: any, done: DoneCallback, fail: FailCallback): any;
+    const post: typeof POST;
     function PUT(url: string, json: any, done: DoneCallback, fail: FailCallback): any;
+    const put: typeof PUT;
 }
 export default mockxhr;
