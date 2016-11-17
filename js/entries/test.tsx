@@ -1,6 +1,11 @@
 import * as React from "react"
 import PolymerLayout from "../index"
 
-declare var ReactDOM: any
+const Box = PolymerLayout.Box
+declare var window: any
 
-(ReactDOM || React).render(<PolymerLayout.Box>Polymer</PolymerLayout.Box>, document.body)
+(window["ReactDOM"] || React).render((
+    <Box center centerJustified fit>
+        Polymer
+    </Box>
+), document.body)
