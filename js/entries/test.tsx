@@ -1,7 +1,6 @@
 import * as React from "react"
-import PolymerLayout from "../index"
+import {Box} from "../index"
 
-const Box = PolymerLayout.Box
 declare var window: any
 
 (window["ReactDOM"] || React).render((

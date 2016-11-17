@@ -56,4 +56,4 @@ declare namespace ReactPolymerLayout {
         render(): JSX.Element;
     }
 }
-export default ReactPolymerLayout;
+export = ReactPolymerLayout;

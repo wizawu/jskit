@@ -214,5 +214,4 @@ var ReactPolymerLayout;
     }(React.Component));
     ReactPolymerLayout.Dialog = Dialog;
 })(ReactPolymerLayout || (ReactPolymerLayout = {}));
-exports.__esModule = true;
-exports["default"] = ReactPolymerLayout;
+module.exports = ReactPolymerLayout;

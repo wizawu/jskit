@@ -235,4 +235,4 @@ namespace ReactPolymerLayout {
     }
 }
 
-export default ReactPolymerLayout
+export = ReactPolymerLayout
