@@ -8,4 +8,4 @@ npm install --save react-polymer-layout
 
 ### Usage
 
-Refer to [Layout attributes](https://www.polymer-project.org/0.5/docs/polymer/layout-attrs.html).
+Refer to [Polymer layout attributes](https://www.polymer-project.org/0.5/docs/polymer/layout-attrs.html).
