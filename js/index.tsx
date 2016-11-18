@@ -83,7 +83,7 @@ namespace ReactPolymerLayout {
 
             style = Object.assign(style, props.style)
 
-            return <div ref="root" {...props} className={props.className} style={style}>{props.children}</div>
+            return <div ref="root" {...props} style={style}>{props.children}</div>
         }
     }
 

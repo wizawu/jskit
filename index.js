@@ -60,7 +60,7 @@ var ReactPolymerLayout;
             if (props.hidden)
                 style.display = "none";
             style = Object.assign(style, props.style);
-            return React.createElement("div", __assign({ref: "root"}, props, {className: props.className, style: style}), props.children);
+            return React.createElement("div", __assign({ref: "root"}, props, {style: style}), props.children);
         };
         return Item;
     }(React.Component));
