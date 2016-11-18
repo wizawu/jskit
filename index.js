@@ -129,30 +129,31 @@ var ReactPolymerLayout;
         __extends(Dialog, _super);
         function Dialog(props) {
             _super.call(this, props);
+            var that = this;
             this.state = {
                 display: "none",
                 opacity: 0,
                 marginTop: -50,
-                timer: null
+                timer: null,
+                handleClickMask: function (e) {
+                    if (e.target === that._getDOMNode(that.refs["mask"]))
+                        that.hide();
+                }
             };
         }
         Dialog.prototype.componentDidMount = function () {
-            this._getDOMNode(this.refs["mask"]).addEventListener("click", this._autoHide);
+            this._getDOMNode(this.refs["mask"]).addEventListener("click", this.state.handleClickMask);
         };
         Dialog.prototype.componentWillUnmount = function () {
-            this._getDOMNode(this.refs["mask"]).removeEventListener("click", this._autoHide);
+            this._getDOMNode(this.refs["mask"]).removeEventListener("click", this.state.handleClickMask);
         };
         Dialog.prototype._getDOMNode = function (element) {
             if (React.version < "1") {
-                return element.getDOMNode();
+                return element.refs["root"].refs.root.getDOMNode();
             }
             else {
                 return element.refs["root"].refs.root;
             }
-        };
-        Dialog.prototype._autoHide = function (e) {
-            if (e.target === this._getDOMNode(this.refs["mask"]))
-                this.hide();
         };
         Dialog.prototype.show = function () {
             if (this.state.timer)

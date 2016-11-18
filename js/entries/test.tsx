@@ -1,10 +1,17 @@
 import * as React from "react"
-import {Box} from "../index"
+import {Box, Dialog} from "../index"
 
 declare var window: any
 
-(window["ReactDOM"] || React).render((
-    <Box center centerJustified fit>
-        Polymer
-    </Box>
-), document.body)
+class Root extends React.Component<any, any> {
+    render() {
+        return (
+            <Box center centerJustified fit onClick={() => (this.refs["dialog"] as Dialog).show()}>
+                Polymer
+                <Dialog ref="dialog">Hello</Dialog>
+            </Box>
+        )
+    }
+}
+
+(window["ReactDOM"] || React).render(<Root />, document.body)

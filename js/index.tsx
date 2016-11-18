@@ -3,7 +3,7 @@ import * as React from "react"
 const useWebkit = ("WebkitAppearance" in document.documentElement.style) && !window.hasOwnProperty("chrome")
 
 namespace ReactPolymerLayout {
-    export interface ItemProps {
+    export interface ItemProps extends React.DOMAttributes<any> {
         flex?: boolean | number | string
         layout?: boolean
         selfStart?: boolean
@@ -42,6 +42,7 @@ namespace ReactPolymerLayout {
         opacity?: number,
         marginTop?: number,
         timer?: any,
+        handleClickMask?: any,
     }
 
     export class Item extends React.Component<ItemProps, {}> {
@@ -144,32 +145,32 @@ namespace ReactPolymerLayout {
     export class Dialog extends React.Component<DialogProps, DialogState> {
         constructor(props: DialogProps) {
             super(props)
+            let that = this
             this.state = {
                 display: "none",
                 opacity: 0,
                 marginTop: -50,
-                timer: null
+                timer: null,
+                handleClickMask(e: any) {
+                    if (e.target === that._getDOMNode(that.refs["mask"])) that.hide()
+                }
             }
         }
 
         componentDidMount() {
-            this._getDOMNode(this.refs["mask"]).addEventListener("click", this._autoHide)
+            this._getDOMNode(this.refs["mask"]).addEventListener("click", this.state.handleClickMask)
         }
 
         componentWillUnmount() {
-            this._getDOMNode(this.refs["mask"]).removeEventListener("click", this._autoHide)
+            this._getDOMNode(this.refs["mask"]).removeEventListener("click", this.state.handleClickMask)
         }
 
         _getDOMNode(element: any): any {
             if (React.version < "1") {
-                return element.getDOMNode()
+                return element.refs["root"].refs.root.getDOMNode()
             } else {
                 return element.refs["root"].refs.root
             }
-        }
-
-        _autoHide(e: any) {
-            if (e.target === this._getDOMNode(this.refs["mask"])) this.hide()
         }
 
         show() {

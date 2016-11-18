@@ -1,7 +1,7 @@
 /// <reference types="react" />
 import * as React from "react";
 declare namespace ReactPolymerLayout {
-    interface ItemProps {
+    interface ItemProps extends React.DOMAttributes<any> {
         flex?: boolean | number | string;
         layout?: boolean;
         selfStart?: boolean;
@@ -37,6 +37,7 @@ declare namespace ReactPolymerLayout {
         opacity?: number;
         marginTop?: number;
         timer?: any;
+        handleClickMask?: any;
     }
     class Item extends React.Component<ItemProps, {}> {
         render(): JSX.Element;
@@ -50,7 +51,6 @@ declare namespace ReactPolymerLayout {
         componentDidMount(): void;
         componentWillUnmount(): void;
         _getDOMNode(element: any): any;
-        _autoHide(e: any): void;
         show(): void;
         hide(): void;
         render(): JSX.Element;
