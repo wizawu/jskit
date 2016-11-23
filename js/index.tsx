@@ -2,6 +2,13 @@ import * as React from "react"
 
 const useWebkit = ("WebkitAppearance" in document.documentElement.style) && !window.hasOwnProperty("chrome")
 
+function assign(target: any, source: any): any {
+    let a: any = target || {}
+    let b: any = source || {}
+    Object.keys(b).forEach((key: string) => a[key] = b[key])
+    return a
+}
+
 namespace ReactPolymerLayout {
     export interface ItemProps extends React.DOMAttributes<any> {
         flex?: boolean | number | string
@@ -82,7 +89,7 @@ namespace ReactPolymerLayout {
             }
             if (props.hidden) style.display = "none"
 
-            style = Object.assign(style, props.style)
+            style = assign(style, props.style)
 
             return <div ref="root" {...props} style={style}>{props.children}</div>
         }
@@ -134,7 +141,7 @@ namespace ReactPolymerLayout {
                 style.justifyContent = "space-around"
             }
 
-            style = Object.assign(style, props.style)
+            style = assign(style, props.style)
 
             return <Item ref="root" layout {...props} style={style}>{props.children}</Item>
         }
@@ -205,7 +212,7 @@ namespace ReactPolymerLayout {
         }
 
         render() {
-            const maskStyle: React.CSSProperties = Object.assign({
+            const maskStyle: React.CSSProperties = assign({
                 position: "fixed",
                 top: 0,
                 left: 0,
@@ -217,7 +224,7 @@ namespace ReactPolymerLayout {
                 opacity: Math.sin(Math.PI * this.state.opacity / 2)
             }, this.props.maskStyle)
 
-            const dialogStyle: React.CSSProperties = Object.assign({
+            const dialogStyle: React.CSSProperties = assign({
                 width: "50%",
                 background: "white",
                 padding: "1em",

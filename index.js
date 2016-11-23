@@ -14,6 +14,12 @@ var __assign = (this && this.__assign) || Object.assign || function(t) {
 };
 var React = require("react");
 var useWebkit = ("WebkitAppearance" in document.documentElement.style) && !window.hasOwnProperty("chrome");
+function assign(target, source) {
+    var a = target || {};
+    var b = source || {};
+    Object.keys(b).forEach(function (key) { return a[key] = b[key]; });
+    return a;
+}
 var ReactPolymerLayout;
 (function (ReactPolymerLayout) {
     var Item = (function (_super) {
@@ -59,7 +65,7 @@ var ReactPolymerLayout;
             }
             if (props.hidden)
                 style.display = "none";
-            style = Object.assign(style, props.style);
+            style = assign(style, props.style);
             return React.createElement("div", __assign({ref: "root"}, props, {style: style}), props.children);
         };
         return Item;
@@ -119,7 +125,7 @@ var ReactPolymerLayout;
             else if (props.aroundJustified) {
                 style.justifyContent = "space-around";
             }
-            style = Object.assign(style, props.style);
+            style = assign(style, props.style);
             return React.createElement(Item, __assign({ref: "root", layout: true}, props, {style: style}), props.children);
         };
         return Box;
@@ -189,7 +195,7 @@ var ReactPolymerLayout;
             }, 20);
         };
         Dialog.prototype.render = function () {
-            var maskStyle = Object.assign({
+            var maskStyle = assign({
                 position: "fixed",
                 top: 0,
                 left: 0,
@@ -200,7 +206,7 @@ var ReactPolymerLayout;
                 display: this.state.display,
                 opacity: Math.sin(Math.PI * this.state.opacity / 2)
             }, this.props.maskStyle);
-            var dialogStyle = Object.assign({
+            var dialogStyle = assign({
                 width: "50%",
                 background: "white",
                 padding: "1em",
