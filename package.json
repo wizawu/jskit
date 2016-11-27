@@ -8,7 +8,7 @@
     "watch": "tsc -d -m commonjs --lib 'dom,es2015,es2015.promise' --outDir . -w js/index.ts",
     "prepublish": "npm run build && react-beaker publish ."
   },
-  "repository": "https://github.com/wizawu/mockxhr.git",
+  "repository": "git@github.com:wizawu/mockxhr.git",
   "devDependencies": {
     "react-beaker": "latest",
     "typescript": "^2.0.0"
