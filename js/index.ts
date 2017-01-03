@@ -2,7 +2,8 @@ class FakePromise {
     constructor(executor: any) {}
 }
 
-const _Promise = Promise || FakePromise
+declare const global: any
+const _Promise = global.Promise || FakePromise
 
 namespace mockxhr {
     export type HTTPMethod = "COPY" | "DELETE" | "GET" | "HEAD" | "OPTIONS" | "PATCH" | "POST" | "PUT"

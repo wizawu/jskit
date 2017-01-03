@@ -4,7 +4,7 @@ var FakePromise = (function () {
     }
     return FakePromise;
 }());
-var _Promise = Promise || FakePromise;
+var _Promise = global.Promise || FakePromise;
 var mockxhr;
 (function (mockxhr) {
     var MockXHR = (function () {
