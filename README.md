@@ -1,5 +1,7 @@
 # mockxhr ![build status](https://travis-ci.org/wizawu/mockxhr.svg)
 
+Flyweight ajax and mock-ajax built on Vanilla JS.
+
 ### Installation
 
 #### Node
