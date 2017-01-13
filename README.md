@@ -1,5 +1,7 @@
 # react-polymer-layout ![](https://travis-ci.org/wizawu/react-polymer-layout.svg)
 
+React layout component inspired by Polymer.
+
 ### Installation
 
 ```
