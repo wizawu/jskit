@@ -1,6 +1,7 @@
 import * as React from "react"
 
 const useWebkit = ("WebkitAppearance" in document.documentElement.style) && !window.hasOwnProperty("chrome")
+const useWebkitFlex = ("WebkitFlex" in document.documentElement.style)
 
 function assign(target: any, source: any): any {
     let a: any = target || {}
@@ -57,7 +58,7 @@ namespace ReactPolymerLayout {
             const props = this.props
 
             let style: React.CSSProperties = props.layout ? {
-                display: useWebkit ? "-webkit-box" : "flex"
+                display: useWebkit ? (useWebkitFlex ? "-webkit-flex" : "-webkit-box") : "flex"
             } : {}
 
             // flex

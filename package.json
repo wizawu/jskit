@@ -1,17 +1,15 @@
 {
   "name": "react-polymer-layout",
-  "version": "1.2.1",
+  "version": "1.3.0",
   "main": "index.js",
   "types": "index.d.ts",
   "scripts": {
     "build": "tsc -d -m commonjs --lib 'dom,es2017' --outDir . --jsx react js/index.tsx",
     "watch": "tsc -d -m commonjs --lib 'dom,es2017' --outDir . --jsx react -w js/index.tsx",
-    "prepublish": "npm run build && react-beaker publish ."
+    "test": "npm run build && react-beaker publish ."
   },
-  "repository": "git@github.com:wizawu/react-polymer-layout.git",
+  "repository": "github:wizawu/react-polymer-layout",
   "devDependencies": {
-    "@types/react": "^0.14.49",
-    "react-beaker": "latest",
-    "typescript": "^2.0.0"
+    "@types/react": "^0.14.49"
   }
 }
