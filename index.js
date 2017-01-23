@@ -14,6 +14,7 @@ var __assign = (this && this.__assign) || Object.assign || function(t) {
 };
 var React = require("react");
 var useWebkit = ("WebkitAppearance" in document.documentElement.style) && !window.hasOwnProperty("chrome");
+var useWebkitFlex = ("WebkitFlex" in document.documentElement.style);
 function assign(target, source) {
     var a = target || {};
     var b = source || {};
@@ -30,7 +31,7 @@ var ReactPolymerLayout;
         Item.prototype.render = function () {
             var props = this.props;
             var style = props.layout ? {
-                display: useWebkit ? "-webkit-box" : "flex"
+                display: useWebkit ? (useWebkitFlex ? "-webkit-flex" : "-webkit-box") : "flex"
             } : {};
             // flex
             if (typeof (props.flex) === "boolean") {
