@@ -1,4 +1,4 @@
-# react-polymer-layout ![](https://travis-ci.org/wizawu/react-polymer-layout.svg)
+# react-polymer-layout [![](https://travis-ci.org/wizawu/react-polymer-layout.svg)](https://travis-ci.org/wizawu/react-polymer-layout)
 
 React layout component inspired by Polymer.
 
