@@ -63,8 +63,8 @@ namespace ReactPolymerLayout {
             const props = this.props
 
             let style: React.CSSProperties = props.layout ? {
-                display: cssSupports("display", "-webkit-box") ? "-webkit-box" : (
-                    cssSupports("display", "-webkit-flex") ? "-webkit-flex" : "flex"
+                display: cssSupports("display", "flex") ? "flex" : (
+                    cssSupports("display", "-webkit-flex") ? "-webkit-flex" : "-webkit-box"
                 )
             } : {}
 

@@ -35,7 +35,7 @@ var ReactPolymerLayout;
         Item.prototype.render = function () {
             var props = this.props;
             var style = props.layout ? {
-                display: cssSupports("display", "-webkit-box") ? "-webkit-box" : (cssSupports("display", "-webkit-flex") ? "-webkit-flex" : "flex")
+                display: cssSupports("display", "flex") ? "flex" : (cssSupports("display", "-webkit-flex") ? "-webkit-flex" : "-webkit-box")
             } : {};
             // flex
             if (typeof (props.flex) === "boolean") {
