@@ -1,4 +1,4 @@
-# mockxhr ![build status](https://travis-ci.org/wizawu/mockxhr.svg)
+# mockxhr [![build status](https://travis-ci.org/wizawu/mockxhr.svg)](https://travis-ci.org/wizawu/mockxhr)
 
 Flyweight ajax and mock-ajax built on Vanilla JS.
 
