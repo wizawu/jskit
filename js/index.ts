@@ -211,7 +211,7 @@ namespace mockxhr {
             }
             xhr.open(method, url, true)
             xhr.setRequestHeader("Content-Type", "application/json; charset=utf-8")
-            Object.keys(_headers || {}).forEach(k => xhr.setRequestHeader(k, _headers[k]))
+            for (let k in _headers) xhr.setRequestHeader(k, _headers[k])
             xhr.send(json ? JSON.stringify(json) : "")
         }
     }

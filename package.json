@@ -1,16 +1,12 @@
 {
   "name": "mockxhr",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "main": "index.js",
   "types": "index.d.ts",
   "scripts": {
-    "build": "tsc -d -m commonjs --lib 'dom,es2015,es2015.promise' --outDir . js/index.ts",
-    "watch": "tsc -d -m commonjs --lib 'dom,es2015,es2015.promise' --outDir . -w js/index.ts",
-    "prepublish": "npm run build && react-beaker publish ."
+    "watch": "tsc -d --outDir . -w js/index.ts",
+    "build": "tsc -d --outDir . js/index.ts",
+    "test": "npm run build && react-beaker publish ."
   },
-  "repository": "git@github.com:wizawu/mockxhr.git",
-  "devDependencies": {
-    "react-beaker": "latest",
-    "typescript": "^2.0.0"
-  }
+  "repository": "github.com:wizawu/mockxhr"
 }

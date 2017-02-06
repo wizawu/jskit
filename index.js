@@ -177,7 +177,8 @@ var mockxhr;
             };
             xhr_1.open(method, url, true);
             xhr_1.setRequestHeader("Content-Type", "application/json; charset=utf-8");
-            Object.keys(_headers || {}).forEach(function (k) { return xhr_1.setRequestHeader(k, _headers[k]); });
+            for (var k in _headers)
+                xhr_1.setRequestHeader(k, _headers[k]);
             xhr_1.send(json ? JSON.stringify(json) : "");
         }
     }
