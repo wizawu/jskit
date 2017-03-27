@@ -1,4 +1,5 @@
 "use strict";
+exports.__esModule = true;
 var FakePromise = (function () {
     function FakePromise(executor) {
     }
@@ -183,5 +184,4 @@ var mockxhr;
         }
     }
 })(mockxhr || (mockxhr = {}));
-exports.__esModule = true;
 exports["default"] = mockxhr;

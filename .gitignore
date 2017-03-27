@@ -1,6 +1,7 @@
+!dist/mockxhr.min.js
 .DS_Store
 .idea
 dist
 node_modules
 npm-debug.log
-!dist/mockxhr.min.js
+tsconfig.json

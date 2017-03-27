@@ -1,6 +1,6 @@
 # mockxhr [![build status](https://travis-ci.org/wizawu/mockxhr.svg)](https://travis-ci.org/wizawu/mockxhr)
 
-Flyweight ajax and mock-ajax built on Vanilla JS.
+Flyweight ajax and mock-ajax with zero dependency.
 
 ### Installation
 
@@ -18,8 +18,8 @@ npm install --save mockxhr
 
 ### API
 
-See [index.d.ts](index.d.ts)
+See [index.d.ts](https://github.com/wizawu/mockxhr/blob/master/index.d.ts)
 
 ### Usage
 
-See [test.html](html/test.html)
+See [test.html](https://github.com/wizawu/mockxhr/blob/master/html/test.html)
