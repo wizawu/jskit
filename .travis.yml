@@ -2,6 +2,5 @@ language: node_js
 node_js:
   - stable
 script:
-  - npm install
   - npm install typescript react-beaker
   - npm run test

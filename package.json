@@ -4,9 +4,9 @@
   "main": "index.js",
   "types": "index.d.ts",
   "scripts": {
-    "build": "tsc -d -m commonjs --lib 'dom,es2015,es2015.promise' --strictNullChecks --outDir . js/index.ts",
-    "watch": "tsc -d -m commonjs --lib 'dom,es2015,es2015.promise' --strictNullChecks --outDir . -w js/index.ts",
-    "prepublish": "npm run build && react-beaker publish ."
+    "build": "tsc -d --strictNullChecks --outDir . js/index.ts",
+    "watch": "tsc -d --strictNullChecks --outDir . -w js/index.ts",
+    "test": "npm run build && react-beaker publish ."
   },
   "repository": "github:wizawu/mockxhr"
 }
