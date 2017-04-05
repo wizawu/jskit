@@ -153,7 +153,7 @@ namespace mockxhr {
     export const put = PUT
 
     function _xhr(resolve: DoneCallback, reject: FailCallback, method: HTTPMethod, url: string, json: any,
-            done: DoneCallback, fail: FailCallback) {
+            done?: DoneCallback, fail?: FailCallback) {
         if (_mock) {
             let matched = url
             if (!_requests[method][url]) {
