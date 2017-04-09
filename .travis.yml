@@ -3,5 +3,5 @@ node_js:
   - stable
 script:
   - npm install
-  - npm install typescript@2.0.x react-beaker
-  - npm run test
+  - npm install typescript
+  - make build
