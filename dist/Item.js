@@ -28,10 +28,10 @@ var Item = (function (_super) {
     Item.prototype.render = function () {
         var props = this.props;
         var style = props.layout ? util_1.mergeCSSProps([
-            ["display", "flex"],
-            ["display", "-webkit-flex"],
-            ["display", "-webkit-box"],
             ["display", "-ms-flexbox"],
+            ["display", "-webkit-box"],
+            ["display", "-webkit-flex"],
+            ["display", "flex"],
         ]) : {};
         switch (typeof (props.flex)) {
             case "boolean":

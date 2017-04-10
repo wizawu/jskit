@@ -20,10 +20,10 @@ export default class Item extends React.Component<Props, any> {
         const props = this.props
 
         let style = props.layout ? mergeCSSProps([
-            ["display", "flex"],
-            ["display", "-webkit-flex"],
-            ["display", "-webkit-box"],
             ["display", "-ms-flexbox"],
+            ["display", "-webkit-box"],
+            ["display", "-webkit-flex"],
+            ["display", "flex"],
         ]) : {}
 
         switch (typeof (props.flex)) {
