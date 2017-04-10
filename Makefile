@@ -1,7 +1,9 @@
 .PHONY: build watch
 
+FLAGS=-d --jsx react --noUnusedLocals --removeComments --strictNullChecks --outDir dist
+
 build:
-	tsc -d --jsx react --noUnusedLocals --removeComments --strictNullChecks --outDir dist src/js/index.tsx
+	tsc ${FLAGS} src/index.tsx
 
 watch:
-	tsc -d --jsx react --noUnusedLocals --removeComments --strictNullChecks --outDir dist -w src/js/index.tsx
+	tsc ${FLAGS} -w src/index.tsx
