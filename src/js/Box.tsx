@@ -88,10 +88,10 @@ export default class Box extends React.Component<Props, any> {
         }
         style = justifyContent ? {
             ...style, ...mergeCSSProps([
-                ["-webkit-box-pack", justifyContent],
-                ["-webkit-justify-content", justifyContent],
-                ["-ms-flex-pack", justifyContent],
-                ["justify-content", justifyContent],
+                ["-webkit-box-pack", justifyContent[0]],
+                ["-webkit-justify-content", justifyContent[1]],
+                ["-ms-flex-pack", justifyContent[2]],
+                ["justify-content", justifyContent[3]],
             ])
         } : style
 

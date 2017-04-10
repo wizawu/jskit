@@ -37,13 +37,13 @@ var Item = (function (_super) {
             case "boolean":
             case "number":
             case "string":
-                var flex = props.flex === true ? 1 : props.flex;
-                style = __assign({}, style, util_1.mergeCSSProps([
-                    ["-webkit-box-flex", flex],
-                    ["-webkit-flex", flex],
-                    ["-ms-flex", flex],
-                    ["flex", flex],
-                ]));
+                var flex = (props.flex === true ? 1 : props.flex || "").toString();
+                style = __assign({}, style, {
+                    "-webkit-box-flex": flex,
+                    "-webkit-flex": flex,
+                    "-ms-flex": flex,
+                    "flex": flex
+                });
                 break;
         }
         var alignSelf = null;

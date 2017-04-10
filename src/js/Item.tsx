@@ -30,14 +30,14 @@ export default class Item extends React.Component<Props, any> {
             case "boolean":
             case "number":
             case "string":
-                let flex = props.flex === true ? 1 : props.flex
+                let flex = (props.flex === true ? 1 : props.flex || "").toString()
                 style = {
-                    ...style, ...mergeCSSProps([
-                        ["-webkit-box-flex", flex],
-                        ["-webkit-flex", flex],
-                        ["-ms-flex", flex],
-                        ["flex", flex],
-                    ])
+                    ...style, ...{
+                        "-webkit-box-flex": flex,
+                        "-webkit-flex": flex,
+                        "-ms-flex": flex,
+                        "flex": flex,
+                    }
                 }
                 break
         }
