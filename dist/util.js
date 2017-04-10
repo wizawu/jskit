@@ -3,7 +3,7 @@ exports.__esModule = true;
 function cssSupports(property, value) {
     var span = document.createElement("span");
     span.style[property] = value;
-    return span.style[property] === value;
+    return span.style[property.replace(/(-\w)/g, function (c) { return c.charAt(1).toUpperCase(); })] === value;
 }
 exports.cssSupports = cssSupports;
 function mergeCSSProps(props) {
