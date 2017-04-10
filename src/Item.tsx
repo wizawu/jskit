@@ -10,6 +10,7 @@ export interface Props extends React.DOMAttributes<any> {
     selfStretch?: boolean
     relative?: boolean
     fit?: boolean
+    fullbleed?: boolean
     hidden?: boolean
     style?: React.CSSProperties
     className?: string
@@ -65,6 +66,11 @@ export default class Item extends React.Component<Props, any> {
         } else if (props.fit) {
             style.position = "absolute"
             style.top = style.bottom = style.left = style.right = 0
+        }
+
+        if (props.fullbleed) {
+            style.margin = 0
+            style.height = "100vh"
         }
 
         if (props.hidden) style.display = "none"

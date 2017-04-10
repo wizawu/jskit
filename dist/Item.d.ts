@@ -9,6 +9,7 @@ export interface Props extends React.DOMAttributes<any> {
     selfStretch?: boolean;
     relative?: boolean;
     fit?: boolean;
+    fullbleed?: boolean;
     hidden?: boolean;
     style?: React.CSSProperties;
     className?: string;

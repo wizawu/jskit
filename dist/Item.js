@@ -71,6 +71,10 @@ var Item = (function (_super) {
             style.position = "absolute";
             style.top = style.bottom = style.left = style.right = 0;
         }
+        if (props.fullbleed) {
+            style.margin = 0;
+            style.height = "100vh";
+        }
         if (props.hidden)
             style.display = "none";
         return React.createElement("div", __assign({}, props, { style: __assign({}, style, props.style) }), props.children);
