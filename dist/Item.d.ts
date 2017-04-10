@@ -11,6 +11,7 @@ export interface Props extends React.DOMAttributes<any> {
     fit?: boolean;
     hidden?: boolean;
     style?: React.CSSProperties;
+    className?: string;
 }
 export default class Item extends React.Component<Props, any> {
     render(): JSX.Element;
