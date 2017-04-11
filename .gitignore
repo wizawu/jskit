@@ -2,5 +2,4 @@
 build
 build.gradle
 node_modules
-tsconfig.json
 yarn.lock

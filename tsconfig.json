@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "jsx": "react",
+    "lib": ["dom", "es2017"],
+    "noUnusedLocals": true,
+    "removeComments": true,
+    "skipLibCheck": true,
+    "strictNullChecks": true,
+    "target": "es5",
+    "typeRoots": [
+      "lib/@types",
+      "node_modules/@types",
+      "src/js/@types"
+    ]
+  },
+  "include": [
+    "lib/@types/**/*.d.ts",
+    "src/**/*.ts",
+    "src/**/*.tsx"
+  ]
+}
