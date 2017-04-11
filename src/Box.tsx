@@ -95,7 +95,7 @@ export default class Box extends React.Component<Props, any> {
             ])
         } : style
 
-        let itemProps: any = {...props, style: {...style, ...props.style}}
+        let itemProps: any = { ...props, style: { ...style, ...props.style } }
         return <Item layout {...itemProps}>{props.children}</Item>
     }
 }
