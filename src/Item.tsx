@@ -75,6 +75,7 @@ export default class Item extends React.Component<Props, any> {
 
         if (props.hidden) style.display = "none"
 
-        return <div {...props} style={{ ...style, ...props.style }}>{props.children}</div>
+        let divProps: any = { ...props, style: { ...style, ...props.style } }
+        return <div {...divProps}>{props.children}</div>
     }
 }
