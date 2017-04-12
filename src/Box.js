@@ -17,6 +17,15 @@ var __assign = (this && this.__assign) || Object.assign || function(t) {
     }
     return t;
 };
+var __rest = (this && this.__rest) || function (s, e) {
+    var t = {};
+    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
+        t[p] = s[p];
+    if (s != null && typeof Object.getOwnPropertySymbols === "function")
+        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) if (e.indexOf(p[i]) < 0)
+            t[p[i]] = s[p[i]];
+    return t;
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = require("react");
 var Item_1 = require("./Item");
@@ -28,6 +37,7 @@ var Box = (function (_super) {
     }
     Box.prototype.render = function () {
         var props = this.props;
+        var _a = this.props, wrap = _a.wrap, reverse = _a.reverse, horizontal = _a.horizontal, vertical = _a.vertical, center = _a.center, start = _a.start, end = _a.end, stretch = _a.stretch, startJustified = _a.startJustified, centerJustified = _a.centerJustified, endJustified = _a.endJustified, justified = _a.justified, aroundJustified = _a.aroundJustified, otherProps = __rest(_a, ["wrap", "reverse", "horizontal", "vertical", "center", "start", "end", "stretch", "startJustified", "centerJustified", "endJustified", "justified", "aroundJustified"]);
         var style = {};
         if (props.wrap) {
             style = __assign({}, style, util_1.mergeCSSProps([
@@ -95,8 +105,7 @@ var Box = (function (_super) {
             ["-ms-flex-pack", justifyContent[2]],
             ["justify-content", justifyContent[3]],
         ])) : style;
-        var itemProps = __assign({}, props, { style: __assign({}, style, props.style) });
-        return React.createElement(Item_1.default, __assign({ layout: true }, itemProps), props.children);
+        return (React.createElement(Item_1.default, __assign({ layout: true }, otherProps, { style: __assign({}, style, props.style) }), props.children));
     };
     return Box;
 }(React.Component));

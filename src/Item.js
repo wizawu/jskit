@@ -17,6 +17,15 @@ var __assign = (this && this.__assign) || Object.assign || function(t) {
     }
     return t;
 };
+var __rest = (this && this.__rest) || function (s, e) {
+    var t = {};
+    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
+        t[p] = s[p];
+    if (s != null && typeof Object.getOwnPropertySymbols === "function")
+        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) if (e.indexOf(p[i]) < 0)
+            t[p[i]] = s[p[i]];
+    return t;
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = require("react");
 var util_1 = require("./util");
@@ -27,6 +36,7 @@ var Item = (function (_super) {
     }
     Item.prototype.render = function () {
         var props = this.props;
+        var flex = props.flex, layout = props.layout, selfStart = props.selfStart, selfCenter = props.selfCenter, selfEnd = props.selfEnd, selfStretch = props.selfStretch, relative = props.relative, fit = props.fit, fullbleed = props.fullbleed, hidden = props.hidden, otherProps = __rest(props, ["flex", "layout", "selfStart", "selfCenter", "selfEnd", "selfStretch", "relative", "fit", "fullbleed", "hidden"]);
         var style = props.layout ? util_1.mergeCSSProps([
             ["display", "-ms-flexbox"],
             ["display", "-webkit-box"],
@@ -37,12 +47,14 @@ var Item = (function (_super) {
             case "boolean":
             case "number":
             case "string":
-                var flex = (props.flex === true ? 1 : props.flex || "").toString();
+                var flex_1 = (props.flex === true ?
+                    "1 1 0.000000001px" :
+                    (props.flex || "")).toString();
                 style = __assign({}, style, {
-                    "-webkit-box-flex": flex,
-                    "-webkit-flex": flex,
-                    "-ms-flex": flex,
-                    "flex": flex,
+                    WebkitBoxFlex: flex_1,
+                    WebkitFlex: flex_1,
+                    MsFlex: flex_1,
+                    flex: flex_1,
                 });
                 break;
         }
@@ -77,8 +89,7 @@ var Item = (function (_super) {
         }
         if (props.hidden)
             style.display = "none";
-        var divProps = __assign({}, props, { style: __assign({}, style, props.style) });
-        return React.createElement("div", __assign({}, divProps), props.children);
+        return (React.createElement("div", __assign({}, otherProps, { style: __assign({}, style, props.style) }), props.children));
     };
     return Item;
 }(React.Component));

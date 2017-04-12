@@ -50,29 +50,43 @@ var Nav = (function (_super) {
     };
     Nav.prototype.render = function () {
         var _this = this;
-        var _a = this.props, logo = _a.logo, headMenu = _a.headMenu, sideMenu = _a.sideMenu, headStyle = _a.headStyle, sideStyle = _a.sideStyle, rootProps = __rest(_a, ["logo", "headMenu", "sideMenu", "headStyle", "sideStyle"]);
         var menu = this.state.menu;
-        var view1 = (React.createElement(Box_1.default, __assign({ vertical: true, fit: true }, rootProps),
+        var _a = this.props, logo = _a.logo, headMenu = _a.headMenu, sideMenu = _a.sideMenu, headStyle = _a.headStyle, sideStyle = _a.sideStyle, otherProps = __rest(_a, ["logo", "headMenu", "sideMenu", "headStyle", "sideStyle"]);
+        var transitionSide = "margin-left 500ms";
+        var transitionMask = menu ?
+            "background-color 500ms, z-index 0ms" :
+            "background-color 500ms, z-index 0ms 500ms";
+        var portrait = (React.createElement(Box_1.default, __assign({ vertical: true, fit: true }, otherProps),
             React.createElement(Box_1.default, { center: true, style: headStyle },
-                React.createElement("div", { style: { fontSize: "2em", padding: ".5em .64em", lineHeight: 1, cursor: "pointer" }, onClick: function () { return _this.setState({ menu: true }); } }, "\u2261"),
+                React.createElement("div", { onClick: function () { return _this.setState({ menu: true }); }, style: {
+                        fontSize: "2em",
+                        padding: ".5em .64em",
+                        lineHeight: 1,
+                        cursor: "pointer"
+                    } }, "\u2261"),
                 React.createElement(Item_1.default, { flex: true }),
                 logo),
             React.createElement(Box_1.default, { flex: true },
                 React.createElement(Item_1.default, { flex: true, relative: true, style: { overflow: "auto" } },
                     React.createElement(Item_1.default, { style: { position: "absolute" } }, this.props.children))),
             React.createElement(Box_1.default, { fit: true, style: {
-                    backgroundColor: menu ? "rgba(0,0,0,0.64)" : "rgba(0,0,0,0)",
+                    backgroundColor: "rgba(0,0,0," + (menu ? 0.64 : 0) + ")",
                     zIndex: menu ? 9 : -999,
-                    transition: menu ? "background-color 500ms, z-index 0ms" : "background-color 500ms, z-index 0ms 500ms",
+                    WebkitTransition: transitionMask,
+                    MsTransition: transitionMask,
+                    transition: transitionMask,
                 } },
-                React.createElement(Item_1.default, { relative: true, style: __assign({}, { height: "100%", overflow: "auto" }, {
+                React.createElement(Item_1.default, { relative: true, style: __assign({}, {
+                        height: "100%", overflow: "auto",
                         marginLeft: menu ? 0 : -innerWidth,
-                        transition: "margin-left 500ms",
+                        WebkitTransition: transitionSide,
+                        MsTransition: transitionSide,
+                        transition: transitionSide,
                     }, sideStyle) },
                     headMenu,
                     sideMenu),
                 React.createElement(Item_1.default, { flex: true, onClick: function () { return _this.setState({ menu: false }); } }))));
-        var view2 = (React.createElement(Box_1.default, __assign({ vertical: true, fit: true }, rootProps),
+        var landscape = (React.createElement(Box_1.default, __assign({ vertical: true, fit: true }, otherProps),
             React.createElement(Box_1.default, { center: true, style: headStyle },
                 logo,
                 React.createElement(Item_1.default, { flex: true }),
@@ -81,7 +95,7 @@ var Nav = (function (_super) {
                 React.createElement(Item_1.default, { relative: true, style: __assign({}, { height: "100%", overflow: "auto" }, sideStyle) }, sideMenu),
                 React.createElement(Item_1.default, { flex: true, relative: true, style: { overflow: "auto" } },
                     React.createElement(Item_1.default, { style: { position: "absolute" } }, this.props.children)))));
-        return this.state.portrait ? view1 : view2;
+        return this.state.portrait ? portrait : landscape;
     };
     return Nav;
 }(React.Component));
