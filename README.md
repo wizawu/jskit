@@ -28,3 +28,10 @@ Refer to [Polymer layout attributes](https://www.polymer-project.org/0.5/docs/po
 // or
 <Box {...props} />
 ```
+
+### Compatibility
+
++ Chrome
++ Firefox
++ Safari >= 6
++ IE >= 9
