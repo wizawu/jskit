@@ -15,13 +15,16 @@ Refer to [Polymer layout attributes](https://www.polymer-project.org/0.5/docs/po
 ```
 // Polymer
 <div center-justified {...props} />
+
 // react-polymer-layout
 <Item centerJustified {...props} />
 
+
 // Polymer
 <div layout {...props} />
+
 // react-polymer-layout
 <Item layout {...props} />
-<Layout {...props} />
+// or
 <Box {...props} />
 ```
