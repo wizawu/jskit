@@ -21,6 +21,12 @@ export interface Props extends ItemProps {
 export default class Box extends React.Component<Props, any> {
     render() {
         const props = this.props
+        let {
+            wrap, reverse, horizontal, vertical, center, start, end, stretch,
+            startJustified, centerJustified, endJustified, justified,
+            aroundJustified, ...otherProps
+        } = this.props
+
         let style: React.CSSProperties = {}
 
         if (props.wrap) {
@@ -95,7 +101,10 @@ export default class Box extends React.Component<Props, any> {
             ])
         } : style
 
-        let itemProps: any = { ...props, style: { ...style, ...props.style } }
-        return <Item layout {...itemProps}>{props.children}</Item>
+        return (
+            <Item layout {...otherProps} style={{ ...style, ...props.style }}>
+                {props.children}
+            </Item>
+        )
     }
 }

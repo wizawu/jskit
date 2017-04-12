@@ -38,14 +38,27 @@ export default class Nav extends React.Component<Props, State> {
     }
 
     render() {
-        let { logo, headMenu, sideMenu, headStyle, sideStyle, ...rootProps } = this.props
         let { menu } = this.state
+        let {
+            logo, headMenu, sideMenu, headStyle, sideStyle,
+            ...otherProps
+        } = this.props
 
-        let view1 = (
-            <Box vertical fit {...rootProps}>
+        let transitionSide = "margin-left 500ms"
+        let transitionMask = menu ?
+            "background-color 500ms, z-index 0ms" :
+            "background-color 500ms, z-index 0ms 500ms"
+
+        let portrait = (
+            <Box vertical fit {...otherProps}>
                 <Box center style={headStyle}>
-                    <div style={{ fontSize: "2em", padding: ".5em .64em", lineHeight: 1, cursor: "pointer" }}
-                        onClick={() => this.setState({ menu: true })}>
+                    <div onClick={() => this.setState({ menu: true })}
+                        style={{
+                            fontSize: "2em",
+                            padding: ".5em .64em",
+                            lineHeight: 1,
+                            cursor: "pointer"
+                        }}>
                         &equiv;
                     </div>
                     <Item flex />
@@ -59,19 +72,25 @@ export default class Nav extends React.Component<Props, State> {
                     </Item>
                 </Box>
 
-                <Box fit style={{
-                    backgroundColor: menu ? "rgba(0,0,0,0.64)" : "rgba(0,0,0,0)",
-                    zIndex: menu ? 9 : -999,
-                    transition: menu ? "background-color 500ms, z-index 0ms" : "background-color 500ms, z-index 0ms 500ms",
-                }}>
-                    <Item relative style={{
-                        ...{ height: "100%", overflow: "auto" } as any,
-                        ...{
-                            marginLeft: menu ? 0 : -innerWidth,
-                            transition: "margin-left 500ms",
-                        } as any,
-                        ...sideStyle
+                <Box fit
+                    style={{
+                        backgroundColor: `rgba(0,0,0,${menu ? 0.64 : 0})`,
+                        zIndex: menu ? 9 : -999,
+                        WebkitTransition: transitionMask,
+                        MsTransition: transitionMask,
+                        transition: transitionMask,
                     }}>
+                    <Item relative
+                        style={{
+                            ...{
+                                height: "100%", overflow: "auto",
+                                marginLeft: menu ? 0 : -innerWidth,
+                                WebkitTransition: transitionSide,
+                                MsTransition: transitionSide,
+                                transition: transitionSide,
+                            } as any,
+                            ...sideStyle
+                        }}>
                         {headMenu}
                         {sideMenu}
                     </Item>
@@ -80,15 +99,19 @@ export default class Nav extends React.Component<Props, State> {
             </Box>
         )
 
-        let view2 = (
-            <Box vertical fit {...rootProps}>
+        let landscape = (
+            <Box vertical fit {...otherProps}>
                 <Box center style={headStyle}>
                     {logo}
                     <Item flex />
                     {headMenu}
                 </Box>
                 <Box flex>
-                    <Item relative style={{ ...{ height: "100%", overflow: "auto" } as any, ...sideStyle }}>
+                    <Item relative
+                        style={{
+                            ...{ height: "100%", overflow: "auto" } as any,
+                            ...sideStyle
+                        }}>
                         {sideMenu}
                     </Item>
                     <Item flex relative style={{ overflow: "auto" }}>
@@ -100,6 +123,6 @@ export default class Nav extends React.Component<Props, State> {
             </Box>
         )
 
-        return this.state.portrait ? view1 : view2
+        return this.state.portrait ? portrait : landscape
     }
 }

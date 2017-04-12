@@ -19,6 +19,10 @@ export interface Props extends React.DOMAttributes<any> {
 export default class Item extends React.Component<Props, any> {
     render() {
         const props = this.props
+        const {
+            flex, layout, selfStart, selfCenter, selfEnd, selfStretch, relative,
+            fit, fullbleed, hidden, ...otherProps
+        } = props
 
         let style = props.layout ? mergeCSSProps([
             ["display", "-ms-flexbox"],
@@ -31,13 +35,16 @@ export default class Item extends React.Component<Props, any> {
             case "boolean":
             case "number":
             case "string":
-                let flex = (props.flex === true ? 1 : props.flex || "").toString()
+                let flex = (props.flex === true ?
+                    "1 1 0.000000001px" :
+                    (props.flex || "")
+                ).toString()
                 style = {
                     ...style, ...{
-                        "-webkit-box-flex": flex,
-                        "-webkit-flex": flex,
-                        "-ms-flex": flex,
-                        "flex": flex,
+                        WebkitBoxFlex: flex,
+                        WebkitFlex: flex,
+                        MsFlex: flex,
+                        flex: flex,
                     }
                 }
                 break
@@ -75,7 +82,10 @@ export default class Item extends React.Component<Props, any> {
 
         if (props.hidden) style.display = "none"
 
-        let divProps: any = { ...props, style: { ...style, ...props.style } }
-        return <div {...divProps}>{props.children}</div>
+        return (
+            <div {...otherProps} style={{ ...style, ...props.style }}>
+                {props.children}
+            </div>
+        )
     }
 }
