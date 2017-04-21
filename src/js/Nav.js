@@ -87,7 +87,7 @@ var Nav = (function (_super) {
                     sideMenu),
                 React.createElement(Item_1.default, { flex: true, onClick: function () { return _this.setState({ menu: false }); } }))));
         var landscape = (React.createElement(Box_1.default, __assign({ vertical: true, fit: true }, otherProps),
-            React.createElement(Box_1.default, { center: true, style: headStyle },
+            React.createElement(Box_1.default, { center: true, style: __assign({ zIndex: 5 }, headStyle) },
                 logo,
                 React.createElement(Item_1.default, { flex: true }),
                 headMenu),

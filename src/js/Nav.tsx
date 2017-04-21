@@ -101,7 +101,7 @@ export default class Nav extends React.Component<Props, State> {
 
         let landscape = (
             <Box vertical fit {...otherProps}>
-                <Box center style={headStyle}>
+                <Box center style={{ zIndex: 5, ...headStyle }}>
                     {logo}
                     <Item flex />
                     {headMenu}
