@@ -51,12 +51,12 @@ var Nav = (function (_super) {
     Nav.prototype.render = function () {
         var _this = this;
         var menu = this.state.menu;
-        var _a = this.props, logo = _a.logo, headMenu = _a.headMenu, sideMenu = _a.sideMenu, headStyle = _a.headStyle, sideStyle = _a.sideStyle, otherProps = __rest(_a, ["logo", "headMenu", "sideMenu", "headStyle", "sideStyle"]);
+        var _a = this.props, logo = _a.logo, headMenu = _a.headMenu, sideMenu = _a.sideMenu, headStyle = _a.headStyle, sideStyle = _a.sideStyle, style = _a.style, otherProps = __rest(_a, ["logo", "headMenu", "sideMenu", "headStyle", "sideStyle", "style"]);
         var transitionSide = "margin-left 500ms";
         var transitionMask = menu ?
             "background-color 500ms, z-index 0ms" :
             "background-color 500ms, z-index 0ms 500ms";
-        var portrait = (React.createElement(Box_1.default, __assign({ vertical: true, fit: true }, otherProps),
+        var portrait = (React.createElement(Box_1.default, __assign({ vertical: true, fit: true }, otherProps, { style: __assign({ overflow: "hidden" }, style) }),
             React.createElement(Box_1.default, { center: true, style: headStyle },
                 React.createElement("div", { onClick: function () { return _this.setState({ menu: true }); }, style: {
                         fontSize: "2em",
@@ -68,7 +68,7 @@ var Nav = (function (_super) {
                 logo),
             React.createElement(Box_1.default, { flex: true },
                 React.createElement(Item_1.default, { flex: true, relative: true, style: { overflow: "auto" } },
-                    React.createElement(Item_1.default, { style: { position: "absolute" } }, this.props.children))),
+                    React.createElement(Item_1.default, { style: { position: "absolute", width: "100%" } }, this.props.children))),
             React.createElement(Box_1.default, { fit: true, style: {
                     backgroundColor: "rgba(0,0,0," + (menu ? 0.64 : 0) + ")",
                     zIndex: menu ? 9 : -999,
@@ -86,7 +86,7 @@ var Nav = (function (_super) {
                     headMenu,
                     sideMenu),
                 React.createElement(Item_1.default, { flex: true, onClick: function () { return _this.setState({ menu: false }); } }))));
-        var landscape = (React.createElement(Box_1.default, __assign({ vertical: true, fit: true }, otherProps),
+        var landscape = (React.createElement(Box_1.default, __assign({ vertical: true, fit: true }, otherProps, { style: __assign({ overflow: "hidden" }, style) }),
             React.createElement(Box_1.default, { center: true, style: __assign({ zIndex: 5 }, headStyle) },
                 logo,
                 React.createElement(Item_1.default, { flex: true }),
@@ -94,7 +94,7 @@ var Nav = (function (_super) {
             React.createElement(Box_1.default, { flex: true },
                 React.createElement(Item_1.default, { relative: true, style: __assign({}, { height: "100%", overflow: "auto" }, sideStyle) }, sideMenu),
                 React.createElement(Item_1.default, { flex: true, relative: true, style: { overflow: "auto" } },
-                    React.createElement(Item_1.default, { style: { position: "absolute" } }, this.props.children)))));
+                    React.createElement(Item_1.default, { style: { position: "absolute", width: "100%" } }, this.props.children)))));
         return this.state.portrait ? portrait : landscape;
     };
     return Nav;

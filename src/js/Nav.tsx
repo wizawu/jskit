@@ -41,7 +41,7 @@ export default class Nav extends React.Component<Props, State> {
         let { menu } = this.state
         let {
             logo, headMenu, sideMenu, headStyle, sideStyle,
-            ...otherProps
+            style, ...otherProps
         } = this.props
 
         let transitionSide = "margin-left 500ms"
@@ -50,7 +50,7 @@ export default class Nav extends React.Component<Props, State> {
             "background-color 500ms, z-index 0ms 500ms"
 
         let portrait = (
-            <Box vertical fit {...otherProps}>
+            <Box vertical fit {...otherProps} style={{ overflow: "hidden", ...style }}>
                 <Box center style={headStyle}>
                     <div onClick={() => this.setState({ menu: true })}
                         style={{
@@ -66,7 +66,7 @@ export default class Nav extends React.Component<Props, State> {
                 </Box>
                 <Box flex>
                     <Item flex relative style={{ overflow: "auto" }}>
-                        <Item style={{ position: "absolute" }}>
+                        <Item style={{ position: "absolute", width: "100%" }}>
                             {this.props.children}
                         </Item>
                     </Item>
@@ -100,7 +100,7 @@ export default class Nav extends React.Component<Props, State> {
         )
 
         let landscape = (
-            <Box vertical fit {...otherProps}>
+            <Box vertical fit {...otherProps} style={{ overflow: "hidden", ...style }}>
                 <Box center style={{ zIndex: 5, ...headStyle }}>
                     {logo}
                     <Item flex />
@@ -115,7 +115,7 @@ export default class Nav extends React.Component<Props, State> {
                         {sideMenu}
                     </Item>
                     <Item flex relative style={{ overflow: "auto" }}>
-                        <Item style={{ position: "absolute" }}>
+                        <Item style={{ position: "absolute", width: "100%" }}>
                             {this.props.children}
                         </Item>
                     </Item>
