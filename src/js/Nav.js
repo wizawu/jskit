@@ -36,17 +36,23 @@ var Nav = (function (_super) {
         var _this = _super.call(this, props) || this;
         _this.state = { portrait: false, menu: false };
         _this.onResize = _this.onResize.bind(_this);
+        _this.hideMenu = _this.hideMenu.bind(_this);
         return _this;
     }
     Nav.prototype.componentDidMount = function () {
+        window.addEventListener("hashchange", this.hideMenu);
         window.addEventListener("resize", this.onResize);
         this.onResize();
     };
     Nav.prototype.componentWillUnmount = function () {
+        window.removeEventListener("hashchange", this.hideMenu);
         window.removeEventListener("resize", this.onResize);
     };
     Nav.prototype.onResize = function () {
         this.setState({ portrait: window.innerHeight > window.innerWidth });
+    };
+    Nav.prototype.hideMenu = function () {
+        this.setState({ menu: false });
     };
     Nav.prototype.render = function () {
         var _this = this;

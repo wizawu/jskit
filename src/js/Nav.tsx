@@ -22,19 +22,26 @@ export default class Nav extends React.Component<Props, State> {
         super(props)
         this.state = { portrait: false, menu: false }
         this.onResize = this.onResize.bind(this)
+        this.hideMenu = this.hideMenu.bind(this)
     }
 
     componentDidMount() {
+        window.addEventListener("hashchange", this.hideMenu)
         window.addEventListener("resize", this.onResize)
         this.onResize()
     }
 
     componentWillUnmount() {
+        window.removeEventListener("hashchange", this.hideMenu)
         window.removeEventListener("resize", this.onResize)
     }
 
     onResize() {
         this.setState({ portrait: window.innerHeight > window.innerWidth })
+    }
+
+    hideMenu() {
+        this.setState({ menu: false })
     }
 
     render() {

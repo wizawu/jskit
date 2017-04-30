@@ -18,5 +18,6 @@ export default class Nav extends React.Component<Props, State> {
     componentDidMount(): void;
     componentWillUnmount(): void;
     onResize(): void;
+    hideMenu(): void;
     render(): JSX.Element;
 }
