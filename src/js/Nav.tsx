@@ -1,4 +1,5 @@
 import * as React from "react"
+import * as ReactDOM from "react-dom"
 import Box from "./Box"
 import Item from "./Item"
 
@@ -22,17 +23,17 @@ export default class Nav extends React.Component<Props, State> {
         super(props)
         this.state = { portrait: false, menu: false }
         this.onResize = this.onResize.bind(this)
-        this.hideMenu = this.hideMenu.bind(this)
+        this.onHashChange = this.onHashChange.bind(this)
     }
 
     componentDidMount() {
-        window.addEventListener("hashchange", this.hideMenu)
+        window.addEventListener("hashchange", this.onHashChange)
         window.addEventListener("resize", this.onResize)
         this.onResize()
     }
 
     componentWillUnmount() {
-        window.removeEventListener("hashchange", this.hideMenu)
+        window.removeEventListener("hashchange", this.onHashChange)
         window.removeEventListener("resize", this.onResize)
     }
 
@@ -40,8 +41,9 @@ export default class Nav extends React.Component<Props, State> {
         this.setState({ portrait: window.innerHeight > window.innerWidth })
     }
 
-    hideMenu() {
+    onHashChange() {
         this.setState({ menu: false })
+        setTimeout(() => ReactDOM.findDOMNode(this.refs.main).scrollTop = 0, 10)
     }
 
     render() {
@@ -87,7 +89,7 @@ export default class Nav extends React.Component<Props, State> {
                         MsTransition: transitionMask,
                         transition: transitionMask,
                     }}>
-                    <Item relative
+                    <Item ref="main" relative
                         style={{
                             ...{
                                 height: "100%", overflow: "auto",
@@ -121,7 +123,7 @@ export default class Nav extends React.Component<Props, State> {
                         }}>
                         {sideMenu}
                     </Item>
-                    <Item flex relative style={{ overflow: "auto" }}>
+                    <Item ref="main" flex relative style={{ overflow: "auto" }}>
                         <Item style={{ position: "absolute", width: "100%" }}>
                             {this.props.children}
                         </Item>
