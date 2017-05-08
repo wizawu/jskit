@@ -37,7 +37,7 @@ var Box = (function (_super) {
     }
     Box.prototype.render = function () {
         var props = this.props;
-        var _a = this.props, wrap = _a.wrap, reverse = _a.reverse, horizontal = _a.horizontal, vertical = _a.vertical, center = _a.center, start = _a.start, end = _a.end, stretch = _a.stretch, startJustified = _a.startJustified, centerJustified = _a.centerJustified, endJustified = _a.endJustified, justified = _a.justified, aroundJustified = _a.aroundJustified, otherProps = __rest(_a, ["wrap", "reverse", "horizontal", "vertical", "center", "start", "end", "stretch", "startJustified", "centerJustified", "endJustified", "justified", "aroundJustified"]);
+        var _a = this.props, wrap = _a.wrap, reverse = _a.reverse, horizontal = _a.horizontal, vertical = _a.vertical, center = _a.center, start = _a.start, end = _a.end, stretch = _a.stretch, startJustified = _a.startJustified, centerJustified = _a.centerJustified, endJustified = _a.endJustified, justified = _a.justified, aroundJustified = _a.aroundJustified, children = _a.children, otherProps = __rest(_a, ["wrap", "reverse", "horizontal", "vertical", "center", "start", "end", "stretch", "startJustified", "centerJustified", "endJustified", "justified", "aroundJustified", "children"]);
         var style = {};
         if (props.wrap) {
             style = __assign({}, style, util_1.mergeCSSProps([
@@ -105,7 +105,7 @@ var Box = (function (_super) {
             ["-ms-flex-pack", justifyContent[2]],
             ["justify-content", justifyContent[3]],
         ])) : style;
-        return (React.createElement(Item_1.default, __assign({ layout: true }, otherProps, { style: __assign({}, style, props.style) }), props.children));
+        return (React.createElement(Item_1.default, __assign({ layout: true }, otherProps, { style: __assign({}, style, props.style) }), children));
     };
     return Box;
 }(React.Component));

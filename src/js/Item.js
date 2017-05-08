@@ -36,7 +36,7 @@ var Item = (function (_super) {
     }
     Item.prototype.render = function () {
         var props = this.props;
-        var flex = props.flex, layout = props.layout, selfStart = props.selfStart, selfCenter = props.selfCenter, selfEnd = props.selfEnd, selfStretch = props.selfStretch, relative = props.relative, fit = props.fit, fullbleed = props.fullbleed, hidden = props.hidden, otherProps = __rest(props, ["flex", "layout", "selfStart", "selfCenter", "selfEnd", "selfStretch", "relative", "fit", "fullbleed", "hidden"]);
+        var flex = props.flex, layout = props.layout, selfStart = props.selfStart, selfCenter = props.selfCenter, selfEnd = props.selfEnd, selfStretch = props.selfStretch, relative = props.relative, fit = props.fit, fullbleed = props.fullbleed, hidden = props.hidden, children = props.children, otherProps = __rest(props, ["flex", "layout", "selfStart", "selfCenter", "selfEnd", "selfStretch", "relative", "fit", "fullbleed", "hidden", "children"]);
         var style = props.layout ? util_1.mergeCSSProps([
             ["display", "-ms-flexbox"],
             ["display", "-webkit-box"],
@@ -89,7 +89,7 @@ var Item = (function (_super) {
         }
         if (props.hidden)
             style.display = "none";
-        return (React.createElement("div", __assign({}, otherProps, { style: __assign({}, style, props.style) }), props.children));
+        return (React.createElement("div", __assign({}, otherProps, { style: __assign({}, style, props.style) }), children));
     };
     return Item;
 }(React.Component));

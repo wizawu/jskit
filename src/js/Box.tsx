@@ -24,7 +24,7 @@ export default class Box extends React.Component<Props, any> {
         let {
             wrap, reverse, horizontal, vertical, center, start, end, stretch,
             startJustified, centerJustified, endJustified, justified,
-            aroundJustified, ...otherProps
+            aroundJustified, children, ...otherProps
         } = this.props
 
         let style: React.CSSProperties = {}
@@ -103,7 +103,7 @@ export default class Box extends React.Component<Props, any> {
 
         return (
             <Item layout {...otherProps} style={{ ...style, ...props.style }}>
-                {props.children}
+                {children}
             </Item>
         )
     }

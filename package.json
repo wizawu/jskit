@@ -1,6 +1,6 @@
 {
   "name": "react-polymer-layout",
-  "version": "3.1.8",
+  "version": "3.1.9",
   "repository": "github:wizawu/react-polymer-layout",
   "main": "src/js/index.js",
   "types": "src/js/index.d.ts",
@@ -10,9 +10,9 @@
     "react"
   ],
   "devDependencies": {
-    "@types/react": "^15.0.21",
-    "@types/react-dom": "^0.14.23",
-    "react": "^15.5.3",
-    "react-dom": "^15.5.3"
+    "@types/react": "^15.0.24",
+    "@types/react-dom": "^15.5.0",
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4"
   }
 }

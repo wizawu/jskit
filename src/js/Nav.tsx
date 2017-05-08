@@ -50,7 +50,7 @@ export default class Nav extends React.Component<Props, State> {
         let { menu } = this.state
         let {
             logo, headMenu, sideMenu, headStyle, sideStyle,
-            style, ...otherProps
+            style, children, ...otherProps
         } = this.props
 
         let transitionSide = "margin-left 500ms"
@@ -76,7 +76,7 @@ export default class Nav extends React.Component<Props, State> {
                 <Box flex>
                     <Item flex relative style={{ overflow: "auto" }}>
                         <Item style={{ position: "absolute", width: "100%" }}>
-                            {this.props.children}
+                            {children}
                         </Item>
                     </Item>
                 </Box>
@@ -125,7 +125,7 @@ export default class Nav extends React.Component<Props, State> {
                     </Item>
                     <Item ref="main" flex relative style={{ overflow: "auto" }}>
                         <Item style={{ position: "absolute", width: "100%" }}>
-                            {this.props.children}
+                            {children}
                         </Item>
                     </Item>
                 </Box>

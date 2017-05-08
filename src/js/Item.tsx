@@ -21,7 +21,7 @@ export default class Item extends React.Component<Props, any> {
         const props = this.props
         const {
             flex, layout, selfStart, selfCenter, selfEnd, selfStretch, relative,
-            fit, fullbleed, hidden, ...otherProps
+            fit, fullbleed, hidden, children, ...otherProps
         } = props
 
         let style = props.layout ? mergeCSSProps([
@@ -84,7 +84,7 @@ export default class Item extends React.Component<Props, any> {
 
         return (
             <div {...otherProps} style={{ ...style, ...props.style }}>
-                {props.children}
+                {children}
             </div>
         )
     }
