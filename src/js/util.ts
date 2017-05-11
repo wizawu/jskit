@@ -1,13 +1,20 @@
 import * as React from "react"
 
+declare const module
+
+export function isNode(): boolean {
+    return typeof module !== "undefined" && !!module.exports
+}
+
 export function cssSupports(property: string, value: string): string {
+    let key = property.replace(/(-\w)/g, c => c.charAt(1).toUpperCase())
+    if (isNode()) return key
     /*
      *  Set style["-webkit-box-pack"] to "center"
      *  If style.WebkitBoxPack is auto-assigned to "center", the property is supported
      */
     let span: any = document.createElement("span")
     span.style[property] = value
-    let key = property.replace(/(-\w)/g, c => c.charAt(1).toUpperCase())
     return span.style[key] === value ? key : ""
 }
 

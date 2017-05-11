@@ -1,9 +1,15 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+function isNode() {
+    return typeof module !== "undefined" && !!module.exports;
+}
+exports.isNode = isNode;
 function cssSupports(property, value) {
+    var key = property.replace(/(-\w)/g, function (c) { return c.charAt(1).toUpperCase(); });
+    if (isNode())
+        return key;
     var span = document.createElement("span");
     span.style[property] = value;
-    var key = property.replace(/(-\w)/g, function (c) { return c.charAt(1).toUpperCase(); });
     return span.style[key] === value ? key : "";
 }
 exports.cssSupports = cssSupports;

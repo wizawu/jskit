@@ -1,6 +1,6 @@
 {
   "name": "react-polymer-layout",
-  "version": "3.1.9",
+  "version": "3.2.0",
   "repository": "github:wizawu/react-polymer-layout",
   "main": "src/js/index.js",
   "types": "src/js/index.d.ts",
