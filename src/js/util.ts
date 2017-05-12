@@ -1,9 +1,7 @@
 import * as React from "react"
 
-declare const module
-
 export function isNode(): boolean {
-    return typeof module !== "undefined" && !!module.exports
+    return typeof window === "undefined" || typeof navigator === "undefined"
 }
 
 export function cssSupports(property: string, value: string): string {

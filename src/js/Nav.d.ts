@@ -12,6 +12,7 @@ export interface Props extends React.DOMAttributes<any> {
 export interface State {
     portrait?: boolean;
     menu?: boolean;
+    className?: string;
 }
 export default class Nav extends React.Component<Props, State> {
     constructor(props: Props);

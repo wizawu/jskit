@@ -1,5 +1,4 @@
 import * as React from "react"
-import * as ReactDOM from "react-dom"
 import Box from "./Box"
 import Item from "./Item"
 import * as util from "./util"
@@ -17,12 +16,13 @@ export interface Props extends React.DOMAttributes<any> {
 export interface State {
     portrait?: boolean
     menu?: boolean
+    className?: string
 }
 
 export default class Nav extends React.Component<Props, State> {
     constructor(props: Props) {
         super(props)
-        this.state = { portrait: false, menu: false }
+        this.state = { portrait: false, menu: false, className: Math.random() + "" }
         this.onResize = this.onResize.bind(this)
         this.onHashChange = this.onHashChange.bind(this)
     }
@@ -44,7 +44,8 @@ export default class Nav extends React.Component<Props, State> {
 
     onHashChange() {
         this.setState({ menu: false }, () => {
-            ReactDOM.findDOMNode(this.refs.main).scrollTop = 0
+            let elements = document.getElementsByClassName(`${this.state.className}`)
+            elements[0].scrollTop = 0
         })
     }
 
@@ -78,7 +79,8 @@ export default class Nav extends React.Component<Props, State> {
                     {logo}
                 </Box>
                 <Box flex>
-                    <Item flex relative style={{ overflow: "auto" }}>
+                    <Item className={this.state.className}
+                        flex relative style={{ overflow: "auto" }}>
                         <Item style={{ position: "absolute", width: "100%" }}>
                             {children}
                         </Item>
@@ -93,15 +95,13 @@ export default class Nav extends React.Component<Props, State> {
                         MsTransition: transitionMask,
                         transition: transitionMask,
                     }}>
-                    <Item ref="main" relative
+                    <Item relative
                         style={{
-                            ...{
-                                height: "100%", overflow: "auto",
-                                marginLeft: menu ? 0 : -innerWidth,
-                                WebkitTransition: transitionSide,
-                                MsTransition: transitionSide,
-                                transition: transitionSide,
-                            } as any,
+                            height: "100%", overflow: "auto",
+                            marginLeft: menu ? 0 : -innerWidth,
+                            WebkitTransition: transitionSide,
+                            MsTransition: transitionSide,
+                            transition: transitionSide,
                             ...sideStyle
                         }}>
                         {headMenu}
@@ -121,13 +121,11 @@ export default class Nav extends React.Component<Props, State> {
                 </Box>
                 <Box flex>
                     <Item relative
-                        style={{
-                            ...{ height: "100%", overflow: "auto" } as any,
-                            ...sideStyle
-                        }}>
+                        style={{ height: "100%", overflow: "auto", ...sideStyle }}>
                         {sideMenu}
                     </Item>
-                    <Item ref="main" flex relative style={{ overflow: "auto" }}>
+                    <Item className={this.state.className}
+                        flex relative style={{ overflow: "auto" }}>
                         <Item style={{ position: "absolute", width: "100%" }}>
                             {children}
                         </Item>

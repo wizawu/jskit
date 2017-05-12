@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 function isNode() {
-    return typeof module !== "undefined" && !!module.exports;
+    return typeof window === "undefined" || typeof navigator === "undefined";
 }
 exports.isNode = isNode;
 function cssSupports(property, value) {

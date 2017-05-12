@@ -28,7 +28,6 @@ var __rest = (this && this.__rest) || function (s, e) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = require("react");
-var ReactDOM = require("react-dom");
 var Box_1 = require("./Box");
 var Item_1 = require("./Item");
 var util = require("./util");
@@ -36,7 +35,7 @@ var Nav = (function (_super) {
     __extends(Nav, _super);
     function Nav(props) {
         var _this = _super.call(this, props) || this;
-        _this.state = { portrait: false, menu: false };
+        _this.state = { portrait: false, menu: false, className: Math.random() + "" };
         _this.onResize = _this.onResize.bind(_this);
         _this.onHashChange = _this.onHashChange.bind(_this);
         return _this;
@@ -56,7 +55,8 @@ var Nav = (function (_super) {
     Nav.prototype.onHashChange = function () {
         var _this = this;
         this.setState({ menu: false }, function () {
-            ReactDOM.findDOMNode(_this.refs.main).scrollTop = 0;
+            var elements = document.getElementsByClassName("" + _this.state.className);
+            elements[0].scrollTop = 0;
         });
     };
     Nav.prototype.render = function () {
@@ -79,7 +79,7 @@ var Nav = (function (_super) {
                 React.createElement(Item_1.default, { flex: true }),
                 logo),
             React.createElement(Box_1.default, { flex: true },
-                React.createElement(Item_1.default, { flex: true, relative: true, style: { overflow: "auto" } },
+                React.createElement(Item_1.default, { className: this.state.className, flex: true, relative: true, style: { overflow: "auto" } },
                     React.createElement(Item_1.default, { style: { position: "absolute", width: "100%" } }, children))),
             React.createElement(Box_1.default, { fit: true, style: {
                     backgroundColor: "rgba(0,0,0," + (menu ? 0.64 : 0) + ")",
@@ -88,13 +88,7 @@ var Nav = (function (_super) {
                     MsTransition: transitionMask,
                     transition: transitionMask,
                 } },
-                React.createElement(Item_1.default, { ref: "main", relative: true, style: __assign({}, {
-                        height: "100%", overflow: "auto",
-                        marginLeft: menu ? 0 : -innerWidth,
-                        WebkitTransition: transitionSide,
-                        MsTransition: transitionSide,
-                        transition: transitionSide,
-                    }, sideStyle) },
+                React.createElement(Item_1.default, { relative: true, style: __assign({ height: "100%", overflow: "auto", marginLeft: menu ? 0 : -innerWidth, WebkitTransition: transitionSide, MsTransition: transitionSide, transition: transitionSide }, sideStyle) },
                     headMenu,
                     sideMenu),
                 React.createElement(Item_1.default, { flex: true, onClick: function () { return _this.setState({ menu: false }); } }))));
@@ -104,8 +98,8 @@ var Nav = (function (_super) {
                 React.createElement(Item_1.default, { flex: true }),
                 headMenu),
             React.createElement(Box_1.default, { flex: true },
-                React.createElement(Item_1.default, { relative: true, style: __assign({}, { height: "100%", overflow: "auto" }, sideStyle) }, sideMenu),
-                React.createElement(Item_1.default, { ref: "main", flex: true, relative: true, style: { overflow: "auto" } },
+                React.createElement(Item_1.default, { relative: true, style: __assign({ height: "100%", overflow: "auto" }, sideStyle) }, sideMenu),
+                React.createElement(Item_1.default, { className: this.state.className, flex: true, relative: true, style: { overflow: "auto" } },
                     React.createElement(Item_1.default, { style: { position: "absolute", width: "100%" } }, children)))));
         return this.state.portrait ? portrait : landscape;
     };
