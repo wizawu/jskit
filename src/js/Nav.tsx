@@ -44,7 +44,7 @@ export default class Nav extends React.Component<Props, State> {
 
     onHashChange() {
         this.setState({ menu: false })
-        setTimeout(() => ReactDOM.findDOMNode(this.refs.main).scrollTop = 0, 10)
+        setTimeout(() => ReactDOM.findDOMNode(this.refs.main).scrollTop = 0, 100)
     }
 
     render() {

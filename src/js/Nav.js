@@ -56,7 +56,7 @@ var Nav = (function (_super) {
     Nav.prototype.onHashChange = function () {
         var _this = this;
         this.setState({ menu: false });
-        setTimeout(function () { return ReactDOM.findDOMNode(_this.refs.main).scrollTop = 0; }, 10);
+        setTimeout(function () { return ReactDOM.findDOMNode(_this.refs.main).scrollTop = 0; }, 100);
     };
     Nav.prototype.render = function () {
         var _this = this;
