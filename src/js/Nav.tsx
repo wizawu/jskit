@@ -1,4 +1,5 @@
 import * as React from "react"
+import * as ReactDOM from "react-dom"
 import Box from "./Box"
 import Item from "./Item"
 import * as util from "./util"
@@ -42,7 +43,9 @@ export default class Nav extends React.Component<Props, State> {
     }
 
     onHashChange() {
-        this.setState({ menu: false })
+        this.setState({ menu: false }, () => {
+            ReactDOM.findDOMNode(this.refs.main).scrollTop = 0
+        })
     }
 
     render() {

@@ -28,6 +28,7 @@ var __rest = (this && this.__rest) || function (s, e) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = require("react");
+var ReactDOM = require("react-dom");
 var Box_1 = require("./Box");
 var Item_1 = require("./Item");
 var util = require("./util");
@@ -53,7 +54,10 @@ var Nav = (function (_super) {
         this.setState({ portrait: window.innerHeight > window.innerWidth });
     };
     Nav.prototype.onHashChange = function () {
-        this.setState({ menu: false });
+        var _this = this;
+        this.setState({ menu: false }, function () {
+            ReactDOM.findDOMNode(_this.refs.main).scrollTop = 0;
+        });
     };
     Nav.prototype.render = function () {
         var _this = this;
