@@ -6,6 +6,7 @@
       "es2017"
     ],
     "noUnusedLocals": true,
+    "outDir": "dist",
     "removeComments": true,
     "skipLibCheck": true,
     "strictNullChecks": true,
