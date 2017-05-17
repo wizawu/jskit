@@ -1,7 +1,3 @@
-!dist/mockxhr.min.js
-.DS_Store
-.idea
-dist
 node_modules
-npm-debug.log
 tsconfig.json
+yarn.lock
