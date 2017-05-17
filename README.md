@@ -1,4 +1,5 @@
-# mockxhr [![build status](https://travis-ci.org/wizawu/mockxhr.svg)](https://travis-ci.org/wizawu/mockxhr)
+# mockxhr [![](https://badge.fury.io/js/mockxhr.svg)](https://www.npmjs.com/package/mockxhr) [![](https://travis-ci.org/wizawu/mockxhr.svg)](https://travis-ci.org/wizawu/mockxhr)
+
 
 Flyweight ajax and mock-ajax with zero dependency.
 
