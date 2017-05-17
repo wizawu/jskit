@@ -1,17 +1,17 @@
 export interface DoneCallback {
-    (resp?: any): void
+    (resp: any): void
 }
 
 export interface FailCallback {
-    (xhr?: XMLHttpRequest): void
+    (xhr: XMLHttpRequest): void
 }
 
 export interface SuccessHandler {
-    (json?: any, done?: DoneCallback, fail?: FailCallback): void
+    (json: any, done?: DoneCallback, fail?: FailCallback): void
 }
 
 export interface FailureHandler {
-    (xhr?: XMLHttpRequest, fail?: FailCallback, done?: DoneCallback): void
+    (xhr: XMLHttpRequest, fail?: FailCallback, done?: DoneCallback): void
 }
 
 export interface MockHandler {
@@ -123,7 +123,7 @@ function _xhr(method: HTTPMethod, url: string, json: any, done?: DoneCallback, f
 
 function methodFactory(method: HTTPMethod) {
     return (
-        (url: string, json: any, done?: DoneCallback, fail?: FailCallback) => {
+        (url: string, json?: any, done?: DoneCallback, fail?: FailCallback) => {
             _xhr(method, url, json, done, fail)
             _requests[method] = {}
         }
