@@ -9,18 +9,17 @@ var MockXHR = (function () {
 }());
 var _mock = false;
 var _headers = {};
+var _requests = {};
 var _success;
 var _failure;
-var _requests = {
-    "COPY": {},
-    "DELETE": {},
-    "GET": {},
-    "HEAD": {},
-    "OPTIONS": {},
-    "PATCH": {},
-    "POST": {},
-    "PUT": {},
-};
+exports.COPY = methodFactory("COPY");
+exports.DELETE = methodFactory("DELETE");
+exports.GET = methodFactory("GET");
+exports.HEAD = methodFactory("HEAD");
+exports.OPTIONS = methodFactory("OPTIONS");
+exports.PATCH = methodFactory("PATCH");
+exports.POST = methodFactory("POST");
+exports.PUT = methodFactory("PUT");
 function setMock(flag) {
     _mock = flag;
 }
@@ -41,12 +40,6 @@ function mock(method, url, handler, status) {
     _requests[method][url] = new MockXHR(handler || (function () { return ""; }), status || 200);
 }
 exports.mock = mock;
-Object.keys(_requests).forEach(function (method) {
-    module.exports[method] = module.exports[method.toLowerCase()] =
-        function (url, json, done, fail) {
-            _xhr(method, url, json, done, fail);
-        };
-});
 function _xhr(method, url, json, done, fail) {
     if (_mock) {
         var matched = url;
@@ -109,4 +102,10 @@ function _xhr(method, url, json, done, fail) {
     for (var k in _headers)
         xhr.setRequestHeader(k, _headers[k]);
     xhr.send(json ? JSON.stringify(json) : "");
+}
+function methodFactory(method) {
+    return (function (url, json, done, fail) {
+        _xhr(method, url, json, done, fail);
+        _requests[method] = {};
+    });
 }

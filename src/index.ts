@@ -1,11 +1,3 @@
-declare const module
-
-export type HTTPMethod = "COPY" | "DELETE" | "GET" | "HEAD" | "OPTIONS" | "PATCH" | "POST" | "PUT"
-
-export interface RequestHandler {
-    (req: any): any
-}
-
 export interface DoneCallback {
     (resp?: any): void
 }
@@ -22,11 +14,15 @@ export interface FailureHandler {
     (xhr?: XMLHttpRequest, fail?: FailCallback, done?: DoneCallback): void
 }
 
+export interface MockHandler {
+    (req: any): any
+}
+
 class MockXHR {
-    handler: RequestHandler
+    handler: MockHandler
     status: number
 
-    constructor(handler: RequestHandler, status: number) {
+    constructor(handler: MockHandler, status: number) {
         this.handler = handler
         this.status = status
     }
@@ -34,18 +30,19 @@ class MockXHR {
 
 let _mock: boolean = false
 let _headers = {}
+let _requests = {}
 let _success: SuccessHandler
 let _failure: FailureHandler
-let _requests = {
-    "COPY": {},
-    "DELETE": {},
-    "GET": {},
-    "HEAD": {},
-    "OPTIONS": {},
-    "PATCH": {},
-    "POST": {},
-    "PUT": {},
-}
+
+export type HTTPMethod = "COPY" | "DELETE" | "GET" | "HEAD" | "OPTIONS" | "PATCH" | "POST" | "PUT"
+export const COPY = methodFactory("COPY")
+export const DELETE = methodFactory("DELETE")
+export const GET = methodFactory("GET")
+export const HEAD = methodFactory("HEAD")
+export const OPTIONS = methodFactory("OPTIONS")
+export const PATCH = methodFactory("PATCH")
+export const POST = methodFactory("POST")
+export const PUT = methodFactory("PUT")
 
 export function setMock(flag: boolean) {
     _mock = flag
@@ -63,16 +60,9 @@ export function ajaxFailure(handler: FailureHandler) {
     _failure = handler
 }
 
-export function mock(method: HTTPMethod, url: string, handler?: RequestHandler, status?: number) {
+export function mock(method: HTTPMethod, url: string, handler?: MockHandler, status?: number) {
     _requests[method][url] = new MockXHR(handler || (() => ""), status || 200)
 }
-
-Object.keys(_requests).forEach((method: HTTPMethod) => {
-    module.exports[method] = module.exports[method.toLowerCase()] =
-        (url: string, json: any, done?: DoneCallback, fail?: FailCallback) => {
-            _xhr(method, url, json, done, fail)
-        }
-})
 
 function _xhr(method: HTTPMethod, url: string, json: any, done?: DoneCallback, fail?: FailCallback) {
     if (_mock) {
@@ -129,4 +119,13 @@ function _xhr(method: HTTPMethod, url: string, json: any, done?: DoneCallback, f
     xhr.setRequestHeader("Content-Type", "application/json; charset=utf-8")
     for (let k in _headers) xhr.setRequestHeader(k, _headers[k])
     xhr.send(json ? JSON.stringify(json) : "")
+}
+
+function methodFactory(method: HTTPMethod) {
+    return (
+        (url: string, json: any, done?: DoneCallback, fail?: FailCallback) => {
+            _xhr(method, url, json, done, fail)
+            _requests[method] = {}
+        }
+    )
 }
