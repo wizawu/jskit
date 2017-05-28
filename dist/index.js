@@ -114,9 +114,9 @@ function _xhr(method, url, json, done, fail) {
     xhr.send(json ? JSON.stringify(json) : "");
 }
 function methodFactory(method) {
+    _requests[method] = {};
+    _sending[method] = {};
     return (function (url, json, done, fail) {
         _xhr(method, url, json, done, fail);
-        _requests[method] = {};
-        _sending[method] = {};
     });
 }

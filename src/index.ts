@@ -133,11 +133,11 @@ function _xhr(method: HTTPMethod, url: string, json: any, done?: DoneCallback, f
 }
 
 function methodFactory(method: HTTPMethod) {
+    _requests[method] = {}
+    _sending[method] = {}
     return (
         (url: string, json?: any, done?: DoneCallback, fail?: FailCallback) => {
             _xhr(method, url, json, done, fail)
-            _requests[method] = {}
-            _sending[method] = {}
         }
     )
 }
