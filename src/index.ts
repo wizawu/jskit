@@ -34,6 +34,9 @@ let _requests = {}
 let _success: SuccessHandler
 let _failure: FailureHandler
 
+let _noRepeat = false
+let _sending = {}
+
 export type HTTPMethod = "COPY" | "DELETE" | "GET" | "HEAD" | "OPTIONS" | "PATCH" | "POST" | "PUT"
 export const COPY = methodFactory("COPY")
 export const DELETE = methodFactory("DELETE")
@@ -50,6 +53,10 @@ export function setMock(flag: boolean) {
 
 export function setHeaders(headers: any) {
     _headers = headers
+}
+
+export function setNoRepeatedRequests(flag: boolean) {
+    _noRepeat = flag
 }
 
 export function ajaxSuccess(handler: SuccessHandler) {
@@ -90,9 +97,13 @@ function _xhr(method: HTTPMethod, url: string, json: any, done?: DoneCallback, f
         }
     }
 
+    if (_noRepeat && _sending[method][url]) return
+    _sending[method][url] = true
+
     let xhr = new XMLHttpRequest()
     xhr.onreadystatechange = () => {
         if (xhr.readyState === 4) {
+            _sending[method][url] = false
             let status = xhr.status
             if (status >= 200 && status < 300 || status === 304) {
                 let response: any
@@ -126,6 +137,7 @@ function methodFactory(method: HTTPMethod) {
         (url: string, json?: any, done?: DoneCallback, fail?: FailCallback) => {
             _xhr(method, url, json, done, fail)
             _requests[method] = {}
+            _sending[method] = {}
         }
     )
 }

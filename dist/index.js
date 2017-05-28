@@ -12,6 +12,8 @@ var _headers = {};
 var _requests = {};
 var _success;
 var _failure;
+var _noRepeat = false;
+var _sending = {};
 exports.COPY = methodFactory("COPY");
 exports.DELETE = methodFactory("DELETE");
 exports.GET = methodFactory("GET");
@@ -28,6 +30,10 @@ function setHeaders(headers) {
     _headers = headers;
 }
 exports.setHeaders = setHeaders;
+function setNoRepeatedRequests(flag) {
+    _noRepeat = flag;
+}
+exports.setNoRepeatedRequests = setNoRepeatedRequests;
 function ajaxSuccess(handler) {
     _success = handler;
 }
@@ -68,9 +74,13 @@ function _xhr(method, url, json, done, fail) {
             }, 0);
         }
     }
+    if (_noRepeat && _sending[method][url])
+        return;
+    _sending[method][url] = true;
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
+            _sending[method][url] = false;
             var status_2 = xhr.status;
             if (status_2 >= 200 && status_2 < 300 || status_2 === 304) {
                 var response = void 0;
@@ -107,5 +117,6 @@ function methodFactory(method) {
     return (function (url, json, done, fail) {
         _xhr(method, url, json, done, fail);
         _requests[method] = {};
+        _sending[method] = {};
     });
 }

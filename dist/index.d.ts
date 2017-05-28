@@ -24,6 +24,7 @@ export declare const POST: (url: string, json?: any, done?: DoneCallback | undef
 export declare const PUT: (url: string, json?: any, done?: DoneCallback | undefined, fail?: FailCallback | undefined) => void;
 export declare function setMock(flag: boolean): void;
 export declare function setHeaders(headers: any): void;
+export declare function setNoRepeatedRequests(flag: boolean): void;
 export declare function ajaxSuccess(handler: SuccessHandler): void;
 export declare function ajaxFailure(handler: FailureHandler): void;
 export declare function mock(method: HTTPMethod, url: string, handler?: MockHandler, status?: number): void;
