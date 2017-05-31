@@ -1,6 +1,16 @@
 # lightest [![](https://badge.fury.io/js/lightest.svg)](https://www.npmjs.com/package/lightest) [![](https://travis-ci.org/wizawu/lightest.svg)](https://travis-ci.org/wizawu/lightest)
 
-A lite alternative to [Mocha](https://mochajs.org/) in 100 LOC. And it's TypeScript-friendly.
+A lite alternative to [Mocha](https://mochajs.org/) in 100 LOC.
+
+### Installation
+
+```
+npm install lightest
+```
+
+### Usage
+
+Check out the [example](https://github.com/wizawu/lightest/blob/master/test/test_index.js).
 
 ```bash
 $ node test/test_index.js
