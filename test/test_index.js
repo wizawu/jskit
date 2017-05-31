@@ -15,8 +15,8 @@ describe("Suite A", () => {
     after(() => console.log("after A"))
     beforeEach(() => console.log("beforeEach A test"))
     afterEach(() => console.log("afterEach A test"))
-    it("add", () => deepStrictEqual(1 + 1, 2))
-    it("minus", () => deepStrictEqual(1 - 1, 2))
+    it("add", () => deepStrictEqual(1 + 1, 1))
+    it("minus", () => deepStrictEqual(1 - 1, 0))
 })
 
 describe("Suite B", () => {
@@ -24,8 +24,8 @@ describe("Suite B", () => {
     after(() => console.log("after B"))
     beforeEach(() => console.log("beforeEach B test"))
     afterEach(() => console.log("afterEach B test"))
-    it("add", () => deepStrictEqual(1 + 1, 2))
-    it("minus", () => deepStrictEqual(1 - 1, 2))
+    it("multiply", () => deepStrictEqual(1 * 1, 1))
+    it("divide", () => deepStrictEqual(1 / 0, 1))
 })
 
 deepStrictEqual(report.ok(), false)

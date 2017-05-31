@@ -1,7 +1,5 @@
 import { constructor as Chalk } from "chalk"
 
-const chalk = new Chalk({ enabled: true })
-
 export interface Callback {
     (): void
 }
@@ -22,7 +20,8 @@ interface Suite {
     afterEach?: Callback
 }
 
-let suites: Suite[] = []
+const chalk = new Chalk({ enabled: true })
+const suites: Suite[] = []
 
 export function describe(description: string, callback: Callback) {
     suites.push({ description, tests: [] })
@@ -43,34 +42,18 @@ export function describe(description: string, callback: Callback) {
     if (suite.after) suite.after()
 }
 
+export const before = callback => suites[suites.length - 1].before = callback
+export const after = callback => suites[suites.length - 1].after = callback
+export const beforeEach = callback => suites[suites.length - 1].beforeEach = callback
+export const afterEach = callback => suites[suites.length - 1].afterEach = callback
+
 export function it(description: string, callback: Callback) {
     suites[suites.length - 1].tests.push({ description, callback })
 }
 
-export function before(callback: Callback) {
-    suites[suites.length - 1].before = callback
-}
-
-export function after(callback: Callback) {
-    suites[suites.length - 1].after = callback
-}
-
-export function beforeEach(callback: Callback) {
-    suites[suites.length - 1].beforeEach = callback
-}
-
-export function afterEach(callback: Callback) {
-    suites[suites.length - 1].afterEach = callback
-}
-
 export class report {
-    private static tab1(line: string) {
-        return `  ${line}\n`
-    }
-
-    private static tab2(line: string) {
-        return `    ${line}\n`
-    }
+    private static tab1 = line => `  ${line}\n`
+    private static tab2 = line => `    ${line}\n`
 
     static toString() {
         let result = "\n\n"
@@ -108,8 +91,7 @@ export class report {
             })
         })
 
-        result += "\n"
-        return result
+        return result + "\n"
     }
 
     static ok() {
