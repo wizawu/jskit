@@ -27,35 +27,17 @@ function describe(description, callback) {
         suite.after();
 }
 exports.describe = describe;
+exports.before = function (callback) { return suites[suites.length - 1].before = callback; };
+exports.after = function (callback) { return suites[suites.length - 1].after = callback; };
+exports.beforeEach = function (callback) { return suites[suites.length - 1].beforeEach = callback; };
+exports.afterEach = function (callback) { return suites[suites.length - 1].afterEach = callback; };
 function it(description, callback) {
     suites[suites.length - 1].tests.push({ description: description, callback: callback });
 }
 exports.it = it;
-function before(callback) {
-    suites[suites.length - 1].before = callback;
-}
-exports.before = before;
-function after(callback) {
-    suites[suites.length - 1].after = callback;
-}
-exports.after = after;
-function beforeEach(callback) {
-    suites[suites.length - 1].beforeEach = callback;
-}
-exports.beforeEach = beforeEach;
-function afterEach(callback) {
-    suites[suites.length - 1].afterEach = callback;
-}
-exports.afterEach = afterEach;
 var report = (function () {
     function report() {
     }
-    report.tab1 = function (line) {
-        return "  " + line + "\n";
-    };
-    report.tab2 = function (line) {
-        return "    " + line + "\n";
-    };
     report.toString = function () {
         var _this = this;
         var result = "\n\n";
@@ -92,8 +74,7 @@ var report = (function () {
                 }
             });
         });
-        result += "\n";
-        return result;
+        return result + "\n";
     };
     report.ok = function () {
         return suites.every(function (suite) {
@@ -102,4 +83,6 @@ var report = (function () {
     };
     return report;
 }());
+report.tab1 = function (line) { return "  " + line + "\n"; };
+report.tab2 = function (line) { return "    " + line + "\n"; };
 exports.report = report;
