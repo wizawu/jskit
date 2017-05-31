@@ -1,0 +1,10 @@
+{
+  "name": "lightest",
+  "version": "0.0.0",
+  "repository": "github:wizawu/lightest",
+  "main": "dist/index.js",
+  "dependencies": {
+    "@types/chalk": "^0.4.31",
+    "chalk": "^1.1.3"
+  }
+}
