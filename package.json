@@ -1,6 +1,6 @@
 {
   "name": "lightest",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "repository": "github:wizawu/lightest",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

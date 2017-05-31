@@ -51,10 +51,10 @@ var report = (function () {
     function report() {
     }
     report.tab1 = function (line) {
-        return "    " + line + "\n";
+        return "  " + line + "\n";
     };
     report.tab2 = function (line) {
-        return "        " + line + "\n";
+        return "    " + line + "\n";
     };
     report.toString = function () {
         var _this = this;

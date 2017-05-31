@@ -65,11 +65,11 @@ export function afterEach(callback: Callback) {
 
 export class report {
     private static tab1(line: string) {
-        return `    ${line}\n`
+        return `  ${line}\n`
     }
 
     private static tab2(line: string) {
-        return `        ${line}\n`
+        return `    ${line}\n`
     }
 
     static toString() {
