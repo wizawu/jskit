@@ -6,3 +6,6 @@ watch:
 
 install:
 	yarn install
+
+test: build
+	node test/test_*.js
