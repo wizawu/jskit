@@ -1,6 +1,6 @@
 {
   "name": "object-path-cli",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "bin": "./main.js",
   "repository": "github:wizawu/object-path-cli",
   "dependencies": {
