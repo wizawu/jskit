@@ -37,12 +37,14 @@ var Item = (function (_super) {
     Item.prototype.render = function () {
         var props = this.props;
         var flex = props.flex, layout = props.layout, selfStart = props.selfStart, selfCenter = props.selfCenter, selfEnd = props.selfEnd, selfStretch = props.selfStretch, relative = props.relative, fit = props.fit, fullbleed = props.fullbleed, hidden = props.hidden, children = props.children, otherProps = __rest(props, ["flex", "layout", "selfStart", "selfCenter", "selfEnd", "selfStretch", "relative", "fit", "fullbleed", "hidden", "children"]);
-        var style = props.layout ? util_1.mergeCSSProps([
-            ["display", "-ms-flexbox"],
-            ["display", "-webkit-box"],
-            ["display", "-webkit-flex"],
-            ["display", "flex"],
-        ]) : {};
+        var style = props.layout ? {
+            display: util_1.cssSupports("display", [
+                "-ms-flexbox",
+                "-webkit-box",
+                "-webkit-flex",
+                "flex",
+            ])
+        } : {};
         switch (typeof (props.flex)) {
             case "boolean":
             case "number":
@@ -71,11 +73,7 @@ var Item = (function (_super) {
         else if (props.selfStretch) {
             alignSelf = ["stretch", "stretch", "stretch"];
         }
-        style = alignSelf ? __assign({}, style, util_1.mergeCSSProps([
-            ["-webkit-align-self", alignSelf[0]],
-            ["-ms-flex-item-align", alignSelf[1]],
-            ["align-self", alignSelf[2]],
-        ])) : style;
+        style = alignSelf ? __assign({}, style, { WebkitAlignSelf: alignSelf[0], MsFlexItemAlign: alignSelf[1], alignSelf: alignSelf[2] }) : style;
         if (props.relative) {
             style.position = "relative";
         }

@@ -29,7 +29,6 @@ var __rest = (this && this.__rest) || function (s, e) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = require("react");
 var Item_1 = require("./Item");
-var util_1 = require("./util");
 var Box = (function (_super) {
     __extends(Box, _super);
     function Box() {
@@ -40,29 +39,13 @@ var Box = (function (_super) {
         var _a = this.props, wrap = _a.wrap, reverse = _a.reverse, horizontal = _a.horizontal, vertical = _a.vertical, center = _a.center, start = _a.start, end = _a.end, stretch = _a.stretch, startJustified = _a.startJustified, centerJustified = _a.centerJustified, endJustified = _a.endJustified, justified = _a.justified, aroundJustified = _a.aroundJustified, children = _a.children, otherProps = __rest(_a, ["wrap", "reverse", "horizontal", "vertical", "center", "start", "end", "stretch", "startJustified", "centerJustified", "endJustified", "justified", "aroundJustified", "children"]);
         var style = {};
         if (props.wrap) {
-            style = __assign({}, style, util_1.mergeCSSProps([
-                ["-webkit-flex-wrap", "wrap"],
-                ["-ms-flex-wrap", "wrap"],
-                ["flex-wrap", "wrap"],
-            ]));
+            style = __assign({}, style, { WebkitFlexWrap: "wrap", MsFlexWrap: "wrap", flexWrap: "wrap" });
         }
         if (props.vertical) {
-            style = __assign({}, style, util_1.mergeCSSProps([
-                ["-webkit-box-orient", "vertical"],
-                ["-webkit-box-direction", props.reverse ? "reverse" : "normal"],
-                ["-webkit-flex-direction", props.reverse ? "column-reverse" : "column"],
-                ["-ms-flex-direction", props.reverse ? "column-reverse" : "column"],
-                ["flex-direction", props.reverse ? "column-reverse" : "column"],
-            ]));
+            style = __assign({}, style, { WebkitBoxOrient: "vertical", WebkitBoxDirection: props.reverse ? "reverse" : "normal", WebkitFlexDirection: props.reverse ? "column-reverse" : "column", MsFlexDirection: props.reverse ? "column-reverse" : "column", flexDirection: props.reverse ? "column-reverse" : "column" });
         }
         else {
-            style = __assign({}, style, util_1.mergeCSSProps([
-                ["-webkit-box-orient", "horizontal"],
-                ["-webkit-box-direction", props.reverse ? "reverse" : "normal"],
-                ["-webkit-flex-direction", props.reverse ? "row-reverse" : "row"],
-                ["-ms-flex-direction", props.reverse ? "row-reverse" : "row"],
-                ["flex-direction", props.reverse ? "row-reverse" : "row"],
-            ]));
+            style = __assign({}, style, { WebkitBoxOrient: "horizontal", WebkitBoxDirection: props.reverse ? "reverse" : "normal", WebkitFlexDirection: props.reverse ? "row-reverse" : "row", MsFlexDirection: props.reverse ? "row-reverse" : "row", flexDirection: props.reverse ? "row-reverse" : "row" });
         }
         var alignItems = null;
         if (props.start) {
@@ -77,12 +60,7 @@ var Box = (function (_super) {
         else if (props.stretch) {
             alignItems = ["stretch", "stretch", "stretch", "stretch"];
         }
-        style = alignItems ? __assign({}, style, util_1.mergeCSSProps([
-            ["-webkit-box-align", alignItems[0]],
-            ["-webkit-align-items", alignItems[1]],
-            ["-ms-flex-align", alignItems[2]],
-            ["align-items", alignItems[3]],
-        ])) : style;
+        style = alignItems ? __assign({}, style, { WebkitBoxAlign: alignItems[0], WebkitAlignItems: alignItems[1], MsFlexAlign: alignItems[2], alignItems: alignItems[3] }) : style;
         var justifyContent = null;
         if (props.startJustified) {
             justifyContent = ["start", "flex-start", "start", "flex-start"];
@@ -99,12 +77,7 @@ var Box = (function (_super) {
         else if (props.aroundJustified) {
             justifyContent = ["", "space-around", "distribute", "space-around"];
         }
-        style = justifyContent ? __assign({}, style, util_1.mergeCSSProps([
-            ["-webkit-box-pack", justifyContent[0]],
-            ["-webkit-justify-content", justifyContent[1]],
-            ["-ms-flex-pack", justifyContent[2]],
-            ["justify-content", justifyContent[3]],
-        ])) : style;
+        style = justifyContent ? __assign({}, style, { WebkitBoxPack: justifyContent[0], WebkitJustifyContent: justifyContent[1], MsFlexPack: justifyContent[2], justifyContent: justifyContent[3] }) : style;
         return (React.createElement(Item_1.default, __assign({ layout: true }, otherProps, { style: __assign({}, style, props.style) }), children));
     };
     return Box;

@@ -1,7 +1,7 @@
 import * as React from "react"
 import * as ReactDOM from "react-dom"
 
-import { Nav } from "../dist/index"
+import { Nav } from "../src/index"
 
 function block(width: number, height: number, background: string) {
     return <div style={{ width, height, background }} />
