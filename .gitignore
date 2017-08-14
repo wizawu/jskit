@@ -1,5 +1,5 @@
-.gradle
-build
-build.gradle
-node_modules
+*.swp
+node_modules/
+test/*.js
+test/*.map
 yarn.lock
