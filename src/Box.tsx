@@ -1,6 +1,5 @@
 import * as React from "react"
 import Item, { Props as ItemProps } from "./Item"
-import { mergeCSSProps } from "./util"
 
 export interface Props extends ItemProps {
     wrap?: boolean
@@ -31,33 +30,30 @@ export default class Box extends React.Component<Props, any> {
 
         if (props.wrap) {
             style = {
-                ...style, ...mergeCSSProps([
-                    ["-webkit-flex-wrap", "wrap"],
-                    ["-ms-flex-wrap", "wrap"],
-                    ["flex-wrap", "wrap"],
-                ])
+                ...style,
+                WebkitFlexWrap: "wrap",
+                MsFlexWrap: "wrap",
+                flexWrap: "wrap",
             }
         }
 
         if (props.vertical) {
             style = {
-                ...style, ...mergeCSSProps([
-                    ["-webkit-box-orient", "vertical"],
-                    ["-webkit-box-direction", props.reverse ? "reverse" : "normal"],
-                    ["-webkit-flex-direction", props.reverse ? "column-reverse" : "column"],
-                    ["-ms-flex-direction", props.reverse ? "column-reverse" : "column"],
-                    ["flex-direction", props.reverse ? "column-reverse" : "column"],
-                ])
+                ...style,
+                WebkitBoxOrient: "vertical",
+                WebkitBoxDirection: props.reverse ? "reverse" : "normal",
+                WebkitFlexDirection: props.reverse ? "column-reverse" : "column",
+                MsFlexDirection: props.reverse ? "column-reverse" : "column",
+                flexDirection: props.reverse ? "column-reverse" : "column",
             }
         } else {
             style = {
-                ...style, ...mergeCSSProps([
-                    ["-webkit-box-orient", "horizontal"],
-                    ["-webkit-box-direction", props.reverse ? "reverse" : "normal"],
-                    ["-webkit-flex-direction", props.reverse ? "row-reverse" : "row"],
-                    ["-ms-flex-direction", props.reverse ? "row-reverse" : "row"],
-                    ["flex-direction", props.reverse ? "row-reverse" : "row"],
-                ])
+                ...style,
+                WebkitBoxOrient: "horizontal",
+                WebkitBoxDirection: props.reverse ? "reverse" : "normal",
+                WebkitFlexDirection: props.reverse ? "row-reverse" : "row",
+                MsFlexDirection: props.reverse ? "row-reverse" : "row",
+                flexDirection: props.reverse ? "row-reverse" : "row",
             }
         }
 
@@ -72,12 +68,11 @@ export default class Box extends React.Component<Props, any> {
             alignItems = ["stretch", "stretch", "stretch", "stretch"]
         }
         style = alignItems ? {
-            ...style, ...mergeCSSProps([
-                ["-webkit-box-align", alignItems[0]],
-                ["-webkit-align-items", alignItems[1]],
-                ["-ms-flex-align", alignItems[2]],
-                ["align-items", alignItems[3]],
-            ])
+            ...style,
+            WebkitBoxAlign: alignItems[0],
+            WebkitAlignItems: alignItems[1],
+            MsFlexAlign: alignItems[2],
+            alignItems: alignItems[3] as any,
         } : style
 
         let justifyContent: string[] | null = null
@@ -93,12 +88,11 @@ export default class Box extends React.Component<Props, any> {
             justifyContent = ["", "space-around", "distribute", "space-around"]
         }
         style = justifyContent ? {
-            ...style, ...mergeCSSProps([
-                ["-webkit-box-pack", justifyContent[0]],
-                ["-webkit-justify-content", justifyContent[1]],
-                ["-ms-flex-pack", justifyContent[2]],
-                ["justify-content", justifyContent[3]],
-            ])
+            ...style,
+            WebkitBoxPack: justifyContent[0],
+            WebkitJustifyContent: justifyContent[1],
+            MsFlexPack: justifyContent[2],
+            justifyContent: justifyContent[3] as any,
         } : style
 
         return (

@@ -1,5 +1,5 @@
 import * as React from "react"
-import { mergeCSSProps } from "./util"
+import { cssSupports } from "./util"
 
 export interface Props extends React.DOMAttributes<any> {
     flex?: boolean | number | string
@@ -24,12 +24,14 @@ export default class Item extends React.Component<Props, any> {
             fit, fullbleed, hidden, children, ...otherProps
         } = props
 
-        let style = props.layout ? mergeCSSProps([
-            ["display", "-ms-flexbox"],
-            ["display", "-webkit-box"],
-            ["display", "-webkit-flex"],
-            ["display", "flex"],
-        ]) : {}
+        let style: React.CSSProperties = props.layout ? {
+            display: cssSupports("display", [
+                "-ms-flexbox",
+                "-webkit-box",
+                "-webkit-flex",
+                "flex",
+            ])
+        } : {}
 
         switch (typeof (props.flex)) {
             case "boolean":
@@ -61,11 +63,10 @@ export default class Item extends React.Component<Props, any> {
             alignSelf = ["stretch", "stretch", "stretch"]
         }
         style = alignSelf ? {
-            ...style, ...mergeCSSProps([
-                ["-webkit-align-self", alignSelf[0]],
-                ["-ms-flex-item-align", alignSelf[1]],
-                ["align-self", alignSelf[2]],
-            ])
+            ...style,
+            WebkitAlignSelf: alignSelf[0],
+            MsFlexItemAlign: alignSelf[1],
+            alignSelf: alignSelf[2] as any,
         } : style
 
         if (props.relative) {
