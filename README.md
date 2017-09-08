@@ -14,19 +14,19 @@ Refer to [Polymer layout attributes](https://www.polymer-project.org/0.5/docs/po
 
 ```
 // Polymer
-<div center-justified {...props} />
+<div self-center {...props} />
 
 // react-polymer-layout
-<Item centerJustified {...props} />
+<Item selfCenter {...props} />
 
 
 // Polymer
-<div layout {...props} />
+<div layout center-justified {...props} />
 
 // react-polymer-layout
-<Item layout {...props} />
+<Item layout centerJustified {...props} />
 // or
-<Box {...props} />
+<Box centerJustified {...props} />
 ```
 
 ### Compatibility
