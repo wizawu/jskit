@@ -14,6 +14,20 @@ export interface Props extends React.DOMAttributes<any> {
     hidden?: boolean
     style?: React.CSSProperties
     className?: string
+
+    wrap?: boolean
+    reverse?: boolean
+    horizontal?: boolean
+    vertical?: boolean
+    center?: boolean
+    start?: boolean
+    end?: boolean
+    stretch?: boolean
+    startJustified?: boolean
+    centerJustified?: boolean
+    endJustified?: boolean
+    justified?: boolean
+    aroundJustified?: boolean
 }
 
 export default class Item extends React.Component<Props, any> {
@@ -21,7 +35,10 @@ export default class Item extends React.Component<Props, any> {
         const props = this.props
         const {
             flex, layout, selfStart, selfCenter, selfEnd, selfStretch, relative,
-            fit, fullbleed, hidden, children, ...otherProps
+            fit, fullbleed, hidden, children,
+            wrap, reverse, horizontal, vertical, center, start, end, stretch,
+            startJustified, centerJustified, endJustified, justified, aroundJustified,
+            ...otherProps
         } = props
 
         let style: React.CSSProperties = props.layout ? {
