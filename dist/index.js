@@ -81,8 +81,8 @@ var report = (function () {
             return suite.tests.every(function (test) { return test.message === undefined; });
         });
     };
+    report.tab1 = function (line) { return "  " + line + "\n"; };
+    report.tab2 = function (line) { return "    " + line + "\n"; };
     return report;
 }());
-report.tab1 = function (line) { return "  " + line + "\n"; };
-report.tab2 = function (line) { return "    " + line + "\n"; };
 exports.report = report;
