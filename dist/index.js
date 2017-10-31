@@ -65,7 +65,7 @@ function _xhr(method, url, json, done, fail) {
             return setTimeout(function () {
                 if (status_1 >= 200 && status_1 < 300 || status_1 === 304) {
                     if (done)
-                        done(response_1);
+                        done(response_1, { status: status_1 });
                 }
                 else {
                     if (fail)
@@ -94,7 +94,7 @@ function _xhr(method, url, json, done, fail) {
                     _success(response, done, fail);
                 }
                 else if (done) {
-                    done(response);
+                    done(response, xhr);
                 }
             }
             else {

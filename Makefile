@@ -1,5 +1,3 @@
-.PHONY: build watch
-
 build:
 	tsc -d -p .
 

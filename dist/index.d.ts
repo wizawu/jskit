@@ -1,5 +1,5 @@
 export interface DoneCallback {
-    (resp: any): void;
+    (resp: any, xhr?: XMLHttpRequest): void;
 }
 export interface FailCallback {
     (xhr: XMLHttpRequest): void;

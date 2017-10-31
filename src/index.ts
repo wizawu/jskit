@@ -1,5 +1,5 @@
 export interface DoneCallback {
-    (resp: any): void
+    (resp: any, xhr?: XMLHttpRequest): void
 }
 
 export interface FailCallback {
@@ -89,7 +89,7 @@ function _xhr(method: HTTPMethod, url: string, json: any, done?: DoneCallback, f
             let response = handler(json ? JSON.parse(JSON.stringify(json)) : null)
             return setTimeout(() => {
                 if (status >= 200 && status < 300 || status === 304) {
-                    if (done) done(response)
+                    if (done) done(response, { status } as any)
                 } else {
                     if (fail) fail({ status } as any)
                 }
@@ -115,7 +115,7 @@ function _xhr(method: HTTPMethod, url: string, json: any, done?: DoneCallback, f
                 if (_success) {
                     _success(response, done, fail)
                 } else if (done) {
-                    done(response)
+                    done(response, xhr)
                 }
             } else {
                 if (_failure) {
