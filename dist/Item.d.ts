@@ -13,6 +13,7 @@ export interface Props extends React.DOMAttributes<any> {
     hidden?: boolean;
     style?: React.CSSProperties;
     className?: string;
+    id?: string;
     wrap?: boolean;
     reverse?: boolean;
     horizontal?: boolean;
