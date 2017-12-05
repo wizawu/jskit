@@ -35,8 +35,8 @@ function displayFlex() {
     let userAgent = navigator.userAgent
     if (/MSIE|Trident/.test(userAgent)) {
         return "-ms-flexbox"
-    } else if (/Chrome/i.test(userAgent)) {
-        return /Safari/i.test(userAgent) ? "-webkit-box" : "flex"
+    } else if (/Safari/i.test(userAgent)) {
+        return /Chrome/i.test(userAgent) ? "flex" : "-webkit-box"
     } else {
         return "flex"
     }
