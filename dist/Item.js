@@ -36,7 +36,7 @@ function displayFlex() {
         return "-ms-flexbox";
     }
     else if (/Safari/i.test(userAgent)) {
-        return /Chrome/i.test(userAgent) ? "flex" : "-webkit-box";
+        return /Chrome/i.test(userAgent) ? "flex" : "-webkit-flex";
     }
     else {
         return "flex";
