@@ -1,5 +1,4 @@
 import * as React from "react"
-import { cssSupports } from "./util"
 
 export interface Props extends React.DOMAttributes<any> {
     flex?: boolean | number | string
@@ -31,6 +30,18 @@ export interface Props extends React.DOMAttributes<any> {
     aroundJustified?: boolean
 }
 
+function displayFlex() {
+    if (typeof navigator === "undefined") return "flex"
+    let userAgent = navigator.userAgent
+    if (/MSIE|Trident/.test(userAgent)) {
+        return "-ms-flexbox"
+    } else if (/Chrome/i.test(userAgent)) {
+        return /Safari/i.test(userAgent) ? "-webkit-box" : "flex"
+    } else {
+        return "flex"
+    }
+}
+
 export default class Item extends React.Component<Props, any> {
     render() {
         const props = this.props
@@ -42,14 +53,7 @@ export default class Item extends React.Component<Props, any> {
             ...otherProps
         } = props
 
-        let style: React.CSSProperties = props.layout ? {
-            display: cssSupports("display", [
-                "-ms-flexbox",
-                "-webkit-box",
-                "-webkit-flex",
-                "flex",
-            ])
-        } : {}
+        let style: React.CSSProperties = props.layout ? { display: displayFlex() } : {}
 
         switch (typeof (props.flex)) {
             case "boolean":

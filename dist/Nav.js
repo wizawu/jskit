@@ -30,7 +30,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var React = require("react");
 var Box_1 = require("./Box");
 var Item_1 = require("./Item");
-var util = require("./util");
 var Nav = (function (_super) {
     __extends(Nav, _super);
     function Nav(props) {
@@ -61,7 +60,7 @@ var Nav = (function (_super) {
     };
     Nav.prototype.render = function () {
         var _this = this;
-        var innerWidth = util.isNode() ? 0 : window.innerWidth;
+        var innerWidth = typeof window === "undefined" ? 0 : window.innerWidth;
         var menu = this.state.menu;
         var _a = this.props, logo = _a.logo, headMenu = _a.headMenu, sideMenu = _a.sideMenu, headStyle = _a.headStyle, sideStyle = _a.sideStyle, style = _a.style, children = _a.children, otherProps = __rest(_a, ["logo", "headMenu", "sideMenu", "headStyle", "sideStyle", "style", "children"]);
         var transitionSide = "margin-left 500ms";

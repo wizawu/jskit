@@ -28,7 +28,20 @@ var __rest = (this && this.__rest) || function (s, e) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = require("react");
-var util_1 = require("./util");
+function displayFlex() {
+    if (typeof navigator === "undefined")
+        return "flex";
+    var userAgent = navigator.userAgent;
+    if (/MSIE|Trident/.test(userAgent)) {
+        return "-ms-flexbox";
+    }
+    else if (/Chrome/i.test(userAgent)) {
+        return /Safari/i.test(userAgent) ? "-webkit-box" : "flex";
+    }
+    else {
+        return "flex";
+    }
+}
 var Item = (function (_super) {
     __extends(Item, _super);
     function Item() {
@@ -37,14 +50,7 @@ var Item = (function (_super) {
     Item.prototype.render = function () {
         var props = this.props;
         var flex = props.flex, layout = props.layout, selfStart = props.selfStart, selfCenter = props.selfCenter, selfEnd = props.selfEnd, selfStretch = props.selfStretch, relative = props.relative, fit = props.fit, fullbleed = props.fullbleed, hidden = props.hidden, children = props.children, wrap = props.wrap, reverse = props.reverse, horizontal = props.horizontal, vertical = props.vertical, center = props.center, start = props.start, end = props.end, stretch = props.stretch, startJustified = props.startJustified, centerJustified = props.centerJustified, endJustified = props.endJustified, justified = props.justified, aroundJustified = props.aroundJustified, otherProps = __rest(props, ["flex", "layout", "selfStart", "selfCenter", "selfEnd", "selfStretch", "relative", "fit", "fullbleed", "hidden", "children", "wrap", "reverse", "horizontal", "vertical", "center", "start", "end", "stretch", "startJustified", "centerJustified", "endJustified", "justified", "aroundJustified"]);
-        var style = props.layout ? {
-            display: util_1.cssSupports("display", [
-                "-ms-flexbox",
-                "-webkit-box",
-                "-webkit-flex",
-                "flex",
-            ])
-        } : {};
+        var style = props.layout ? { display: displayFlex() } : {};
         switch (typeof (props.flex)) {
             case "boolean":
             case "number":

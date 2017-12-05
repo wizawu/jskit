@@ -1,7 +1,6 @@
 import * as React from "react"
 import Box from "./Box"
 import Item from "./Item"
-import * as util from "./util"
 
 export interface Props extends React.DOMAttributes<any> {
     logo?: any
@@ -50,7 +49,7 @@ export default class Nav extends React.Component<Props, State> {
     }
 
     render() {
-        let innerWidth = util.isNode() ? 0 : window.innerWidth
+        let innerWidth = typeof window === "undefined" ? 0 : window.innerWidth
 
         let { menu } = this.state
         let {
