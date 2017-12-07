@@ -29,5 +29,8 @@ export interface Props extends React.DOMAttributes<any> {
     aroundJustified?: boolean;
 }
 export default class Item extends React.Component<Props, any> {
+    componentDidMount(): void;
+    componentDidUpdate(): void;
+    appendDisplayFlex(): void;
     render(): JSX.Element;
 }

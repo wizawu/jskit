@@ -28,29 +28,29 @@ var __rest = (this && this.__rest) || function (s, e) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = require("react");
-function displayFlex() {
-    if (typeof navigator === "undefined")
-        return "flex";
-    var userAgent = navigator.userAgent;
-    if (/MSIE|Trident/.test(userAgent)) {
-        return "-ms-flexbox";
-    }
-    else if (/Safari/i.test(userAgent)) {
-        return /Chrome/i.test(userAgent) ? "flex" : "-webkit-flex";
-    }
-    else {
-        return "flex";
-    }
-}
+var ReactDOM = require("react-dom");
 var Item = (function (_super) {
     __extends(Item, _super);
     function Item() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
+    Item.prototype.componentDidMount = function () {
+        this.appendDisplayFlex();
+    };
+    Item.prototype.componentDidUpdate = function () {
+        this.appendDisplayFlex();
+    };
+    Item.prototype.appendDisplayFlex = function () {
+        if (this.props.layout) {
+            var root = ReactDOM.findDOMNode(this.refs.root);
+            root.setAttribute("style", root.getAttribute("style") +
+                ["flex", "-webkit-flex", "-webkit-box", "-ms-flexbox"].map(function (v) { return ";display:" + v; }));
+        }
+    };
     Item.prototype.render = function () {
         var props = this.props;
         var flex = props.flex, layout = props.layout, selfStart = props.selfStart, selfCenter = props.selfCenter, selfEnd = props.selfEnd, selfStretch = props.selfStretch, relative = props.relative, fit = props.fit, fullbleed = props.fullbleed, hidden = props.hidden, children = props.children, wrap = props.wrap, reverse = props.reverse, horizontal = props.horizontal, vertical = props.vertical, center = props.center, start = props.start, end = props.end, stretch = props.stretch, startJustified = props.startJustified, centerJustified = props.centerJustified, endJustified = props.endJustified, justified = props.justified, aroundJustified = props.aroundJustified, otherProps = __rest(props, ["flex", "layout", "selfStart", "selfCenter", "selfEnd", "selfStretch", "relative", "fit", "fullbleed", "hidden", "children", "wrap", "reverse", "horizontal", "vertical", "center", "start", "end", "stretch", "startJustified", "centerJustified", "endJustified", "justified", "aroundJustified"]);
-        var style = props.layout ? { display: displayFlex() } : {};
+        var style = {};
         switch (typeof (props.flex)) {
             case "boolean":
             case "number":
@@ -93,7 +93,7 @@ var Item = (function (_super) {
         }
         if (props.hidden)
             style.display = "none";
-        return (React.createElement("div", __assign({}, otherProps, { style: __assign({}, style, props.style) }), children));
+        return (React.createElement("div", __assign({ ref: "root" }, otherProps, { style: __assign({}, style, props.style) }), children));
     };
     return Item;
 }(React.Component));

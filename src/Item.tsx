@@ -1,4 +1,5 @@
 import * as React from "react"
+import * as ReactDOM from "react-dom"
 
 export interface Props extends React.DOMAttributes<any> {
     flex?: boolean | number | string
@@ -30,19 +31,24 @@ export interface Props extends React.DOMAttributes<any> {
     aroundJustified?: boolean
 }
 
-function displayFlex() {
-    if (typeof navigator === "undefined") return "flex"
-    let userAgent = navigator.userAgent
-    if (/MSIE|Trident/.test(userAgent)) {
-        return "-ms-flexbox"
-    } else if (/Safari/i.test(userAgent)) {
-        return /Chrome/i.test(userAgent) ? "flex" : "-webkit-flex"
-    } else {
-        return "flex"
-    }
-}
-
 export default class Item extends React.Component<Props, any> {
+    componentDidMount() {
+        this.appendDisplayFlex()
+    }
+
+    componentDidUpdate() {
+        this.appendDisplayFlex()
+    }
+
+    appendDisplayFlex() {
+        if (this.props.layout) {
+            let root: any = ReactDOM.findDOMNode(this.refs.root)
+            root.setAttribute("style", root.getAttribute("style") +
+                ["flex", "-webkit-flex", "-webkit-box", "-ms-flexbox"].map(v => ";display:" + v)
+            )
+        }
+    }
+
     render() {
         const props = this.props
         const {
@@ -53,7 +59,7 @@ export default class Item extends React.Component<Props, any> {
             ...otherProps
         } = props
 
-        let style: React.CSSProperties = props.layout ? { display: displayFlex() } : {}
+        let style: React.CSSProperties = {}
 
         switch (typeof (props.flex)) {
             case "boolean":
@@ -106,7 +112,7 @@ export default class Item extends React.Component<Props, any> {
         if (props.hidden) style.display = "none"
 
         return (
-            <div {...otherProps} style={{ ...style, ...props.style }}>
+            <div ref="root" {...otherProps} style={{ ...style, ...props.style }}>
                 {children}
             </div>
         )
