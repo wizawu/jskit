@@ -43,8 +43,10 @@ export default class Item extends React.Component<Props, any> {
     insertDisplayFlex() {
         if (this.props.layout) {
             let root: any = ReactDOM.findDOMNode(this.refs.root)
-            let values = ["-webkit-box", "-webkit-flex", "-ms-flexbox", "flex"]
-            root.setAttribute("style", values.map(v => "display:" + v + ";").join("") + root.getAttribute("style"))
+            let values = ["-webkit-box", "-webkit-flex", "-ms-flexbox", "flex"].map(v => "display:" + v + ";").join("")
+            if (root.getAttribute("style").indexOf(values) !== 0) {
+                root.setAttribute("style", values + root.getAttribute("style"))
+            }
         }
     }
 

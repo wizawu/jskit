@@ -43,8 +43,10 @@ var Item = (function (_super) {
     Item.prototype.insertDisplayFlex = function () {
         if (this.props.layout) {
             var root = ReactDOM.findDOMNode(this.refs.root);
-            var values = ["-webkit-box", "-webkit-flex", "-ms-flexbox", "flex"];
-            root.setAttribute("style", values.map(function (v) { return "display:" + v + ";"; }).join("") + root.getAttribute("style"));
+            var values = ["-webkit-box", "-webkit-flex", "-ms-flexbox", "flex"].map(function (v) { return "display:" + v + ";"; }).join("");
+            if (root.getAttribute("style").indexOf(values) !== 0) {
+                root.setAttribute("style", values + root.getAttribute("style"));
+            }
         }
     };
     Item.prototype.render = function () {
