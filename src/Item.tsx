@@ -33,19 +33,18 @@ export interface Props extends React.DOMAttributes<any> {
 
 export default class Item extends React.Component<Props, any> {
     componentDidMount() {
-        this.appendDisplayFlex()
+        this.insertDisplayFlex()
     }
 
     componentDidUpdate() {
-        this.appendDisplayFlex()
+        this.insertDisplayFlex()
     }
 
-    appendDisplayFlex() {
+    insertDisplayFlex() {
         if (this.props.layout) {
             let root: any = ReactDOM.findDOMNode(this.refs.root)
-            root.setAttribute("style", root.getAttribute("style") +
-                ["flex", "-webkit-flex", "-webkit-box", "-ms-flexbox"].map(v => ";display:" + v)
-            )
+            let values = ["flex", "-webkit-flex", "-webkit-box", "-ms-flexbox"]
+            root.setAttribute("style", values.map(v => "display:" + v + ";").join("") + root.getAttribute("style"))
         }
     }
 

@@ -31,6 +31,6 @@ export interface Props extends React.DOMAttributes<any> {
 export default class Item extends React.Component<Props, any> {
     componentDidMount(): void;
     componentDidUpdate(): void;
-    appendDisplayFlex(): void;
+    insertDisplayFlex(): void;
     render(): JSX.Element;
 }

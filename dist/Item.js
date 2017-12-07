@@ -35,16 +35,16 @@ var Item = (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     Item.prototype.componentDidMount = function () {
-        this.appendDisplayFlex();
+        this.insertDisplayFlex();
     };
     Item.prototype.componentDidUpdate = function () {
-        this.appendDisplayFlex();
+        this.insertDisplayFlex();
     };
-    Item.prototype.appendDisplayFlex = function () {
+    Item.prototype.insertDisplayFlex = function () {
         if (this.props.layout) {
             var root = ReactDOM.findDOMNode(this.refs.root);
-            root.setAttribute("style", root.getAttribute("style") +
-                ["flex", "-webkit-flex", "-webkit-box", "-ms-flexbox"].map(function (v) { return ";display:" + v; }));
+            var values = ["flex", "-webkit-flex", "-webkit-box", "-ms-flexbox"];
+            root.setAttribute("style", values.map(function (v) { return "display:" + v + ";"; }).join("") + root.getAttribute("style"));
         }
     };
     Item.prototype.render = function () {
