@@ -44,9 +44,9 @@ var Item = (function (_super) {
         if (this.props.layout) {
             var root = ReactDOM.findDOMNode(this.refs.root);
             var values = ["-webkit-box", "-webkit-flex", "-ms-flexbox", "flex"].map(function (v) { return "display:" + v + ";"; }).join("");
-            if (root.getAttribute("style").indexOf(values) !== 0) {
-                root.setAttribute("style", values + root.getAttribute("style"));
-            }
+            var style = root.getAttribute("style") || "";
+            if (style.indexOf(values) !== 0)
+                root.setAttribute("style", values + style);
         }
     };
     Item.prototype.render = function () {
