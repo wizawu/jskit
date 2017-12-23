@@ -51,7 +51,7 @@ var Item = (function (_super) {
     };
     Item.prototype.render = function () {
         var props = this.props;
-        var flex = props.flex, layout = props.layout, selfStart = props.selfStart, selfCenter = props.selfCenter, selfEnd = props.selfEnd, selfStretch = props.selfStretch, relative = props.relative, fit = props.fit, fullbleed = props.fullbleed, hidden = props.hidden, children = props.children, wrap = props.wrap, reverse = props.reverse, horizontal = props.horizontal, vertical = props.vertical, center = props.center, start = props.start, end = props.end, stretch = props.stretch, startJustified = props.startJustified, centerJustified = props.centerJustified, endJustified = props.endJustified, justified = props.justified, aroundJustified = props.aroundJustified, otherProps = __rest(props, ["flex", "layout", "selfStart", "selfCenter", "selfEnd", "selfStretch", "relative", "fit", "fullbleed", "hidden", "children", "wrap", "reverse", "horizontal", "vertical", "center", "start", "end", "stretch", "startJustified", "centerJustified", "endJustified", "justified", "aroundJustified"]);
+        var flex = props.flex, layout = props.layout, selfStart = props.selfStart, selfCenter = props.selfCenter, selfEnd = props.selfEnd, selfStretch = props.selfStretch, relative = props.relative, fit = props.fit, fullbleed = props.fullbleed, hidden = props.hidden, children = props.children, otherProps = __rest(props, ["flex", "layout", "selfStart", "selfCenter", "selfEnd", "selfStretch", "relative", "fit", "fullbleed", "hidden", "children"]);
         var style = {};
         switch (typeof (props.flex)) {
             case "boolean":

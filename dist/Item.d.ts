@@ -11,22 +11,9 @@ export interface Props extends React.DOMAttributes<any> {
     fit?: boolean;
     fullbleed?: boolean;
     hidden?: boolean;
-    style?: React.CSSProperties;
-    className?: string;
     id?: string;
-    wrap?: boolean;
-    reverse?: boolean;
-    horizontal?: boolean;
-    vertical?: boolean;
-    center?: boolean;
-    start?: boolean;
-    end?: boolean;
-    stretch?: boolean;
-    startJustified?: boolean;
-    centerJustified?: boolean;
-    endJustified?: boolean;
-    justified?: boolean;
-    aroundJustified?: boolean;
+    className?: string;
+    style?: React.CSSProperties;
 }
 export default class Item extends React.Component<Props, any> {
     componentDidMount(): void;
