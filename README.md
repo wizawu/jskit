@@ -24,8 +24,6 @@ Refer to [Polymer layout attributes](https://www.polymer-project.org/0.5/docs/po
 <div layout center-justified {...props} />
 
 // react-polymer-layout
-<Item layout centerJustified {...props} />
-// or
 <Box centerJustified {...props} />
 ```
 
