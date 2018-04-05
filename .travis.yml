@@ -3,4 +3,4 @@ node_js:
   - stable
 script:
   - npm install typescript 1c
-  - make build
+  - cd react-polymer-layout && make build
