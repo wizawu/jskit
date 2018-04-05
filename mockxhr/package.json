@@ -1,7 +1,7 @@
 {
   "name": "mockxhr",
-  "version": "2.2.0",
-  "repository": "github:wizawu/mockxhr",
+  "version": "2.2.1",
+  "repository": "https://github.com/wizawu/js-toolkit/tree/master/mockxhr",
   "main": "dist/index.js",
   "types": "dist/index.d.ts"
 }

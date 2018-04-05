@@ -4,3 +4,4 @@ node_js:
 script:
   - npm i -g typescript 1c
   - cd react-polymer-layout && make build
+  - cd mockxhr && make
