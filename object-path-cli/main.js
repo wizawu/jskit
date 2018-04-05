@@ -22,7 +22,12 @@ process.stdin.on("end", function () {
     var path = process.argv[2]
     var conv = process.argv[3]
 
-    var json = JSON.parse(buffer)
+    try {
+        var json = JSON.parse(buffer)
+    } catch (e) {
+        console.log(undefined)
+        process.exit(1)
+    }
     var value = objectPath.get(json, path)
 
     if (conv) {
