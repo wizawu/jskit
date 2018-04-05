@@ -2,5 +2,5 @@ language: node_js
 node_js:
   - stable
 script:
-  - npm install typescript 1c
+  - npm i -g typescript 1c
   - cd react-polymer-layout && make build

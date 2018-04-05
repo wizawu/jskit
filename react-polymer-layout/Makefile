@@ -1,6 +1,9 @@
-.PHONY: build watch test
+.PHONY: test
 
-build:
+deps:
+	npm install
+
+build: deps
 	tsc -d -p .
 
 watch:
