@@ -1,0 +1,13 @@
+{
+  "name": "lightest",
+  "version": "0.1.2",
+  "repository": "github:wizawu/lightest",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "dependencies": {
+    "@types/chai": "^4.0.4",
+    "@types/chalk": "^0.4.31",
+    "chai": "^4.1.2",
+    "chalk": "^1.1.3"
+  }
+}
