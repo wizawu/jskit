@@ -1,4 +1,7 @@
-build:
+deps:
+	npm install
+
+build: deps
 	tsc -d -p . --outDir dist
 
 watch:
