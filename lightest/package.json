@@ -1,7 +1,7 @@
 {
   "name": "lightest",
-  "version": "0.1.3",
-  "repository": "https://github.com/wizawu/js-toolkit/tree/master/lightest",
+  "version": "0.1.4",
+  "repository": "https://github.com/wizawu/jskit/tree/master/lightest",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "dependencies": {
