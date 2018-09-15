@@ -1,0 +1,13 @@
+{
+  "name": "nanoid-base58",
+  "version": "0.0.1",
+  "repository": "https://github.com/wizawu/jskit/tree/master/nanoid-base58",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "dependencies": {
+    "nanoid": "^1.2.3"
+  },
+  "devDependencies": {
+    "@types/nanoid": "^1.2.0"
+  }
+}
