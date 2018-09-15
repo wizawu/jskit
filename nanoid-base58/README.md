@@ -10,9 +10,9 @@ npm install --save nanoid-base58
 
 ### Usage
 
-```
-import nanoid58 from "nanoid-base58"
+```typescript
+import nanoid from "nanoid-base58"
 
-nanoid58()      //=> 7d1W6YmrR6kDMFypmxyu (default length is 20)
-nanoid58(40)    //=> 9H8wSGdFnLpzT4KMm2arTsF35SYp8o4sQfMVTLPi
+nanoid()        //=> 7d1W6YmrR6kDMFypmxyu (default length is 20)
+nanoid(40)      //=> 9H8wSGdFnLpzT4KMm2arTsF35SYp8o4sQfMVTLPi
 ```
