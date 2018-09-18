@@ -57,15 +57,8 @@ var Item = (function (_super) {
             case "boolean":
             case "number":
             case "string":
-                var flex_1 = (props.flex === true ?
-                    "1 1 0.000000001px" :
-                    (props.flex || "")).toString();
-                style = __assign({}, style, {
-                    WebkitBoxFlex: flex_1,
-                    WebkitFlex: flex_1,
-                    MsFlex: flex_1,
-                    flex: flex_1,
-                });
+                var flex_1 = (props.flex === true ? "1 1 0" : (props.flex || "")).toString();
+                style = __assign({}, style, { WebkitBoxFlex: flex_1, WebkitFlex: flex_1, MsFlex: flex_1, flex: flex_1 });
                 break;
         }
         var alignSelf = null;

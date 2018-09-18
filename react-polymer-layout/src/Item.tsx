@@ -49,17 +49,13 @@ export default class Item extends React.Component<Props, any> {
             case "boolean":
             case "number":
             case "string":
-                let flex = (props.flex === true ?
-                    "1 1 0.000000001px" :
-                    (props.flex || "")
-                ).toString()
+                let flex = (props.flex === true ?  "1 1 0" : (props.flex || "")).toString()
                 style = {
-                    ...style, ...{
-                        WebkitBoxFlex: flex,
-                        WebkitFlex: flex,
-                        MsFlex: flex,
-                        flex: flex,
-                    }
+                    ...style,
+                    WebkitBoxFlex: flex,
+                    WebkitFlex: flex,
+                    MsFlex: flex,
+                    flex: flex,
                 }
                 break
         }

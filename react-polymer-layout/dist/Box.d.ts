@@ -1,4 +1,3 @@
-/// <reference types="react" />
 import * as React from "react";
 import { Props as ItemProps } from "./Item";
 export interface Props extends ItemProps {
