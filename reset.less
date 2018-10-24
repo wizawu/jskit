@@ -1,7 +1,7 @@
 * {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
     text-underline-position: under;
 }
 
@@ -9,22 +9,26 @@
     outline: none;
 }
 
+body, html {
+    -webkit-font-smoothing: antialiased;
+}
+
 button {
     cursor: pointer;
     font-family: inherit;
 }
 
-html, body {
-    -webkit-font-smoothing: antialiased;
+img {
+    vertical-align: bottom;
 }
 
-input, textarea, select {
+input, select, textarea {
+    -webkit-appearance: none;
+    -webkit-border-radius: 0;
+    border-radius: 0;
     font-family: inherit;
     font-size: inherit;
     font-weight: inherit;
-    border-radius: 0;
-    -webkit-border-radius: 0;
-    -webkit-appearance: none;
 }
 
 table {
@@ -41,13 +45,13 @@ table {
 }
 
 .background-cover {
-    background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .background-contain {
-    background-size: contain;
     background-position: center center;
     background-repeat: no-repeat;
+    background-size: contain;
 }
