@@ -1,6 +1,15 @@
 import * as React from "react"
 import * as ReactDOM from "react-dom"
 
+export interface MsCSSPropperties {
+    MsFlex?: string
+    MsFlexAlign?: string
+    MsFlexDirection?: string
+    MsFlexItemAlign?: string
+    MsFlexPack?: string
+    MsFlexWrap?: string
+}
+
 export interface Props extends React.DOMAttributes<any> {
     flex?: boolean | number | string
     layout?: boolean
@@ -43,16 +52,16 @@ export default class Item extends React.Component<Props, any> {
             fit, fullbleed, hidden, children, ...otherProps
         } = props
 
-        let style: React.CSSProperties = {}
+        let style: React.CSSProperties & MsCSSPropperties = {}
 
         switch (typeof (props.flex)) {
             case "boolean":
             case "number":
             case "string":
-                let flex = (props.flex === true ?  "1 1 0" : (props.flex || "")).toString()
+                let flex = (props.flex === true ? "1 1 0" : (props.flex || "")).toString()
                 style = {
                     ...style,
-                    WebkitBoxFlex: flex,
+                    WebkitBoxFlex: flex as any,
                     WebkitFlex: flex,
                     MsFlex: flex,
                     flex: flex,
@@ -74,7 +83,7 @@ export default class Item extends React.Component<Props, any> {
             ...style,
             WebkitAlignSelf: alignSelf[0],
             MsFlexItemAlign: alignSelf[1],
-            alignSelf: alignSelf[2] as any,
+            alignSelf: alignSelf[2],
         } : style
 
         if (props.relative) {

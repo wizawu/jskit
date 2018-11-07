@@ -1,5 +1,5 @@
 import * as React from "react"
-import Item, { Props as ItemProps } from "./Item"
+import Item, { MsCSSPropperties, Props as ItemProps } from "./Item"
 
 export interface Props extends ItemProps {
     wrap?: boolean
@@ -26,7 +26,7 @@ export default class Box extends React.Component<Props, any> {
             aroundJustified, children, ...otherProps
         } = this.props
 
-        let style: React.CSSProperties = {}
+        let style: React.CSSProperties & MsCSSPropperties = {}
 
         if (props.wrap) {
             style = {
@@ -69,10 +69,10 @@ export default class Box extends React.Component<Props, any> {
         }
         style = alignItems ? {
             ...style,
-            WebkitBoxAlign: alignItems[0],
+            WebkitBoxAlign: alignItems[0] as any,
             WebkitAlignItems: alignItems[1],
             MsFlexAlign: alignItems[2],
-            alignItems: alignItems[3] as any,
+            alignItems: alignItems[3],
         } : style
 
         let justifyContent: string[] | null = null
@@ -89,10 +89,10 @@ export default class Box extends React.Component<Props, any> {
         }
         style = justifyContent ? {
             ...style,
-            WebkitBoxPack: justifyContent[0],
+            WebkitBoxPack: justifyContent[0] as any,
             WebkitJustifyContent: justifyContent[1],
             MsFlexPack: justifyContent[2],
-            justifyContent: justifyContent[3] as any,
+            justifyContent: justifyContent[3],
         } : style
 
         return (

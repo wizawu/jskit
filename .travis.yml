@@ -3,6 +3,6 @@ node_js:
   - stable
 script:
   - npm i -g typescript 1c
-  - (cd react-polymer-layout && make build)
+  - (cd react-polymer-layout && make)
   - (cd mockxhr && make)
   - (cd lightest && make test)

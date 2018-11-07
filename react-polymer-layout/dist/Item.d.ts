@@ -1,4 +1,12 @@
 import * as React from "react";
+export interface MsCSSPropperties {
+    MsFlex?: string;
+    MsFlexAlign?: string;
+    MsFlexDirection?: string;
+    MsFlexItemAlign?: string;
+    MsFlexPack?: string;
+    MsFlexWrap?: string;
+}
 export interface Props extends React.DOMAttributes<any> {
     flex?: boolean | number | string;
     layout?: boolean;
