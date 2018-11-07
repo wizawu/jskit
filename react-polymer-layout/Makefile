@@ -1,3 +1,8 @@
+all: deps build
+
+deps:
+	npm install
+
 build: clean
 	tsc -d -p .
 
