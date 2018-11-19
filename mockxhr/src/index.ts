@@ -7,7 +7,7 @@ export interface FailCallback {
 }
 
 export interface SuccessHandler {
-    (json: any, done?: DoneCallback, fail?: FailCallback): void
+    (json: any, done?: DoneCallback, fail?: FailCallback, xhr?: XMLHttpRequest): void
 }
 
 export interface FailureHandler {
@@ -113,7 +113,7 @@ function _xhr(method: HTTPMethod, url: string, json: any, done?: DoneCallback, f
                     response = xhr.responseText
                 }
                 if (_success) {
-                    _success(response, done, fail)
+                    _success(response, done, fail, xhr)
                 } else if (done) {
                     done(response, xhr)
                 }

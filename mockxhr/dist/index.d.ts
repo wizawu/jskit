@@ -5,7 +5,7 @@ export interface FailCallback {
     (xhr: XMLHttpRequest): void;
 }
 export interface SuccessHandler {
-    (json: any, done?: DoneCallback, fail?: FailCallback): void;
+    (json: any, done?: DoneCallback, fail?: FailCallback, xhr?: XMLHttpRequest): void;
 }
 export interface FailureHandler {
     (xhr: XMLHttpRequest, fail?: FailCallback, done?: DoneCallback): void;

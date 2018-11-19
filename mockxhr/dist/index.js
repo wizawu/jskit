@@ -91,7 +91,7 @@ function _xhr(method, url, json, done, fail) {
                     response = xhr.responseText;
                 }
                 if (_success) {
-                    _success(response, done, fail);
+                    _success(response, done, fail, xhr);
                 }
                 else if (done) {
                     done(response, xhr);
