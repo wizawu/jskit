@@ -15,6 +15,7 @@ export interface Props extends ItemProps {
     endJustified?: boolean
     justified?: boolean
     aroundJustified?: boolean
+    evenlyJustified?: boolean
 }
 
 export default class Box extends React.Component<Props, any> {
@@ -86,6 +87,8 @@ export default class Box extends React.Component<Props, any> {
             justifyContent = ["justify", "space-between", "justify", "space-between"]
         } else if (props.aroundJustified) {
             justifyContent = ["", "space-around", "distribute", "space-around"]
+        } else if (props.evenlyJustified) {
+            justifyContent = ["space-evenly", "space-evenly", "space-evenly", "space-evenly"]
         }
         style = justifyContent ? {
             ...style,

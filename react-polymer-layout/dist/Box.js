@@ -5,7 +5,7 @@ var __extends = (this && this.__extends) || (function () {
             ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
             function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
         return extendStatics(d, b);
-    }
+    };
     return function (d, b) {
         extendStatics(d, b);
         function __() { this.constructor = d; }
@@ -82,6 +82,9 @@ var Box = (function (_super) {
         }
         else if (props.aroundJustified) {
             justifyContent = ["", "space-around", "distribute", "space-around"];
+        }
+        else if (props.evenlyJustified) {
+            justifyContent = ["space-evenly", "space-evenly", "space-evenly", "space-evenly"];
         }
         style = justifyContent ? __assign({}, style, { WebkitBoxPack: justifyContent[0], WebkitJustifyContent: justifyContent[1], MsFlexPack: justifyContent[2], justifyContent: justifyContent[3] }) : style;
         return (React.createElement(Item_1.default, __assign({ layout: true }, otherProps, { style: __assign({}, style, props.style) }), children));

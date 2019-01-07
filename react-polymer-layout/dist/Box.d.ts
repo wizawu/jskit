@@ -14,6 +14,7 @@ export interface Props extends ItemProps {
     endJustified?: boolean;
     justified?: boolean;
     aroundJustified?: boolean;
+    evenlyJustified?: boolean;
 }
 export default class Box extends React.Component<Props, any> {
     render(): JSX.Element;
