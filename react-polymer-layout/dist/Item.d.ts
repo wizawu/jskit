@@ -18,6 +18,7 @@ export interface Props extends React.DOMAttributes<any> {
     fit?: boolean;
     fullbleed?: boolean;
     hidden?: boolean;
+    overflow?: boolean | string;
     id?: string;
     className?: string;
     style?: React.CSSProperties;

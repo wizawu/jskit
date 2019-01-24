@@ -94,6 +94,7 @@ var Item = (function (_super) {
         }
         if (props.hidden)
             style.display = "none";
+        style.overflow = props.overflow === true ? "auto" : (props.overflow || "hidden");
         return (React.createElement("div", __assign({ ref: "root" }, otherProps, { style: __assign({}, style, props.style) }), children));
     };
     return Item;

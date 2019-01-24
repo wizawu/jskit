@@ -21,6 +21,7 @@ export interface Props extends React.DOMAttributes<any> {
     fit?: boolean
     fullbleed?: boolean
     hidden?: boolean
+    overflow?: boolean | string
 
     id?: string
     className?: string
@@ -99,6 +100,7 @@ export default class Item extends React.Component<Props, any> {
         }
 
         if (props.hidden) style.display = "none"
+        style.overflow = props.overflow === true ? "auto" : (props.overflow || "hidden")
 
         return (
             <div ref="root" {...otherProps} style={{ ...style, ...props.style }}>

@@ -1,6 +1,6 @@
 {
   "name": "react-polymer-layout",
-  "version": "4.1.0",
+  "version": "4.1.1",
   "repository": "https://github.com/wizawu/jskit/tree/master/react-polymer-layout",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
