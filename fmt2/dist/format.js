@@ -19,12 +19,19 @@ function formatXML(input) {
 }
 exports.formatXML = formatXML;
 function formatYAML(input) {
-    var yaml = yaml_1.default.parse(input);
+    var opts = { schema: "yaml-1.1" };
+    var yaml = yaml_1.default.parse(input, opts);
     if (util_1.isArray(yaml)) {
-        return yaml.map(function (obj) { return yaml_1.default.stringify([obj]); }).join("\n");
+        return yaml.map(function (obj) { return yaml_1.default.stringify([obj], opts); }).join("\n");
+    }
+    else if (util_1.isObject(yaml)) {
+        return Object.keys(yaml).map(function (key) {
+            var _a;
+            return yaml_1.default.stringify((_a = {}, _a[key] = yaml[key], _a), opts);
+        }).join("\n");
     }
     else {
-        return yaml_1.default.stringify(yaml);
+        return yaml_1.default.stringify(yaml, opts);
     }
 }
 exports.formatYAML = formatYAML;

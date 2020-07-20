@@ -1,13 +1,16 @@
 {
   "name": "fmt2",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "license": "MIT",
+  "repository": "https://github.com/wizawu/jskit/tree/master/fmt2",
   "bin": "./dist/main.js",
   "dependencies": {
-    "@types/node": "^10.17.27",
-    "@types/xml-js": "^1.0.0",
-    "@types/yaml": "^1.9.7",
     "xml-js": "^1.6.11",
     "yaml": "^1.10.0"
+  },
+  "devDependencies": {
+    "@types/node": "^10.17.27",
+    "@types/xml-js": "^1.0.0",
+    "@types/yaml": "^1.9.7"
   }
 }

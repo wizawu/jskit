@@ -1,6 +1,6 @@
 import XML from "xml-js"
 import YAML from "yaml"
-import { isArray } from "util"
+import { isArray, isObject } from "util"
 
 YAML.scalarOptions.str.fold.lineWidth = 120
 
@@ -15,10 +15,13 @@ export function formatXML(input: string) {
 }
 
 export function formatYAML(input: string) {
-    let yaml = YAML.parse(input)
+    let opts: YAML.Options = { schema: "yaml-1.1" }
+    let yaml = YAML.parse(input, opts)
     if (isArray(yaml)) {
-        return yaml.map(obj => YAML.stringify([obj])).join("\n")
+        return yaml.map(obj => YAML.stringify([obj], opts)).join("\n")
+    } else if (isObject(yaml)) {
+        return Object.keys(yaml).map(key => YAML.stringify({ [key]: yaml[key] }, opts)).join("\n")
     } else {
-        return YAML.stringify(yaml)
+        return YAML.stringify(yaml, opts)
     }
 }
