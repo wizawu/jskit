@@ -6,12 +6,12 @@ YAML.scalarOptions.str.fold.lineWidth = 120
 
 export function formatJSON(input: string) {
     let json = JSON.parse(input)
-    return JSON.stringify(json, null, 2)
+    return JSON.stringify(json, null, 2) + "\n"
 }
 
 export function formatXML(input: string) {
     let xml = XML.xml2js(input)
-    return XML.js2xml(xml, { spaces: 2 })
+    return XML.js2xml(xml, { spaces: 2 }) + "\n"
 }
 
 export function formatYAML(input: string) {

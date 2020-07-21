@@ -21,14 +21,34 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var fs = __importStar(require("fs"));
+var path = __importStar(require("path"));
 var format_1 = require("./format");
 var opts = process.argv[2];
 var source = process.argv[3];
 var target = process.argv[4];
+var version = (function () {
+    var packagePath = path.resolve(__dirname, "..", "package.json");
+    return JSON.parse(fs.readFileSync(packagePath, "utf-8")).version;
+})();
+if (opts === "-v") {
+    console.log(version);
+    process.exit(0);
+}
+function help(code) {
+    if (code === void 0) { code = 0; }
+    console.log("Version: " + version);
+    console.log("Usage:");
+    console.log("  fmt2 -h                            Print help message");
+    console.log("  fmt2 -v                            Print version");
+    console.log("  fmt2 [-j|-x|-y] <source> [target]  Format JSON/XML/YAML");
+    process.exit(code);
+}
+if (opts === "-h")
+    help(0);
 if (!opts)
-    process.exit(2);
+    help(2);
 if (!source)
-    process.exit(3);
+    help(3);
 var input = fs.readFileSync(source, "utf-8");
 var output = "";
 switch (opts) {
@@ -48,5 +68,5 @@ if (target) {
     fs.writeFileSync(target, output);
 }
 else {
-    console.log(output);
+    process.stdout.write(output);
 }

@@ -10,12 +10,12 @@ var util_1 = require("util");
 yaml_1.default.scalarOptions.str.fold.lineWidth = 120;
 function formatJSON(input) {
     var json = JSON.parse(input);
-    return JSON.stringify(json, null, 2);
+    return JSON.stringify(json, null, 2) + "\n";
 }
 exports.formatJSON = formatJSON;
 function formatXML(input) {
     var xml = xml_js_1.default.xml2js(input);
-    return xml_js_1.default.js2xml(xml, { spaces: 2 });
+    return xml_js_1.default.js2xml(xml, { spaces: 2 }) + "\n";
 }
 exports.formatXML = formatXML;
 function formatYAML(input) {
