@@ -1,8 +1,8 @@
 {
-  "name": "fmt2",
+  "name": "fmt2i",
   "version": "0.1.2",
   "license": "MIT",
-  "repository": "https://github.com/wizawu/jskit/tree/master/fmt2",
+  "repository": "https://github.com/wizawu/jskit/tree/master/fmt2i",
   "bin": "./dist/main.js",
   "dependencies": {
     "xml-js": "^1.6.11",

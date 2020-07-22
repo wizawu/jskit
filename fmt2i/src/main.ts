@@ -20,9 +20,9 @@ if (opts === "-v") {
 function help(code = 0) {
     console.log(`Version: ${version}`)
     console.log(`Usage:`)
-    console.log(`  fmt2 -h                            Print help message`)
-    console.log(`  fmt2 -v                            Print version`)
-    console.log(`  fmt2 [-j|-x|-y] <source> [target]  Format JSON/XML/YAML`)
+    console.log(`  fmt2i -h                            Print help message`)
+    console.log(`  fmt2i -v                            Print version`)
+    console.log(`  fmt2i [-j|-x|-y] <source> [target]  Format JSON/XML/YAML`)
     process.exit(code)
 }
 
