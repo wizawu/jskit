@@ -62,7 +62,7 @@ switch (opts) {
         output = format_1.formatYAML(input);
         break;
     default:
-        output = input;
+        help(1);
 }
 if (target) {
     fs.writeFileSync(target, output);

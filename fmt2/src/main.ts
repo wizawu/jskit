@@ -43,7 +43,7 @@ switch (opts) {
         output = formatYAML(input)
         break
     default:
-        output = input
+        help(1)
 }
 
 if (target) {
