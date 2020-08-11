@@ -25,7 +25,7 @@ var path = __importStar(require("path"));
 var format_1 = require("./format");
 var opts = process.argv[2];
 var source = process.argv[3];
-var target = process.argv[4];
+var target = process.argv[process.argv[4] === "{}" ? 3 : 4];
 var version = (function () {
     var packagePath = path.resolve(__dirname, "..", "package.json");
     return JSON.parse(fs.readFileSync(packagePath, "utf-8")).version;

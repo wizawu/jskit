@@ -6,7 +6,7 @@ import { formatJSON, formatXML, formatYAML } from "./format"
 
 const opts = process.argv[2]
 const source = process.argv[3]
-const target = process.argv[4]
+const target = process.argv[process.argv[4] === "{}" ? 3 : 4]
 const version = (() => {
     let packagePath = path.resolve(__dirname, "..", "package.json")
     return JSON.parse(fs.readFileSync(packagePath, "utf-8")).version
