@@ -43,7 +43,11 @@ switch (opts) {
         output = formatYAML(input)
         break
     default:
-        help(1)
+        if (/-y\d+/.test(opts)) {
+            output = formatYAML(input, Number.parseInt(opts.substr(2)))
+        } else {
+            help(1)
+        }
 }
 
 if (target) {

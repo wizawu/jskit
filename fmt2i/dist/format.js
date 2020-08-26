@@ -6,7 +6,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.formatYAML = exports.formatXML = exports.formatJSON = void 0;
 var xml_js_1 = __importDefault(require("xml-js"));
 var yaml_1 = __importDefault(require("yaml"));
-yaml_1.default.scalarOptions.str.fold.lineWidth = 120;
 function formatJSON(input) {
     var doc = JSON.parse(input);
     return JSON.stringify(doc, null, 2) + "\n";
@@ -17,7 +16,9 @@ function formatXML(input) {
     return xml_js_1.default.js2xml(doc, { spaces: 2 }) + "\n";
 }
 exports.formatXML = formatXML;
-function formatYAML(input) {
+function formatYAML(input, lineWidth) {
+    if (lineWidth === void 0) { lineWidth = 80; }
+    yaml_1.default.scalarOptions.str.fold.lineWidth = lineWidth;
     var doc = yaml_1.default.parseDocument(input, { indent: 2, schema: "yaml-1.1" });
     return doc.toString();
 }
