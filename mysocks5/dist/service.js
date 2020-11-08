@@ -1,5 +1,6 @@
 "use strict";
 exports.__esModule = true;
+exports.preferAnother = exports.updateDomain = exports.select = exports.log = void 0;
 var http = require("http");
 var diskdb = require("diskdb");
 var LoggerFactory = require("log4js");
