@@ -8,17 +8,17 @@ interface Backend {
     port: number
 }
 
-export const log = LoggerFactory.getLogger("\b")
+export const log = LoggerFactory.getLogger("\t\b\b\b\b\b\b\b")
 log.level = "debug"
 let db = diskdb.connect("db", ["domains"])
 let backends: Backend[] = [{
     _id: 0,
     host: "127.0.0.1",
-    port: 1081
+    port: 1080
 }, {
     _id: 1,
     host: "127.0.0.1",
-    port: 1080
+    port: 1085
 }]
 
 setInterval(() => {
@@ -74,4 +74,15 @@ export function updateDomain(domain: string, prefer: number) {
         { domain, prefer, time: Date.now() },
         { upsert: true }
     )
+}
+
+export function preferAnother(domain: string) {
+    let record = db.domains.findOne({ domain })
+    if (record) {
+        db.domains.update(
+            { domain },
+            { prefer: 1 - record.prefer },
+            { upsert: false }
+        )
+    }
 }

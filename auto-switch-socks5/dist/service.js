@@ -3,17 +3,17 @@ exports.__esModule = true;
 var http = require("http");
 var diskdb = require("diskdb");
 var LoggerFactory = require("log4js");
-exports.log = LoggerFactory.getLogger("\b");
+exports.log = LoggerFactory.getLogger("\t\b\b\b\b\b\b\b");
 exports.log.level = "debug";
 var db = diskdb.connect("db", ["domains"]);
 var backends = [{
         _id: 0,
         host: "127.0.0.1",
-        port: 1081
+        port: 1080
     }, {
         _id: 1,
         host: "127.0.0.1",
-        port: 1080
+        port: 1085
     }];
 setInterval(function () {
     db.domains.find({}).forEach(function (it) {
@@ -68,3 +68,10 @@ function updateDomain(domain, prefer) {
     db.domains.update({ domain: domain }, { domain: domain, prefer: prefer, time: Date.now() }, { upsert: true });
 }
 exports.updateDomain = updateDomain;
+function preferAnother(domain) {
+    var record = db.domains.findOne({ domain: domain });
+    if (record) {
+        db.domains.update({ domain: domain }, { prefer: 1 - record.prefer }, { upsert: false });
+    }
+}
+exports.preferAnother = preferAnother;

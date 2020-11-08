@@ -1,6 +1,6 @@
 import * as net from "net"
 
-import { log, select, updateDomain } from "./service"
+import { log, select, preferAnother } from "./service"
 
 let server = net.createServer()
 let lastUpstream = ""
@@ -12,7 +12,7 @@ server.on("connection", conn => {
     let clientData2: Buffer | null = null
     conn.on("error", e => {
         log.error(`Router error (${upstream}): ${e.message}`)
-        // updateDomain(upstream!, 1)
+        preferAnother(upstream!)
     })
     conn.on("data", data => {
         if (upstream === null) {
@@ -26,13 +26,13 @@ server.on("connection", conn => {
             let contentLength = 0
             client = net.createConnection(backend, () => {
                 if (upstream !== lastUpstream) {
-                    log.debug(`Select proxy ${backend.host}:${backend.port} for ${upstream}`)
+                    log.debug(`Select backend :${backend.port} for ${upstream}`)
                 }
                 lastUpstream = upstream!
                 setTimeout(() => {
-                    if (contentLength <= 64) {
+                    if (contentLength <= 16) {
                         log.warn(`Content length (${upstream}): ${contentLength}`)
-                        updateDomain(upstream!, 1 - backend._id)
+                        preferAnother(upstream!)
                     }
                 }, 5000)
             })
@@ -57,4 +57,4 @@ server.on("connection", conn => {
     })
 })
 
-server.listen(1090, () => log.info("Listening on 1090"))
+server.listen(1090, "127.0.0.1", () => log.info("Listening on 1090"))

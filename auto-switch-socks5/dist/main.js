@@ -11,7 +11,7 @@ server.on("connection", function (conn) {
     var clientData2 = null;
     conn.on("error", function (e) {
         service_1.log.error("Router error (" + upstream + "): " + e.message);
-        // updateDomain(upstream!, 1)
+        service_1.preferAnother(upstream);
     });
     conn.on("data", function (data) {
         if (upstream === null) {
@@ -26,13 +26,13 @@ server.on("connection", function (conn) {
             var contentLength_1 = 0;
             client = net.createConnection(backend_1, function () {
                 if (upstream !== lastUpstream) {
-                    service_1.log.debug("Select proxy " + backend_1.host + ":" + backend_1.port + " for " + upstream);
+                    service_1.log.debug("Select backend :" + backend_1.port + " for " + upstream);
                 }
                 lastUpstream = upstream;
                 setTimeout(function () {
-                    if (contentLength_1 <= 64) {
+                    if (contentLength_1 <= 16) {
                         service_1.log.warn("Content length (" + upstream + "): " + contentLength_1);
-                        service_1.updateDomain(upstream, 1 - backend_1._id);
+                        service_1.preferAnother(upstream);
                     }
                 }, 5000);
             });
@@ -58,4 +58,4 @@ server.on("connection", function (conn) {
         }
     });
 });
-server.listen(1090, function () { return service_1.log.info("Listening on 1090"); });
+server.listen(1090, "127.0.0.1", function () { return service_1.log.info("Listening on 1090"); });
