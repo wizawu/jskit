@@ -10,7 +10,7 @@ npm install lightest
 
 ### Usage
 
-Check out the [example](https://github.com/wizawu/lightest/blob/master/test/test_index.js).
+Check out the [example](https://github.com/wizawu/lightest/blob/main/test/test_index.js).
 
 ```bash
 $ node test/test_index.js

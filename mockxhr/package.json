@@ -1,7 +1,7 @@
 {
   "name": "mockxhr",
   "version": "2.3.0",
-  "repository": "https://github.com/wizawu/jskit/tree/master/mockxhr",
+  "repository": "https://github.com/wizawu/jskit/tree/main/mockxhr",
   "main": "dist/index.js",
   "types": "dist/index.d.ts"
 }

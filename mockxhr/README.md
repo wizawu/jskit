@@ -10,7 +10,7 @@ npm install --save mockxhr
 
 ### API
 
-See [index.d.ts](https://github.com/wizawu/mockxhr/blob/master/dist/index.d.ts)
+See [index.d.ts](https://github.com/wizawu/mockxhr/blob/main/dist/index.d.ts)
 
 ### Usage
 
