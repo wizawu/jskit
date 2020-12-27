@@ -1,8 +1,14 @@
 import XML from "xml-js"
 import YAML from "yaml"
 
-export function formatJSON(input: string) {
+export function formatJSON(input: string, sorted = false) {
     let doc = JSON.parse(input)
+    if (sorted) {
+        doc = Object.keys(doc).sort().reduce((res, k) => {
+            res[k] = doc[k]
+            return res
+        }, {} as any)
+    }
     return JSON.stringify(doc, null, 2) + "\n"
 }
 

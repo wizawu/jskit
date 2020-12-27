@@ -53,21 +53,22 @@ var input = fs.readFileSync(source, "utf-8");
 var output = "";
 switch (opts) {
     case "-j":
-        output = format_1.formatJSON(input);
+        output = format_1.formatJSON(input, false);
+        break;
+    case "-J":
+        output = format_1.formatJSON(input, true);
         break;
     case "-x":
         output = format_1.formatXML(input);
         break;
     case "-y":
-        output = format_1.formatYAML(input);
+        output = format_1.formatYAML(input, 80);
+        break;
+    case "-Y":
+        output = format_1.formatYAML(input, 120);
         break;
     default:
-        if (/-y\d+/.test(opts)) {
-            output = format_1.formatYAML(input, Number.parseInt(opts.substr(2)));
-        }
-        else {
-            help(1);
-        }
+        help(1);
 }
 if (target) {
     fs.writeFileSync(target, output);

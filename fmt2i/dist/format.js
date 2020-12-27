@@ -6,8 +6,15 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.formatYAML = exports.formatXML = exports.formatJSON = void 0;
 var xml_js_1 = __importDefault(require("xml-js"));
 var yaml_1 = __importDefault(require("yaml"));
-function formatJSON(input) {
+function formatJSON(input, sorted) {
+    if (sorted === void 0) { sorted = false; }
     var doc = JSON.parse(input);
+    if (sorted) {
+        doc = Object.keys(doc).sort().reduce(function (res, k) {
+            res[k] = doc[k];
+            return res;
+        }, {});
+    }
     return JSON.stringify(doc, null, 2) + "\n";
 }
 exports.formatJSON = formatJSON;
