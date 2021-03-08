@@ -1,6 +1,6 @@
 {
   "name": "fmt2i",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "repository": "https://github.com/wizawu/jskit/tree/main/fmt2i",
   "description": "2-space indent JSON/XML/YAML formatter",
   "license": "MIT",
