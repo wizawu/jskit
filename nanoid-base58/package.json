@@ -5,7 +5,7 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "dependencies": {
-    "nanoid": "^1.2.3"
+    "nanoid": "^3.1.31"
   },
   "devDependencies": {
     "@types/nanoid": "^1.2.0"
