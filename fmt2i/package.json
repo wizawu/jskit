@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "xml-js": "^1.6.11",
-    "yaml": "^1.10.0"
+    "yaml": "^2.2.2"
   },
   "devDependencies": {
     "@types/node": "^10.17.27",
