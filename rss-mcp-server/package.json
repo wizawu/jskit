@@ -1,0 +1,28 @@
+{
+  "name": "rss-mcp-server",
+  "version": "0.0.1",
+  "scripts": {
+    "start": "node --experimental-strip-types --watch main.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "github.com/wizawu/jskit/rss-mcp-server"
+  },
+  "keywords": [
+    "RSS",
+    "MCP Server"
+  ],
+  "author": "wizawu",
+  "license": "MIT",
+  "type": "module",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.11.0",
+    "express": "^5.1.0",
+    "opml-to-json": "^1.0.1",
+    "rss-parser": "^3.13.0",
+    "zod": "^3.24.4"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.17"
+  }
+}
