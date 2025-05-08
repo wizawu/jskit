@@ -1,10 +1,11 @@
-import express from "express"
-import fs from "fs"
-import { opmlToJSON } from "opml-to-json"
-import Parser from "rss-parser"
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js"
+import { opmlToJSON } from "opml-to-json"
 import { StreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/streamableHttp.js"
 import { z } from "zod"
+import express from "express"
+import fs from "fs"
+import Parser from "rss-parser"
+import shortHash from "short-hash"
 
 const feedFile = process.argv[2] || "example.opml"
 const feedXml = fs.readFileSync(feedFile, "utf8")
@@ -30,6 +31,50 @@ app.all("/mcp", async (req, res) => {
     name: "rss-mcp-server",
     version: "0.0.1",
   })
+  server.tool("list-all-titles", "Returns IDs and titles of all articles", {}, async () => {
+    const articles = await fetchArticles()
+    const result = articles.map((it: Parser.Item) => ({
+      id: shortHash(it.title),
+      title: it.title,
+    }))
+    return {
+      content: [
+        {
+          type: "text",
+          text: JSON.stringify(result, null, 2),
+        },
+      ],
+    }
+  })
+  server.tool(
+    "list-by-id",
+    "Return article details matching specified IDs",
+    {
+      id: z.array(z.string({ description: "ID of the article" })),
+    },
+    async ({ id }) => {
+      console.log(id)
+      const articles = await fetchArticles()
+      const result = articles
+        .filter((it: Parser.Item) => id.indexOf(shortHash(it.title)) >= 0)
+        .map((it: Parser.Item) => {
+          console.log(`${it.isoDate} | ${it.title?.trim()}`)
+          return {
+            title: it.title?.trim(),
+            link: it.link,
+            pubDate: it.pubDate,
+          }
+        })
+      return {
+        content: [
+          {
+            type: "text",
+            text: JSON.stringify(result, null, 2),
+          },
+        ],
+      }
+    },
+  )
   server.tool(
     "search-by-keywords",
     "Returns a list of articles matching the given keywords",
