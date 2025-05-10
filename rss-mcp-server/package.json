@@ -1,8 +1,11 @@
 {
   "name": "rss-mcp-server",
-  "version": "0.0.4",
+  "version": "0.0.6",
   "scripts": {
     "start": "node --experimental-strip-types --watch main.ts"
+  },
+  "bin": {
+    "rss-mcp-server": "main.ts"
   },
   "homepage": "https://github.com/wizawu/jskit/tree/main/rss-mcp-server",
   "keywords": [

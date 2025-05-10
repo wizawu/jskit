@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js"
 import { opmlToJSON } from "opml-to-json"
 import { StreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/streamableHttp.js"
@@ -14,11 +16,22 @@ const feedList = feedJson.children.map((it: any) => it.xmlurl)
 console.log(feedList)
 
 async function fetchArticles() {
-  const parser = new Parser()
+  const parser = new Parser({
+    timeout: 10_000,
+    headers: {
+      Accept: "*/*",
+      "User-Agent":
+        "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36",
+    },
+  })
   const articles: Parser.Item[] = []
   for (const url of feedList) {
-    const feed = await parser.parseURL(url)
-    articles.push(...feed.items)
+    try {
+      const feed = await parser.parseURL(url)
+      articles.push(...feed.items)
+    } catch (e) {
+      console.error(`${url} ${e.message}`)
+    }
   }
   return articles
 }
