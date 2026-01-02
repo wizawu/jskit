@@ -18,7 +18,7 @@
   "type": "module",
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.11.0",
-    "express": "^5.1.0",
+    "express": "^5.2.1",
     "opml-to-json": "^1.0.1",
     "rss-parser": "^3.13.0",
     "short-hash": "^1.0.0",
